@@ -1,5 +1,7 @@
 const main = document.querySelector("#main-content");
-const homeContent = main.innerHTML;
+const appShell = document.querySelector("#app-shell");
+const loginScreen = document.querySelector("#login-screen");
+const loginForm = document.querySelector("#login-form");
 const toast = document.querySelector(".toast");
 const notificationButton = document.querySelector(".notification-button");
 const notificationDialog = document.querySelector("#notification-dialog");
@@ -549,66 +551,7 @@ const services = {
     title: "Poin Kemahasiswaan",
     category: "KEGIATAN",
     description: "Pantau akumulasi poin wajib, status FCH, dan pengajuan poin kegiatan.",
-    content: `
-      <section class="points-overview" aria-label="Ringkasan poin kemahasiswaan">
-        <div class="points-overview-top"><span>TOTAL AKUMULASI POIN</span><span class="graduation-requirement">Syarat Kelulusan Terpenuhi</span></div>
-        <p class="points-total"><strong id="points-total">60</strong><span>/ min 50 poin</span></p>
-        <div class="points-progress" role="progressbar" aria-label="Progres poin kelulusan" aria-valuemin="0" aria-valuemax="50" aria-valuenow="50"><span></span></div>
-        <p class="points-verification">✓ Poin diverifikasi: <strong id="points-verified">60</strong> Poin. Belum diverifikasi: <strong id="points-pending">0</strong> Poin.</p>
-      </section>
-      <section class="fch-status-card">
-        <h2>Status Poin Wajib Mahasiswa</h2>
-        <div class="fch-status-list">
-          <div class="fch-status"><span>INSA</span><strong>BELUM</strong></div>
-          <div class="fch-status"><span>FCH1</span><strong>BELUM</strong></div>
-          <div class="fch-status"><span>FCH2</span><strong>BELUM</strong></div>
-          <div class="fch-status"><span>FCH3</span><strong>BELUM</strong></div>
-          <div class="fch-status is-complete"><span>FCH4</span><strong>✓ SUDAH</strong></div>
-        </div>
-      </section>
-      <div class="points-section-heading"><h2>Daftar Poin Kegiatan Anda</h2><span id="points-entry-count">2 Kegiatan Tercatat</span></div>
-      <div class="point-entry-list" id="point-entry-list"></div>
-      <button class="primary-button points-submit-open" type="button" data-open-dialog="point-submission-dialog"><span aria-hidden="true">＋</span> Ajukan Poin Kegiatan Baru</button>
-      <dialog class="submission-dialog" id="point-submission-dialog" aria-labelledby="point-form-title">
-        <form class="submission-form" id="point-submission-form">
-          <header class="submission-header"><h2 id="point-form-title"><span aria-hidden="true">♙</span> Input Pengajuan Poin Kegiatan</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup formulir">×</button></header>
-          <div class="submission-body">
-            <section class="points-student-info" aria-label="Data mahasiswa">
-              <div><strong>NIM</strong><b>245314034</b></div><div><strong>Nama</strong><b>${escapeHTML(profileData.name.toLocaleUpperCase("id"))}</b></div>
-            </section>
-            <button class="points-template-link" type="button" data-message="Template surat tugas mahasiswa">Template Surat Tugas Mahasiswa</button>
-            <label class="form-field">Kategori
-              <select id="point-category" name="pointCategory" required>${pointCategories.map((item, index) => `<option value="${index}">${escapeHTML(item.label)}</option>`).join("")}</select>
-            </label>
-            <label class="form-field">Jenis
-              <select id="point-type" name="pointType" required></select>
-            </label>
-            <label class="form-field">Peran
-              <select id="point-role" name="pointRole" required></select>
-            </label>
-            <section class="points-auto-info" aria-live="polite">
-              <div><span>Poin</span><strong id="calculated-point-value">+10 Poin</strong></div>
-              <p><strong>Satuan: </strong><span id="point-unit">Kegiatan</span></p>
-            </section>
-            <label class="form-field">Softskills
-              <textarea id="point-softskills" rows="3" readonly></textarea>
-            </label>
-            <label class="form-field">Nama Kegiatan / Nama UKM
-              <input name="activity" type="text" maxlength="120" placeholder="Nama kegiatan" required>
-            </label>
-            <label class="form-field">Unit / Badan Penyelenggara
-              <input name="organizer" type="text" maxlength="100" placeholder="Nama penyelenggara" required>
-            </label>
-            <div class="point-date-fields"><label class="form-field">Tanggal mulai<input name="startDate" type="date" required></label><label class="form-field">Tanggal selesai<input name="endDate" type="date" required></label></div>
-            <label class="form-field">Surat Keterangan Aktif / Bukti Kegiatan
-              <span class="file-picker"><span aria-hidden="true">⇧</span><strong>Pilih Berkas Bukti Kegiatan</strong><small>PDF, JPG, PNG maksimal 5MB</small><input name="evidence" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></span>
-            </label>
-            <p class="point-input-date">Tanggal Input: <span id="point-input-date"></span></p>
-            <p class="form-error" id="point-form-error" role="alert"></p>
-            <div class="evaluation-actions"><button class="secondary-button" type="reset">Batal</button><button class="primary-button form-submit-button" type="submit">Simpan Pengajuan</button></div>
-          </div>
-        </form>
-      </dialog>`,
+    content: "",
   },
   drs: {
     title: "Daftar Rencana Studi (DRS)",
@@ -647,39 +590,7 @@ const services = {
     title: "Profil Mahasiswa",
     category: "AKUN",
     description: "Lihat informasi biodata akademik dan status studi mahasiswa.",
-    content: `
-      <section class="student-profile-card">
-        <div class="student-profile-top">
-          <div class="profile-portrait"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="10" r="5" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 27v-2a8.5 8.5 0 0 1 17 0v2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span aria-hidden="true">✿</span></div>
-          <strong class="student-profile-name">${escapeHTML(profileData.name)}</strong>
-          <span class="student-profile-meta">NIM: 245314034</span>
-          <div class="student-profile-badges"><span class="profile-status">◉ Aktif</span><span class="profile-semester">Semester 4</span></div>
-          <div class="student-profile-stats"><div><strong>3.26</strong><span>IPK</span></div><div><strong>84</strong><span>SKS Lulus</span></div><div><strong>A / B+</strong><span>Predikat</span></div></div>
-        </div>
-        <section class="biodata-card">
-          <h2><span aria-hidden="true">♧</span> Biodata Akademik Mahasiswa</h2>
-          <dl class="biodata-list">
-            <div><dt>Perguruan Tinggi</dt><dd>Universitas Sanata Dharma</dd></div>
-            <div><dt>Fakultas</dt><dd>Sains dan Teknologi</dd></div>
-            <div><dt>Jalur Masuk</dt><dd>Prestasi</dd></div>
-            <div><dt>Dosen Pembimbing</dt><dd>Prof. Dr. Ir. Anastasia Rita Widiarti</dd></div>
-            <div><dt>Email Student</dt><dd><a href="mailto:${escapeHTML(profileData.email)}">${escapeHTML(profileData.email)}</a></dd></div>
-            <div><dt>Nomor Telepon</dt><dd><a href="tel:${escapeHTML(profileData.phone.replace(/[^\d+]/g, ""))}">${escapeHTML(profileData.phone)}</a></dd></div>
-          </dl>
-        </section>
-      </section>
-      <div class="profile-actions"><button class="primary-button" type="button" data-open-dialog="profile-edit-dialog"><span aria-hidden="true">✎</span> Perbarui Data Diri</button><button class="logout-button" type="button" data-message="Anda telah keluar.">⇥ &nbsp; Keluar Akun (Logout)</button></div>
-      <dialog class="submission-dialog profile-edit-dialog" id="profile-edit-dialog" aria-labelledby="profile-edit-title">
-        <form class="submission-form" id="profile-edit-form">
-          <header class="submission-header"><h2 id="profile-edit-title">Perbarui Data Diri</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup formulir">×</button></header>
-          <div class="submission-body">
-            <label class="form-field">Nama lengkap<input name="fullName" value="${escapeHTML(profileData.name)}" required></label>
-            <label class="form-field">Email student<input name="email" type="email" value="${escapeHTML(profileData.email)}" required></label>
-            <label class="form-field">Nomor telepon<input name="phone" type="tel" value="${escapeHTML(profileData.phone)}" required></label>
-            <button class="primary-button form-submit-button" type="submit">Simpan Data Diri</button>
-          </div>
-        </form>
-      </dialog>`,
+    content: "",
   },
   kegiatan: {
     title: "Kegiatan Mahasiswa",
@@ -950,17 +861,10 @@ function showMessage(message) {
 }
 
 function renderAcademicHub() {
-  const cards = academicServiceRoutes.map((route) => {
-    const service = services[route];
-    return `<button class="hub-card academic-service-card" type="button" data-route="${route}"><span class="academic-service-icon academic-icon-${route}">${academicServiceIcons[route]}</span><span class="academic-service-copy"><strong>${service.title === "Kartu Keuangan Mahasiswa" ? "Kartu Keuangan (UKT)" : service.title === "Jadwal Mahasiswa" ? "Jadwal Kuliah Mahasiswa" : service.title === "Nilai per Semester" ? "Nilai per Semester (KHS)" : service.title}</strong><span class="hub-card-description">${service.description}</span></span><span class="hub-card-arrow" aria-hidden="true">›</span></button>`;
-  }).join("");
-
-  return `
-    <div class="academic-list-heading"><button class="academic-home-link" type="button" data-route="beranda">← Beranda</button><h1>Akademik</h1></div>
-    <div class="academic-service-list">${cards}</div>`;
+  return window.SIA_MENU_VIEWS.akademik(academicServiceRoutes, services, academicServiceIcons);
 }
 
-function renderService(route) {
+function renderService(route, content = services[route].content) {
   const service = services[route];
   return `
     <div class="service-title-bar">
@@ -969,7 +873,17 @@ function renderService(route) {
       <span class="service-title-spacer" aria-hidden="true"></span>
     </div>
     <p class="service-description">${service.description}</p>
-    ${service.content}`;
+    ${content}`;
+}
+
+function renderKegiatanMahasiswa() {
+  const categoryOptions = pointCategories
+    .map((category, index) => `<option value="${index}">${escapeHTML(category.label)}</option>`)
+    .join("");
+  const content = window.SIA_MENU_VIEWS.kegiatanMahasiswa()
+    .replace("{{STUDENT_NAME}}", escapeHTML(profileData.name.toLocaleUpperCase("id")))
+    .replace("{{CATEGORY_OPTIONS}}", categoryOptions);
+  return renderService("poin-kemahasiswaan", content);
 }
 
 function renderRoute() {
@@ -978,9 +892,16 @@ function renderRoute() {
   const selectedRoute = validRoute ? route : "beranda";
 
   if (selectedRoute === "beranda") {
-    main.innerHTML = homeContent;
+    main.innerHTML = window.SIA_MENU_VIEWS.beranda();
   } else if (selectedRoute === "akademik") {
     main.innerHTML = renderAcademicHub();
+  } else if (selectedRoute === "poin-kemahasiswaan") {
+    main.innerHTML = renderKegiatanMahasiswa();
+  } else if (selectedRoute === "profil") {
+    main.innerHTML = renderService(
+      "profil",
+      window.SIA_MENU_VIEWS.profil(profileData, escapeHTML),
+    );
   } else {
     main.innerHTML = renderService(selectedRoute);
   }
@@ -1012,7 +933,7 @@ function renderRoute() {
   const activeTab = selectedRoute === "beranda"
     ? "beranda"
     : selectedRoute === "kegiatan" || selectedRoute === "poin-kemahasiswaan"
-      ? "kegiatan"
+      ? "poin-kemahasiswaan"
       : selectedRoute === "profil"
         ? "profil"
         : "akademik";
@@ -1036,9 +957,11 @@ function renderRoute() {
     }
   });
 
-  document.title = selectedRoute === "beranda"
-    ? "Beranda Akademik — SIA"
-    : `${selectedRoute === "akademik" ? "Layanan akademik" : services[selectedRoute].title} — SIA`;
+  document.title = sessionStorage.getItem("sia-demo-login") !== "true"
+    ? "Sistem Akademik Mahasiswa"
+    : selectedRoute === "beranda"
+      ? "Beranda | Sistem Akademik Mahasiswa"
+      : `${selectedRoute === "akademik" ? "Akademik" : services[selectedRoute].title} | Sistem Akademik Mahasiswa`;
   main.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "instant" });
 }
@@ -1195,6 +1118,10 @@ document.addEventListener("click", (event) => {
 
   const messageButton = event.target.closest("[data-message]");
   if (messageButton) {
+    if (!loginScreen.hidden) {
+      document.querySelector(".login-feedback").textContent = messageButton.dataset.message;
+      return;
+    }
     showMessage(messageButton.dataset.message);
     return;
   }
@@ -1289,6 +1216,23 @@ document.addEventListener("input", (event) => {
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target === loginForm) {
+    event.preventDefault();
+    document.querySelector(".login-feedback").textContent = "";
+    const credentials = new FormData(loginForm);
+    const nim = credentials.get("nim").trim();
+    const password = credentials.get("password");
+    if (!nim || !password) return;
+    sessionStorage.setItem("sia-demo-login", "true");
+    loginScreen.hidden = true;
+    appShell.hidden = false;
+    renderRoute();
+    showMessage(`Selamat datang, ${profileData.name.toLocaleUpperCase("id")}`);
+    loginForm.reset();
+    document.querySelector("#login-nim").value = "245314034";
+    return;
+  }
+
   if (event.target.id === "course-evaluation-form") {
     event.preventDefault();
     const form = event.target;
@@ -1366,6 +1310,17 @@ document.addEventListener("reset", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-logout]")) {
+    sessionStorage.removeItem("sia-demo-login");
+    appShell.hidden = true;
+    loginScreen.hidden = false;
+    loginForm.reset();
+    document.querySelector("#login-nim").value = "245314034";
+    document.querySelector("#login-password").focus();
+    window.location.hash = "/beranda";
+    return;
+  }
+
   const dayTab = event.target.closest("[data-schedule-day-select]");
   if (dayTab) {
     renderStudentSchedule(dayTab.dataset.scheduleDaySelect);
@@ -1431,6 +1386,10 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!window.location.hash) {
     window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#/beranda`);
   }
+  const isLoggedIn = sessionStorage.getItem("sia-demo-login") === "true";
+  loginScreen.hidden = isLoggedIn;
+  appShell.hidden = !isLoggedIn;
   renderRoute();
+  if (!isLoggedIn) document.title = "Sistem Akademik Mahasiswa";
   updateUnreadCount();
 });

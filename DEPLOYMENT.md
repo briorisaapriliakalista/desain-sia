@@ -9,6 +9,6 @@ Situs ini berupa HTML, CSS, dan JavaScript statis, sehingga tidak memerlukan ser
 
 Untuk repository ini, URL default GitHub Pages berbentuk `https://briorisaapriliakalista.github.io/desain-sia/`.
 
-Menu Beranda, Akademik, Kegiatan, dan Profil serta delapan halaman layanan dapat dibuka dari navigasi. Beberapa kontrol pratinjau seperti filter semester, filter jadwal, dan simulasi pilihan KRS juga tersedia.
+Menu Beranda, Akademik, Kegiatan Mahasiswa, dan Profil serta halaman layanan dapat dibuka dari navigasi. Konten menu utama berada di folder `menus/` agar bisa diedit terpisah.
 
-Halaman ini tetap merupakan pratinjau antarmuka. Angka akademik, jadwal, tagihan, agenda, dan identitas merupakan data contoh; layanan kampus, login, pembayaran, dan penyimpanan data belum terhubung.
+Login yang tersedia adalah simulasi sisi browser dan bukan autentikasi akun kampus. Situs statis ini tidak memverifikasi NIM atau password ke server.

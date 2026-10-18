@@ -2,7 +2,7 @@ window.SIA_MENU_VIEWS = window.SIA_MENU_VIEWS || {};
 
 window.SIA_MENU_VIEWS.beranda = () => `
   <section class="welcome-row" aria-labelledby="welcome-title">
-    <div><p class="greeting-label" id="welcome-greeting"></p><h1 id="welcome-title">Briorisa Aprilia Kalista</h1><p class="student-meta"><span>NIM: 245314034</span><span class="student-meta-divider" aria-hidden="true">·</span><span class="student-program">Prodi: Informatika</span></p></div>
+    <div><p class="greeting-label" id="welcome-greeting"></p><h1 id="welcome-title">Halo, <span id="welcome-name">Briorisa Aprilia Kalista</span></h1><p class="student-meta"><span>NIM: 245314034</span><span class="student-meta-divider" aria-hidden="true">·</span><span class="student-program">Prodi: Informatika</span></p></div>
     <div class="welcome-avatar" aria-hidden="true">B</div>
   </section>
   <section class="academic-card" aria-labelledby="academic-title">
@@ -17,11 +17,11 @@ window.SIA_MENU_VIEWS.beranda = () => `
         <div class="metric"><span class="metric-label">IPS Terakhir</span><strong class="metric-cyan">3.55</strong></div>
         <div class="metric"><span class="metric-label">Total SKS</span><strong>84 <span class="metric-unit">SKS</span></strong></div>
       </div>
-      <div class="academic-card-bottom"><span>Predikat: <strong>Sangat Memuaskan</strong></span><a href="#/nilai" data-route="nilai">Lihat Nilai <span aria-hidden="true">›</span></a></div>
+      <div class="academic-card-bottom"><span>Predikat: <strong>Sangat Memuaskan</strong></span><a href="./" data-route="nilai">Lihat Nilai <span aria-hidden="true">›</span></a></div>
     </div>
   </section>
   <section class="shortcuts-section" aria-labelledby="shortcuts-title">
-    <div class="section-heading"><div><h2 id="shortcuts-title">Pintasan Cepat</h2></div><a class="text-link" href="#/akademik" data-route="akademik">Semua Menu</a></div>
+    <div class="section-heading"><div><h2 id="shortcuts-title">Pintasan Cepat</h2></div><a class="text-link" href="./" data-route="akademik">Semua Menu</a></div>
     <div class="shortcut-grid">
       <button class="shortcut-card" type="button" data-route="nilai"><span class="shortcut-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span class="shortcut-name">Nilai per<br>Semester</span><span class="shortcut-arrow" aria-hidden="true">↗</span></button>
       <button class="shortcut-card" type="button" data-route="lpkp"><span class="shortcut-icon icon-green"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.75h8l4 4v12.5H6a2 2 0 0 1-2-2v-12a2.5 2.5 0 0 1 2-2.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v4h4M8 13h8M8 16.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="shortcut-name">LPKP</span><span class="shortcut-arrow" aria-hidden="true">↗</span></button>

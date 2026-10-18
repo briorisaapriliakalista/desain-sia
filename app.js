@@ -9,6 +9,7 @@ const notificationCloseButton = document.querySelector(".notification-close");
 const markReadButton = document.querySelector(".mark-read-button");
 let toastTimeout;
 let notificationTrigger;
+let currentRoute = "beranda";
 let lpkpMeetingIndex = 0;
 let lpkpAttendanceFilter = "ALL";
 const evaluationResponses = new Map();
@@ -791,8 +792,8 @@ function updateIdentity() {
   document.querySelectorAll(".avatar-small, .welcome-avatar").forEach((avatar) => {
     avatar.textContent = initial;
   });
-  const greeting = document.querySelector("#welcome-title");
-  if (greeting) greeting.textContent = profileData.name;
+  const welcomeName = document.querySelector("#welcome-name");
+  if (welcomeName) welcomeName.textContent = profileData.name;
   const greetingLabel = document.querySelector("#welcome-greeting");
   if (greetingLabel) greetingLabel.textContent = getGreetingByJakartaTime();
   const studentProgram = document.querySelector(".student-program");
@@ -902,10 +903,10 @@ function renderKegiatanMahasiswa() {
   return renderService("poin-kemahasiswaan", content);
 }
 
-function renderRoute() {
-  const route = window.location.hash.replace(/^#\/?/, "") || "beranda";
+function renderRoute(route = currentRoute) {
   const validRoute = route === "beranda" || route === "akademik" || Object.hasOwn(services, route);
   const selectedRoute = validRoute ? route : "beranda";
+  currentRoute = selectedRoute;
 
   if (selectedRoute === "beranda") {
     main.innerHTML = window.SIA_MENU_VIEWS.beranda();
@@ -1124,10 +1125,11 @@ document.addEventListener("click", (event) => {
       event.preventDefault();
     }
     const route = routeLink.dataset.route;
-    if (window.location.hash === `#/${route}`) {
+    if (route === currentRoute) {
       renderRoute();
     } else {
-      window.location.hash = `/${route}`;
+      window.history.pushState({ route }, "", `${window.location.pathname}${window.location.search}`);
+      renderRoute(route);
     }
     return;
   }
@@ -1333,7 +1335,7 @@ document.addEventListener("click", (event) => {
     loginForm.reset();
     document.querySelector("#login-nim").value = "245314034";
     document.querySelector("#login-password").focus();
-    window.location.hash = "/beranda";
+    currentRoute = "beranda";
     return;
   }
 
@@ -1397,15 +1399,25 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("hashchange", renderRoute);
+window.addEventListener("popstate", (event) => {
+  const route = event.state && typeof event.state === "object" ? event.state.route : "beranda";
+  renderRoute(route);
+});
 window.addEventListener("DOMContentLoaded", () => {
-  if (!window.location.hash) {
-    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#/beranda`);
-  }
+  const hashRoute = window.location.hash.replace(/^#\/?/, "");
+  const savedRoute = window.history.state && typeof window.history.state === "object"
+    ? window.history.state.route
+    : "";
+  const requestedRoute = hashRoute || savedRoute || "beranda";
+  window.history.replaceState(
+    { route: requestedRoute },
+    "",
+    `${window.location.pathname}${window.location.search}`,
+  );
   const isLoggedIn = sessionStorage.getItem("sia-demo-login") === "true";
   loginScreen.hidden = isLoggedIn;
   appShell.hidden = !isLoggedIn;
-  renderRoute();
+  renderRoute(requestedRoute);
   if (!isLoggedIn) document.title = "Sistem Akademik Mahasiswa";
   updateUnreadCount();
 });

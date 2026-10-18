@@ -3199,6 +3199,856 @@ h1 {
   }
 }
 
+.service-title-bar {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 2fr) minmax(90px, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 3px 0 5px;
+}
+
+.service-title-bar h1 {
+  margin: 0;
+  color: #1e2d42;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.service-title-bar .back-button {
+  min-height: 34px;
+  justify-self: start;
+  padding: 0 7px;
+  border: 0;
+  color: #2563eb;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.service-title-bar .back-button > span:first-child {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.service-title-spacer {
+  min-width: 1px;
+}
+
+.service-description {
+  margin: 0 0 15px;
+  color: #718096;
+  font-size: 11px;
+}
+
+.finance-overview {
+  margin: 0 0 13px;
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #12395f, #092744);
+  box-shadow: 0 6px 14px rgba(12, 49, 83, 0.16);
+}
+
+.finance-overview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #edf5ff;
+  font-size: 11px;
+}
+
+.finance-paid-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #087b59;
+  background: #d7f8eb;
+  font-size: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.finance-overview > p {
+  margin: 13px 0 2px;
+  color: #d4e2ef;
+  font-size: 9px;
+}
+
+.finance-total-paid {
+  display: block;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.finance-balance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  color: #66e0b1;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.finance-payment-note {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(210, 230, 249, 0.17);
+  color: #c7d9ea;
+  font-size: 9px;
+}
+
+.finance-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 11px;
+  padding: 4px;
+  border-radius: 11px;
+  background: #e9eef4;
+}
+
+.finance-tab {
+  min-height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  color: #526177;
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.finance-tab.is-active {
+  color: #1f334d;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(26, 44, 65, 0.08);
+  font-weight: 700;
+}
+
+.finance-panel {
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid #e1eaf2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 7px rgba(25, 52, 80, 0.035);
+}
+
+.finance-panel[hidden] {
+  display: none;
+}
+
+.finance-panel-heading,
+.finance-history-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.finance-panel-heading > div {
+  display: grid;
+  gap: 5px;
+}
+
+.finance-panel-heading > div strong,
+.finance-history-heading strong {
+  color: #24344b;
+  font-size: 10px;
+}
+
+.finance-panel-heading > div > span {
+  color: #8ca0b9;
+  font-size: 9px;
+}
+
+.finance-cost-list {
+  display: grid;
+  gap: 0;
+  margin: 12px 0 0;
+}
+
+.finance-cost-list > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 0;
+  color: #536780;
+  font-size: 9px;
+}
+
+.finance-cost-list dd {
+  margin: 0;
+  color: #24344b;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.finance-semester-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 5px;
+  padding-top: 10px;
+  border-top: 1px solid #ebf0f5;
+}
+
+.finance-semester-total > div {
+  display: grid;
+  gap: 4px;
+}
+
+.finance-semester-total > div strong {
+  color: #25374f;
+  font-size: 10px;
+}
+
+.finance-semester-total > div span {
+  color: #17a66c;
+  font-size: 8px;
+}
+
+.finance-semester-total > strong {
+  color: #0e9b7c;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.finance-history-list {
+  display: grid;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.finance-history-card {
+  padding: 12px;
+  border: 1px solid #e2eaf2;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(25, 52, 80, 0.03);
+}
+
+.finance-history-heading {
+  align-items: center;
+}
+
+.finance-history-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 7px;
+  margin-top: 7px;
+  color: #263850;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.finance-history-amount > span {
+  color: #8297b3;
+  font-family: "DM Sans", sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.finance-history-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 7px;
+  color: #8091a7;
+  font-size: 8px;
+}
+
+.finance-history-total .finance-history-amount > span {
+  color: #68788e;
+}
+
+.finance-guide-card h2 {
+  margin: 0 0 10px;
+  color: #263850;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+}
+
+.virtual-account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 10px;
+  border: 1px solid #dce6f1;
+  border-radius: 10px;
+  background: #f7f9fc;
+}
+
+.virtual-account > div {
+  display: grid;
+  gap: 4px;
+}
+
+.virtual-account > div span {
+  color: #40536c;
+  font-size: 9px;
+}
+
+.virtual-account > div strong {
+  color: #193a68;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+}
+
+.virtual-account button {
+  padding: 4px 5px;
+  border: 0;
+  color: #2563eb;
+  background: transparent;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.finance-guide-card h3 {
+  margin: 14px 0 6px;
+  color: #293b53;
+  font-size: 10px;
+}
+
+.finance-guide-card > p {
+  margin: 0;
+  color: #73839a;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.finance-download-button {
+  width: 100%;
+  min-height: 42px;
+  margin: 1px 0 9px;
+  border: 0;
+  border-radius: 11px;
+  color: #fff;
+  background: #103d68;
+  box-shadow: 0 3px 7px rgba(12, 49, 83, 0.13);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.finance-download-button:hover {
+  background: #155184;
+}
+
+.finance-preview-note {
+  margin: 4px 2px 12px;
+  color: #718096;
+  font-size: 9px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.receipt-dialog {
+  width: min(720px, calc(100% - 26px));
+  max-width: none;
+  max-height: min(92vh, 900px);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 14px;
+  color: #23344d;
+  background: #f8fafc;
+  box-shadow: 0 24px 75px rgba(4, 15, 30, 0.34);
+}
+
+.receipt-dialog::backdrop {
+  background: rgba(4, 10, 22, 0.84);
+  backdrop-filter: blur(4px);
+}
+
+.receipt-dialog-header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  min-height: 51px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 15px;
+  color: #fff;
+  background: #101a2f;
+}
+
+.receipt-dialog-header > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.receipt-dialog-header > div > strong {
+  font-size: 10px;
+}
+
+.receipt-dialog-header .dialog-close {
+  width: 27px;
+  height: 27px;
+  color: #d5dfec;
+  background: transparent;
+}
+
+.receipt-print-button {
+  min-height: 30px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #2563eb;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.receipt-dialog-body {
+  padding: 21px;
+  background: #f6f9fc;
+}
+
+.official-receipt {
+  position: relative;
+  max-width: 590px;
+  margin: 0 auto;
+  padding: 19px;
+  border: 1px solid #dce5ee;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(20, 44, 70, 0.06);
+}
+
+.receipt-university {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #16385e;
+}
+
+.receipt-seal {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  color: #fff;
+  background: #183d86;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.receipt-university > div {
+  flex: 1;
+  display: grid;
+  gap: 3px;
+}
+
+.receipt-university > div strong {
+  color: #17253a;
+  font-size: 10px;
+}
+
+.receipt-university > div small,
+.receipt-reference {
+  color: #8090a5;
+  font-size: 8px;
+}
+
+.receipt-reference {
+  margin: -8px 0 11px;
+  text-align: right;
+}
+
+.receipt-title {
+  margin: 12px 0;
+  text-align: center;
+}
+
+.receipt-title h2 {
+  margin: 0 0 4px;
+  color: #14243c;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.receipt-title span {
+  color: #76869d;
+  font-size: 9px;
+}
+
+.receipt-student {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 11px;
+  padding: 10px;
+  border: 1px solid #dfe7f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.receipt-student > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8px;
+}
+
+.receipt-student dt {
+  color: #687991;
+}
+
+.receipt-student dd {
+  margin: 0;
+  color: #24344a;
+  font-weight: 600;
+  text-align: right;
+}
+
+.receipt-cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8px;
+}
+
+.receipt-cost-table th,
+.receipt-cost-table td {
+  padding: 7px;
+  border: 1px solid #e0e7ef;
+  text-align: left;
+}
+
+.receipt-cost-table thead th {
+  color: #34475e;
+  background: #f1f5f9;
+}
+
+.receipt-cost-table th:last-child,
+.receipt-cost-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.receipt-cost-table .receipt-total-row {
+  color: #153f8e;
+  background: #eef4ff;
+  font-size: 9px;
+}
+
+.receipt-amount-words {
+  margin: 10px 0;
+  padding: 9px;
+  border: 1px solid #e0e7ef;
+  border-radius: 7px;
+  color: #54667f;
+  font-size: 8px;
+}
+
+.receipt-signature {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #dfe7ef;
+}
+
+.receipt-qr {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d8e1ec;
+  border-radius: 5px;
+  color: #1d3150;
+  background: repeating-linear-gradient(45deg, #e4ebf3 0 3px, #fff 3px 6px);
+  font-size: 25px;
+}
+
+.receipt-signature > p,
+.receipt-signature > div:last-child {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+}
+
+.receipt-signature strong {
+  color: #293c55;
+  font-size: 8px;
+}
+
+.receipt-signature span,
+.receipt-signature small {
+  color: #7c8ca2;
+  font-size: 7px;
+}
+
+.receipt-signature > div:last-child {
+  text-align: right;
+}
+
+.receipt-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 14px;
+  background: #fff;
+}
+
+.receipt-dialog-footer > span {
+  color: #69809b;
+  font-size: 8px;
+}
+
+.receipt-dialog-footer > button {
+  min-height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #34445a;
+  background: #e9eef4;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .service-title-bar {
+    grid-template-columns: minmax(72px, 1fr) minmax(0, 2.4fr) minmax(4px, 1fr);
+    gap: 5px;
+    margin: 1px 0 4px;
+  }
+
+  .service-title-bar h1 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .service-title-bar .back-button {
+    min-height: 30px;
+    gap: 3px;
+    padding: 0 2px;
+    font-size: 11px;
+  }
+
+  .service-title-bar .back-button > span:first-child {
+    font-size: 19px;
+  }
+
+  .service-description {
+    margin: 0 0 12px;
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .finance-overview {
+    margin-bottom: 11px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .finance-overview-heading {
+    font-size: 9px;
+  }
+
+  .finance-overview > p {
+    margin-top: 11px;
+    font-size: 8px;
+  }
+
+  .finance-total-paid {
+    font-size: 23px;
+  }
+
+  .finance-balance,
+  .finance-payment-note {
+    font-size: 8px;
+  }
+
+  .finance-tab {
+    min-height: 30px;
+    font-size: 8px;
+  }
+
+  .finance-panel {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .finance-cost-list > div {
+    font-size: 8px;
+  }
+
+  .finance-cost-list dd {
+    font-size: 8px;
+  }
+
+  .finance-semester-total > div strong {
+    font-size: 9px;
+  }
+
+  .finance-semester-total > strong {
+    font-size: 13px;
+  }
+
+  .finance-history-card {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .finance-history-heading strong {
+    font-size: 9px;
+  }
+
+  .finance-history-amount {
+    font-size: 11px;
+  }
+
+  .finance-history-meta {
+    font-size: 7px;
+  }
+
+  .finance-download-button {
+    min-height: 40px;
+    font-size: 9px;
+  }
+
+  .receipt-dialog {
+    width: calc(100% - 26px);
+    max-height: 88vh;
+    border-radius: 13px;
+  }
+
+  .receipt-dialog-body {
+    padding: 13px 10px;
+  }
+
+  .official-receipt {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .receipt-dialog-header {
+    gap: 5px;
+    padding: 7px 9px;
+  }
+
+  .receipt-dialog-header > div > strong {
+    font-size: 8px;
+  }
+
+  .receipt-print-button {
+    min-height: 27px;
+    padding: 0 6px;
+    font-size: 8px;
+  }
+
+  .receipt-title h2 {
+    font-size: 10px;
+  }
+
+  .receipt-student > div,
+  .receipt-cost-table {
+    font-size: 7px;
+  }
+
+  .receipt-cost-table th,
+  .receipt-cost-table td {
+    padding: 6px 4px;
+  }
+
+  .receipt-signature {
+    grid-template-columns: 34px 1fr;
+    gap: 7px;
+  }
+
+  .receipt-qr {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .receipt-signature > div:last-child {
+    grid-column: 2;
+  }
+
+  .receipt-dialog-footer {
+    padding: 8px 10px;
+  }
+
+  .receipt-dialog-footer > span {
+    font-size: 7px;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .receipt-dialog[open],
+  .receipt-dialog[open] * {
+    visibility: visible !important;
+  }
+
+  .receipt-dialog[open] {
+    position: absolute;
+    inset: 0 auto auto 0;
+    display: block;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .receipt-dialog-header,
+  .receipt-dialog-footer {
+    display: none !important;
+  }
+
+  .receipt-dialog-body {
+    padding: 0;
+    background: #fff;
+  }
+
+  .official-receipt {
+    max-width: none;
+    border: 0;
+    box-shadow: none;
+  }
+}
+
 .schedule-toolbar {
   display: flex;
   align-items: center;

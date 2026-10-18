@@ -183,20 +183,62 @@ const services = {
       </div>`,
   },
   keuangan: {
-    title: "Kartu Keuangan Mahasiswa",
+    title: "Kartu Keuangan Mahasiswa (KKM)",
     category: "KEUANGAN",
-    description: "Periksa ringkasan tagihan dan riwayat transaksi perkuliahan.",
+    description: "Ringkasan tagihan, riwayat pembayaran, dan informasi pembayaran mahasiswa.",
     content: `
-      <div class="finance-card"><div><span>TAGIHAN SEMESTER GENAP 2025/2026</span><strong>Rp 4.500.000</strong><small>Jatuh tempo · 28 Februari 2026</small></div><span class="finance-status">Belum dibayar</span></div>
-      <div class="summary-grid summary-grid-three">
-        <article class="summary-card"><span>Total tagihan</span><strong class="amount">Rp 4,5 jt</strong><small>Semester berjalan</small></article>
-        <article class="summary-card"><span>Sudah dibayar</span><strong class="amount amount-green">Rp 0</strong><small>Belum ada pembayaran</small></article>
-        <article class="summary-card"><span>Sisa tagihan</span><strong class="amount">Rp 4,5 jt</strong><small>Data simulasi</small></article>
+      <section class="finance-overview" aria-label="Ringkasan tagihan keuangan">
+        <div class="finance-overview-heading"><strong>Status Tagihan Keuangan Mahasiswa</strong><span class="finance-paid-badge">◉ LUNAS</span></div>
+        <p>Total Pembayaran Akumulasi (Lunas)</p>
+        <strong class="finance-total-paid">Rp 65.255.000</strong>
+        <div class="finance-balance"><span>Total Belum Bayar: Rp 0</span><span>•</span><span>Denda: Rp 0</span></div>
+        <div class="finance-payment-note">◷ &nbsp; Dibayar via Bank Virtual Account BR Mahasiswa Sendiri</div>
+      </section>
+      <div class="finance-tabs" role="tablist" aria-label="Informasi kartu keuangan">
+        <button class="finance-tab is-active" type="button" role="tab" id="finance-tab-details" aria-selected="true" aria-controls="finance-panel-details" data-finance-tab="details">Rincian Biaya</button>
+        <button class="finance-tab" type="button" role="tab" id="finance-tab-history" aria-selected="false" aria-controls="finance-panel-history" data-finance-tab="history">Riwayat Bayar</button>
+        <button class="finance-tab" type="button" role="tab" id="finance-tab-guide" aria-selected="false" aria-controls="finance-panel-guide" data-finance-tab="guide">Tata Cara</button>
       </div>
-      <div class="content-card table-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">RIWAYAT</p><h3>Transaksi terakhir</h3></div><span class="sample-tag">Data pratinjau</span></div>
-        <div class="table-scroll"><table><thead><tr><th>Keterangan</th><th>Tanggal</th><th>Jumlah</th><th>Status</th></tr></thead><tbody><tr><td>Registrasi semester ganjil</td><td>12 Agu 2025</td><td>Rp 4.250.000</td><td><span class="table-status status-paid">Lunas</span></td></tr><tr><td>Biaya kemahasiswaan</td><td>12 Agu 2025</td><td>Rp 250.000</td><td><span class="table-status status-paid">Lunas</span></td></tr></tbody></table></div>
-      </div>
-      <p class="inline-note">Informasi pembayaran ini hanya simulasi. Pembayaran nyata tidak tersedia di pratinjau ini.</p>`,
+      <section class="finance-panel finance-detail-card" id="finance-panel-details" role="tabpanel" aria-labelledby="finance-tab-details">
+        <div class="finance-panel-heading"><div><strong>Tahun Akademik</strong><span>2026 / 2027 • Gasal</span></div><span class="finance-paid-badge">LUNAS</span></div>
+        <dl class="finance-cost-list">
+          <div><dt>Uang Kuliah Tunggal (UKT) Tahap I</dt><dd>Rp 2.750.000</dd></div>
+          <div><dt>Uang Kuliah Tunggal (UKT) Tahap II</dt><dd>Rp 2.750.000</dd></div>
+          <div><dt>Iuran Kemahasiswaan (Kmhs)</dt><dd>Rp 225.000</dd></div>
+          <div><dt>Sosial Mahasiswa (Sos Mhs)</dt><dd>Rp 40.000</dd></div>
+        </dl>
+        <div class="finance-semester-total"><div><strong>Total Tagihan Semester Ini</strong><span>Semua komponen terbayar penuh</span></div><strong>Rp 5.765.000</strong></div>
+      </section>
+      <section class="finance-panel finance-history-list" id="finance-panel-history" role="tabpanel" aria-labelledby="finance-tab-history" hidden>
+        <article class="finance-history-card"><div class="finance-history-heading"><strong>Gasal 2026 / 2027 (Tahap II)</strong><span class="finance-paid-badge">LUNAS</span></div><div class="finance-history-amount">Rp 2.750.000 <span>USD-TRX-2026-01-2901</span></div><div class="finance-history-meta"><span>Bank Virtual Account BR Mahasiswa Sendiri</span><time datetime="2026-01-29">29-01-2026</time></div></article>
+        <article class="finance-history-card"><div class="finance-history-heading"><strong>Gasal 2025 / 2026 (Tahap I)</strong><span class="finance-paid-badge">LUNAS</span></div><div class="finance-history-amount">Rp 2.750.000 <span>USD-TRX-2025-08-0408</span></div><div class="finance-history-meta"><span>Bank Virtual Account BR Mahasiswa Sendiri</span><time datetime="2025-08-04">04-08-2025</time></div></article>
+        <article class="finance-history-card"><div class="finance-history-heading"><strong>Iuran Kemahasiswaan 2025/2026</strong><span class="finance-paid-badge">LUNAS</span></div><div class="finance-history-amount">Rp 225.000 <span>USD-TRX-2025-08-KMHS</span></div><div class="finance-history-meta"><span>Bank Virtual Account BR Mahasiswa Sendiri</span><time datetime="2025-08-04">04-08-2025</time></div></article>
+        <article class="finance-history-card finance-history-total"><div class="finance-history-heading"><strong>Akumulasi Total Pembayaran Mahasiswa</strong><span class="finance-paid-badge">LUNAS</span></div><div class="finance-history-amount">Rp 65.255.000 <span>SISA BELUM BAYAR: Rp 0</span></div><div class="finance-history-meta"><span>Total Bayar Resmi: Rp 65.255.000</span><span>Lunas s/d Semester Berjalan</span></div></article>
+      </section>
+      <section class="finance-panel finance-guide-card" id="finance-panel-guide" role="tabpanel" aria-labelledby="finance-tab-guide" hidden>
+        <h2>Bank Virtual Account Mahasiswa USD</h2>
+        <div class="virtual-account"><div><span>Bank BRI Virtual Account (BR Mahasiswa)</span><strong id="bri-account">10238245134034</strong></div><button type="button" data-copy-account="bri-account">▢ &nbsp; Salin</button></div>
+        <div class="virtual-account"><div><span>Bank Mandiri Virtual Account</span><strong id="mandiri-account">88765245314034</strong></div><button type="button" data-copy-account="mandiri-account">▢ &nbsp; Salin</button></div>
+        <h3>Ketentuan Pembayaran Biaya Kuliah</h3>
+        <p>Pembayaran dialokasikan pertama untuk kewajiban pokok dan baru kemudian untuk denda bila ada. Pembayaran dialokasikan sesuai urutan jatuh tempo otomatis oleh sistem SIA.</p>
+      </section>
+      <button class="finance-download-button" type="button" data-open-dialog="payment-receipt-dialog">⇩ &nbsp; Unduh Bukti Bayar / Kuitansi Sah (PDF)</button>
+      <dialog class="receipt-dialog" id="payment-receipt-dialog" aria-labelledby="receipt-dialog-title">
+        <header class="receipt-dialog-header"><div><strong id="receipt-dialog-title">Bukti Pembayaran / Kuitansi Sah</strong><span class="finance-paid-badge">LUNAS</span></div><button class="receipt-print-button" type="button" data-print-receipt>▣ &nbsp; Cetak / PDF</button><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup kuitansi">×</button></header>
+        <div class="receipt-dialog-body">
+          <article class="official-receipt" id="official-receipt">
+            <div class="receipt-university"><span class="receipt-seal">USD</span><div><strong>Universitas Sanata Dharma</strong><small>Biro Keuangan &amp; Administrasi Akademik</small></div><span class="finance-paid-badge">LUNAS</span></div>
+            <p class="receipt-reference">No: BKT-2026-USD-04-89312</p>
+            <div class="receipt-title"><h2>Kuitansi Pembayaran Biaya Pendidikan (UKT)</h2><span>Semester Genap Tahun Akademik 2025/2026</span></div>
+            <dl class="receipt-student"><div><dt>Nama Mahasiswa</dt><dd>Briorisa Aprilia Kalista</dd></div><div><dt>Nomor Induk Mahasiswa (NIM)</dt><dd>245314034</dd></div><div><dt>Program Studi / Jenjang</dt><dd>Informatika (S-1)</dd></div><div><dt>Fakultas</dt><dd>Sains dan Teknologi</dd></div><div><dt>Waktu Pembayaran</dt><dd>29 Januari 2026, 11:20 WIB</dd></div></dl>
+            <table class="receipt-cost-table"><thead><tr><th>Komponen Biaya</th><th>Jumlah</th></tr></thead><tbody><tr><td>Uang Kuliah Tunggal (UKT) Tahap I</td><td>Rp 2.750.000</td></tr><tr><td>Uang Kuliah Tunggal (UKT) Tahap II</td><td>Rp 2.750.000</td></tr><tr><td>Iuran Kemahasiswaan (Kmhs)</td><td>Rp 225.000</td></tr><tr><td>Sosial Mahasiswa (Sos Mhs)</td><td>Rp 40.000</td></tr><tr><td>Total Terbayar Semester Ini</td><td>Rp 5.765.000</td></tr><tr class="receipt-total-row"><th>TOTAL PEMBAYARAN</th><th>Rp 5.765.000</th></tr></tbody></table>
+            <p class="receipt-amount-words"><strong>Terbilang:</strong> “Lima Juta Tujuh Ratus Enam Puluh Lima Ribu Rupiah”</p>
+            <div class="receipt-signature"><div class="receipt-qr" aria-label="Kode verifikasi kuitansi">▦</div><p><strong>Digital Signature Valid</strong><span>Bank Partner: PT Bank Central Asia Tbk</span><span>ID Transaksi: USD-TRX-2026-04-89312</span></p><div><span>Disahkan oleh,</span><strong>Biro Administrasi Keuangan</strong><small>Universitas Sanata Dharma</small></div></div>
+          </article>
+        </div>
+        <footer class="receipt-dialog-footer"><span>✓ Kuitansi ini merupakan contoh pratinjau dan bukan bukti pembayaran resmi.</span><button type="button" data-close-dialog>Tutup</button></footer>
+      </dialog>
+      <p class="finance-preview-note">Informasi pembayaran di atas adalah contoh pratinjau. Pembayaran dan kuitansi resmi tidak terhubung ke sistem kampus.</p>`,
   },
   "jadwal-mahasiswa": {
     title: "Jadwal Kuliah Mahasiswa",
@@ -529,13 +571,13 @@ function renderAcademicHub() {
 
 function renderService(route) {
   const service = services[route];
-  const backRoute = route === "poin-kemahasiswaan" || route === "kegiatan" ? "beranda" : "akademik";
-  const backLabel = route === "poin-kemahasiswaan" ? "Beranda" : "Kembali";
   return `
-    <div class="page-heading-row">
-      <div class="page-intro"><p class="eyebrow section-eyebrow">${service.category} <span class="eyebrow-line"></span> DATA PRATINJAU</p><h1>${service.title}</h1><p>${service.description}</p></div>
-      <button class="back-button" type="button" data-route="${backRoute}"><span aria-hidden="true">←</span> ${backLabel}</button>
+    <div class="service-title-bar">
+      <button class="back-button" type="button" data-route="beranda"><span aria-hidden="true">‹</span><span>Beranda</span></button>
+      <h1>${service.title}</h1>
+      <span class="service-title-spacer" aria-hidden="true"></span>
     </div>
+    <p class="service-description">${service.description}</p>
     ${service.content}`;
 }
 
@@ -672,6 +714,36 @@ function closeNotifications() {
 }
 
 document.addEventListener("click", (event) => {
+  const financeTab = event.target.closest("[data-finance-tab]");
+  if (financeTab) {
+    const selectedTab = financeTab.dataset.financeTab;
+    document.querySelectorAll(".finance-tab").forEach((tab) => {
+      const selected = tab === financeTab;
+      tab.classList.toggle("is-active", selected);
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    document.querySelectorAll(".finance-panel").forEach((panel) => {
+      panel.hidden = panel.id !== `finance-panel-${selectedTab}`;
+    });
+    return;
+  }
+
+  const copyButton = event.target.closest("[data-copy-account]");
+  if (copyButton) {
+    const account = document.querySelector(`#${copyButton.dataset.copyAccount}`).textContent;
+    Promise.resolve()
+      .then(() => navigator.clipboard.writeText(account))
+      .then(() => showMessage("Nomor virtual account berhasil disalin."))
+      .catch(() => showMessage("Nomor tidak dapat disalin otomatis. Silakan salin nomor yang tertera."));
+    return;
+  }
+
+  if (event.target.closest("[data-print-receipt]")) {
+    window.print();
+    return;
+  }
+
   const openDialogButton = event.target.closest("[data-open-dialog]");
   if (openDialogButton) {
     document.querySelector(`#${openDialogButton.dataset.openDialog}`).showModal();
@@ -712,6 +784,21 @@ document.addEventListener("click", (event) => {
     const count = [...document.querySelectorAll(".course-choice:checked")].length;
     showMessage(count ? "Simulasi rencana studi berhasil disimpan di halaman ini." : "Pilih minimal satu mata kuliah terlebih dahulu.");
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  const tab = event.target.closest(".finance-tab");
+  if (!tab || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  const tabs = [...document.querySelectorAll(".finance-tab")];
+  const currentIndex = tabs.indexOf(tab);
+  const nextIndex = event.key === "Home"
+    ? 0
+    : event.key === "End"
+      ? tabs.length - 1
+      : (currentIndex + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
+  event.preventDefault();
+  tabs[nextIndex].focus();
+  tabs[nextIndex].click();
 });
 
 document.addEventListener("change", (event) => {

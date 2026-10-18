@@ -2177,6 +2177,900 @@ h1 {
     backdrop-filter: blur(16px);
   }
 
+}
+
+  .academic-list-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 8px 0 20px;
+  }
+
+  .academic-list-heading h1 {
+    margin: 0;
+    color: #192c48;
+    font-size: 24px;
+  }
+
+  .academic-home-link {
+    padding: 5px 0;
+    border: 0;
+    color: #2869b4;
+    background: none;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .academic-service-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .academic-service-card {
+    min-height: 83px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+    padding: 13px;
+    border-color: #e9eef4;
+  }
+
+  .academic-service-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 14px;
+    color: #1d64bd;
+    background: #e9f2ff;
+  }
+
+  .academic-service-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .academic-icon-lpkp { color: #11845a; background: #e7f7ef; }
+  .academic-icon-drs { color: #b96709; background: #fff5df; }
+  .academic-icon-jadwal-mahasiswa { color: #6551ca; background: #f0edff; }
+  .academic-icon-keuangan { color: #078278; background: #e4f7f4; }
+  .academic-icon-jadwal-dosen { color: #c93d7e; background: #fff0f6; }
+
+  .academic-service-copy {
+    min-width: 0;
+    flex: 1;
+    display: grid;
+    gap: 4px;
+  }
+
+  .academic-service-copy strong {
+    color: #24364f;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .academic-service-copy .hub-card-description {
+    color: #7b8798;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .academic-service-card .hub-card-arrow {
+    position: static;
+    flex: 0 0 auto;
+    color: #9ba9bb;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .page-notice {
+    margin-top: 16px;
+  }
+
+  .points-overview {
+    padding: 20px;
+    border: 1px solid #d8e9fc;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #f2f8ff, #fff);
+  }
+
+  .points-overview-top,
+  .points-section-heading,
+  .point-entry-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .points-overview-top > span:first-child {
+    color: #52647c;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+  }
+
+  .graduation-requirement {
+    padding: 6px 9px;
+    border-radius: 999px;
+    color: #147449;
+    background: #e5f7ed;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .graduation-requirement::before {
+    content: "\2713 ";
+  }
+
+  .points-total {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 14px 0 10px;
+  }
+
+  .points-total strong {
+    color: #174e8b;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 38px;
+    line-height: 1;
+  }
+
+  .points-total span {
+    color: #6c7b90;
+    font-size: 12px;
+  }
+
+  .points-progress {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e4ebf3;
+  }
+
+  .points-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #28a36a, #47c78a);
+  }
+
+  .points-verification {
+    margin: 11px 0 0;
+    color: #65748a;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .points-verification strong {
+    color: #1c3d61;
+  }
+
+  .fch-status-card,
+  .biodata-card {
+    margin-top: 15px;
+    padding: 16px;
+    border: 1px solid #e7edf4;
+    border-radius: 15px;
+    background: #fff;
+  }
+
+  .fch-status-card h2,
+  .biodata-card h2,
+  .points-section-heading h2 {
+    margin: 0;
+    color: #26384f;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 14px;
+  }
+
+  .fch-status-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .fch-status {
+    min-height: 58px;
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    border: 1px solid #e9edf2;
+    border-radius: 10px;
+    color: #738197;
+    text-align: center;
+    background: #f8fafc;
+  }
+
+  .fch-status span {
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .fch-status strong {
+    color: #9aa5b4;
+    font-size: 8px;
+  }
+
+  .fch-status.is-complete {
+    border-color: #c9ead9;
+    color: #16804d;
+    background: #edfaf3;
+  }
+
+  .fch-status.is-complete strong {
+    color: #16804d;
+  }
+
+  .points-section-heading {
+    margin: 22px 0 11px;
+  }
+
+  .points-section-heading span {
+    color: #718096;
+    font-size: 9px;
+  }
+
+  .point-entry-list {
+    display: grid;
+    gap: 9px;
+  }
+
+  .point-entry-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #e7edf4;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .point-entry-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 12px;
+    color: #1479a2;
+    background: #eaf8fc;
+    font-size: 20px;
+  }
+
+  .point-entry-content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .point-entry-category {
+    color: #3074a4;
+    font-size: 8px;
+    font-weight: 700;
+  }
+
+  .point-entry-content h3 {
+    margin: 4px 0;
+    color: #25364d;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .point-entry-content > p {
+    margin: 0;
+    color: #718096;
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .point-entry-meta {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 9px;
+    color: #78879b;
+    font-size: 8px;
+  }
+
+  .point-entry-value {
+    flex: 0 0 auto;
+    color: #188452;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .point-entry-value small {
+    font-family: "DM Sans", sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+  }
+
+  .points-submit-open {
+    width: 100%;
+    min-height: 43px;
+    margin-top: 14px;
+    border-radius: 11px;
+    font-size: 11px;
+  }
+
+  .submission-dialog {
+    width: min(560px, calc(100% - 28px));
+    max-height: min(88vh, 820px);
+    padding: 0;
+    overflow: auto;
+    border: 1px solid #e3eaf2;
+    border-radius: 16px;
+    color: #25364d;
+    background: #fff;
+    box-shadow: 0 22px 70px rgba(16, 35, 58, 0.24);
+  }
+
+  .submission-dialog::backdrop {
+    background: rgba(15, 31, 50, 0.48);
+    backdrop-filter: blur(3px);
+  }
+
+  .submission-form {
+    margin: 0;
+  }
+
+  .submission-header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 19px;
+    border-bottom: 1px solid #edf1f5;
+    background: #fff;
+  }
+
+  .submission-header h2 {
+    margin: 0;
+    color: #233852;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 15px;
+  }
+
+  .dialog-close {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: #66768a;
+    background: #f1f5f9;
+    font-size: 21px;
+    cursor: pointer;
+  }
+
+  .submission-body {
+    display: grid;
+    gap: 14px;
+    padding: 18px 19px 20px;
+  }
+
+  .form-field {
+    display: grid;
+    gap: 7px;
+    color: #344860;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .form-field select,
+  .form-field input:not([type="file"]) {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 11px;
+    border: 1px solid #dce4ed;
+    border-radius: 9px;
+    color: #334155;
+    background: #fff;
+    font: inherit;
+    font-size: 11px;
+  }
+
+  .form-field select:focus,
+  .form-field input:focus {
+    outline: 2px solid #b8d7fa;
+    border-color: #6da6e4;
+  }
+
+  .points-auto-info {
+    padding: 12px;
+    border: 1px solid #cde8dd;
+    border-radius: 10px;
+    color: #176c49;
+    background: #f0faf5;
+  }
+
+  .points-auto-info > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .points-auto-info strong {
+    margin-left: auto;
+    color: #08794e;
+    white-space: nowrap;
+  }
+
+  .points-auto-info p {
+    margin: 8px 0 0;
+    color: #537766;
+    font-size: 9px;
+    line-height: 1.55;
+  }
+
+  .category-detail {
+    display: grid;
+    gap: 6px;
+    padding: 11px 12px;
+    border-radius: 9px;
+    color: #596b80;
+    background: #f5f8fb;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .category-detail p {
+    margin: 0;
+  }
+
+  .category-detail strong {
+    color: #354b64;
+  }
+
+  .file-picker {
+    position: relative;
+    min-height: 86px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 4px;
+    overflow: hidden;
+    border: 1px dashed #95b8df;
+    border-radius: 10px;
+    color: #2768a5;
+    text-align: center;
+    background: #f5faff;
+    cursor: pointer;
+  }
+
+  .file-picker > span {
+    font-size: 17px;
+  }
+
+  .file-picker strong {
+    font-size: 10px;
+  }
+
+  .file-picker small {
+    color: #8190a3;
+    font-size: 8px;
+    font-weight: 500;
+  }
+
+  .file-picker input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .form-error {
+    margin: 0;
+    color: #b42318;
+    font-size: 10px;
+  }
+
+  .form-submit-button {
+    min-height: 42px;
+    font-size: 11px;
+  }
+
+  .student-profile-card {
+    width: min(100%, 690px);
+    margin: 0 auto;
+  }
+
+  .student-profile-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 17px 17px;
+    border: 1px solid #e5edf5;
+    border-radius: 17px 17px 0 0;
+    background: linear-gradient(180deg, #f2f8ff, #fff 70%);
+  }
+
+  .profile-portrait {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 9px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    color: #a6b9cf;
+    background: #e8f0f9;
+    box-shadow: 0 2px 9px rgba(30, 64, 98, 0.12);
+  }
+
+  .profile-portrait svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profile-portrait > span {
+    position: absolute;
+    right: -1px;
+    bottom: 0;
+    color: #e85b91;
+    font-size: 17px;
+  }
+
+  .student-profile-name {
+    color: #203652;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 17px;
+    text-align: center;
+  }
+
+  .student-profile-meta {
+    margin-top: 5px;
+    color: #75859a;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .student-profile-badges {
+    display: flex;
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .profile-status,
+  .profile-semester {
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .profile-status {
+    color: #17804f;
+    background: #e5f7ed;
+  }
+
+  .profile-semester {
+    color: #2865a5;
+    background: #eaf3ff;
+  }
+
+  .student-profile-stats {
+    width: min(100%, 440px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #e9eef4;
+  }
+
+  .student-profile-stats > div {
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    border-right: 1px solid #e9eef4;
+  }
+
+  .student-profile-stats > div:last-child {
+    border: 0;
+  }
+
+  .student-profile-stats strong {
+    color: #263d5a;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 16px;
+  }
+
+  .student-profile-stats span {
+    color: #8794a6;
+    font-size: 9px;
+  }
+
+  .biodata-card {
+    margin-top: 0;
+    border-radius: 0 0 15px 15px;
+  }
+
+  .biodata-card h2 {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf1f5;
+  }
+
+  .biodata-card h2 span {
+    color: #2276b8;
+  }
+
+  .biodata-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 18px;
+    margin: 0;
+  }
+
+  .biodata-list > div {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f3f6;
+  }
+
+  .biodata-list > div:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .biodata-list dt {
+    color: #8491a2;
+    font-size: 9px;
+  }
+
+  .biodata-list dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #334960;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .biodata-list a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .profile-actions {
+    width: min(100%, 690px);
+    display: grid;
+    gap: 9px;
+    margin: 14px auto 0;
+  }
+
+  .profile-actions .primary-button {
+    min-height: 42px;
+  }
+
+  .logout-button {
+    min-height: 39px;
+    border: 1px solid #f1d8d7;
+    border-radius: 10px;
+    color: #b7443e;
+    background: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .logout-button:hover {
+    background: #fff7f6;
+  }
+
+  @media (max-width: 560px) {
+    .academic-list-heading {
+      gap: 12px;
+      margin: 5px 0 15px;
+    }
+
+    .academic-list-heading h1 {
+      font-size: 19px;
+    }
+
+    .academic-home-link {
+      font-size: 10px;
+    }
+
+    .academic-service-list {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .academic-service-card {
+      min-height: 72px;
+      gap: 11px;
+      padding: 10px;
+      border-radius: 13px;
+    }
+
+    .academic-service-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+    }
+
+    .academic-service-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .academic-service-copy strong {
+      font-size: 11px;
+    }
+
+    .academic-service-copy .hub-card-description {
+      font-size: 9px;
+    }
+
+    .points-overview {
+      padding: 14px;
+      border-radius: 13px;
+    }
+
+    .points-overview-top > span:first-child {
+      font-size: 8px;
+    }
+
+    .graduation-requirement {
+      padding: 5px 7px;
+      font-size: 8px;
+    }
+
+    .points-total {
+      margin: 11px 0 8px;
+    }
+
+    .points-total strong {
+      font-size: 32px;
+    }
+
+    .points-total span,
+    .points-verification {
+      font-size: 9px;
+    }
+
+    .fch-status-card,
+    .biodata-card {
+      padding: 13px;
+    }
+
+    .fch-status-card h2,
+    .biodata-card h2,
+    .points-section-heading h2 {
+      font-size: 12px;
+    }
+
+    .fch-status-list {
+      gap: 4px;
+    }
+
+    .fch-status {
+      min-height: 52px;
+      border-radius: 8px;
+    }
+
+    .fch-status span {
+      font-size: 9px;
+    }
+
+    .fch-status strong {
+      font-size: 7px;
+    }
+
+    .points-section-heading {
+      align-items: flex-start;
+      margin-top: 18px;
+    }
+
+    .points-section-heading span {
+      padding-top: 2px;
+      font-size: 8px;
+    }
+
+    .point-entry-card {
+      gap: 9px;
+      padding: 11px;
+    }
+
+    .point-entry-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .point-entry-content h3 {
+      font-size: 10px;
+    }
+
+    .point-entry-content > p {
+      font-size: 8px;
+    }
+
+    .point-entry-meta {
+      gap: 5px 9px;
+      font-size: 7px;
+    }
+
+    .point-entry-value {
+      font-size: 11px;
+    }
+
+    .submission-header {
+      padding: 13px 14px;
+    }
+
+    .submission-header h2 {
+      font-size: 13px;
+    }
+
+    .submission-body {
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .points-auto-info > div {
+      flex-wrap: wrap;
+      font-size: 9px;
+    }
+
+    .points-auto-info strong {
+      margin-left: 0;
+    }
+
+    .student-profile-top {
+      padding: 18px 12px 14px;
+    }
+
+    .student-profile-name {
+      font-size: 15px;
+    }
+
+    .student-profile-stats {
+      margin-top: 14px;
+      padding-top: 11px;
+    }
+
+    .student-profile-stats strong {
+      font-size: 14px;
+    }
+
+    .biodata-list {
+      grid-template-columns: 1fr;
+    }
+
+    .biodata-list > div:nth-last-child(-n + 2) {
+      border-bottom: 1px solid #f0f3f6;
+    }
+
+    .biodata-list > div:last-child {
+      border-bottom: 0;
+    }
+
+    .profile-actions {
+      margin-top: 11px;
+    }
+  }
+
+@media (max-width: 560px) {
   .nav-item {
     display: flex;
     flex-direction: column;

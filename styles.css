@@ -5736,6 +5736,373 @@ h1 {
   font-weight: 700;
 }
 
+.points-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #d8e5ee;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+.points-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.points-table th,
+.points-table td {
+  padding: 10px 9px;
+  border: 1px solid #e2eaf0;
+  color: #35485f;
+  font-size: 10px;
+  line-height: 1.45;
+  vertical-align: top;
+}
+
+.points-table thead th {
+  color: #244b79;
+  background: #e6f5fc;
+  font-size: 9px;
+}
+
+.points-table tbody tr:nth-child(odd) {
+  background: #f0f9fd;
+}
+
+.points-table td:first-child,
+.points-table td:nth-last-child(-n + 2) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.points-student-info {
+  display: grid;
+  border: 1px solid #9abbd1;
+}
+
+.points-student-info > div {
+  display: grid;
+  grid-template-columns: minmax(72px, 110px) 1fr;
+  gap: 10px;
+  padding: 8px 10px;
+  color: #25364d;
+  font-size: 11px;
+}
+
+.points-student-info > div:nth-child(even) {
+  background: #eef8fc;
+}
+
+.points-student-info b {
+  font-weight: 700;
+}
+
+.points-template-link {
+  justify-self: center;
+  padding: 4px;
+  border: 0;
+  color: #0758b3;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.points-auto-info p {
+  margin-bottom: 0;
+}
+
+.points-auto-info p strong {
+  color: #176c49;
+}
+
+.submission-body > .form-field textarea {
+  width: 100%;
+  min-height: 66px;
+  padding: 9px 11px;
+  border: 1px solid #dce4ed;
+  border-radius: 9px;
+  color: #536477;
+  background: #f7fafc;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.point-date-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.point-input-date {
+  margin: 0;
+  color: #536477;
+  font-size: 10px;
+}
+
+.evaluation-dialog {
+  width: min(900px, calc(100% - 24px));
+  max-height: min(92vh, 1000px);
+  border-color: #9ec5dc;
+  border-radius: 8px;
+}
+
+.evaluation-dialog .submission-header {
+  color: #fff;
+  background: #4d9ccc;
+}
+
+.evaluation-dialog .submission-header h2 {
+  color: inherit;
+}
+
+.evaluation-body {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+}
+
+.evaluation-course-info {
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) 1fr;
+  border: 1px solid #9fc2d5;
+}
+
+.evaluation-course-info > div {
+  display: grid;
+  grid-template-columns: minmax(125px, 240px) 1fr;
+  gap: 10px;
+  padding: 7px 9px;
+  color: #25364d;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.evaluation-course-info > div:nth-child(odd) {
+  background: #eef8fc;
+}
+
+.evaluation-course-info > div:nth-child(even) {
+  background: #fff;
+}
+
+.evaluation-course-info > div span {
+  color: #394d63;
+}
+
+.evaluation-course-info > div strong {
+  font-weight: 700;
+}
+
+.evaluation-status {
+  color: #dc2626;
+}
+
+.evaluation-intro {
+  margin: 0;
+  padding: 10px;
+  color: #26384f;
+  background: #eef8fc;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.evaluation-workload,
+.evaluation-rating-section {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #a9c7d8;
+}
+
+.evaluation-workload legend,
+.evaluation-ratings h3 {
+  width: 100%;
+  padding: 9px 11px;
+  color: #245488;
+  background: linear-gradient(#dff5ff, #bfe6f7);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.evaluation-workload-item {
+  padding: 8px 10px;
+  color: #25364d;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.evaluation-workload-item:nth-of-type(even),
+.evaluation-rating-row:nth-child(even) {
+  background: #eef8fc;
+}
+
+.evaluation-choice-list,
+.evaluation-rating-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 7px 8px 1px 22px;
+}
+
+.evaluation-choice-list label,
+.evaluation-rating-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #35485f;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.evaluation-choice-list input,
+.evaluation-rating-options input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #2c83b4;
+}
+
+.evaluation-ratings {
+  display: grid;
+  gap: 0;
+  border: 1px solid #a9c7d8;
+}
+
+.evaluation-ratings h3 {
+  margin: 0;
+}
+
+.evaluation-ratings > p {
+  margin: 0;
+  padding: 7px 10px;
+  color: #35485f;
+  background: #f4f9fb;
+  font-size: 10px;
+}
+
+.evaluation-rating-section {
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.evaluation-rating-section legend {
+  width: 100%;
+  padding: 8px 10px;
+  color: #2d5e91;
+  background: #eef5fb;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.evaluation-rating-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(245px, 40%);
+  border-top: 1px solid #e0e8ee;
+}
+
+.evaluation-rating-row > strong {
+  display: flex;
+  gap: 8px;
+  padding: 9px 10px;
+  color: #27394e;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.evaluation-rating-row > strong > span {
+  flex: 0 0 auto;
+}
+
+.evaluation-rating-options {
+  align-content: center;
+  padding: 7px 9px;
+  border-left: 1px solid #dce5ec;
+}
+
+.evaluation-rating-options label {
+  gap: 3px;
+}
+
+.evaluation-rating-options small {
+  color: #52647a;
+  font-size: 9px;
+}
+
+.evaluation-comment {
+  display: grid;
+  gap: 7px;
+  color: #344860;
+  font-size: 10px;
+}
+
+.evaluation-comment textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 9px;
+  border: 1px solid #b9cbd8;
+  border-radius: 5px;
+  color: #334155;
+  font: inherit;
+  resize: vertical;
+}
+
+.evaluation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 9px;
+  background: #eaf4fb;
+}
+
+.evaluation-actions button {
+  min-width: 78px;
+  min-height: 36px;
+}
+
+@media (max-width: 620px) {
+  .evaluation-body {
+    gap: 10px;
+    padding: 9px;
+  }
+
+  .evaluation-course-info {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-course-info > div {
+    grid-template-columns: minmax(110px, 42%) 1fr;
+    padding: 6px 7px;
+    font-size: 10px;
+  }
+
+  .evaluation-rating-row {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-rating-options {
+    padding-left: 32px;
+    border-top: 1px solid #e5edf2;
+    border-left: 0;
+  }
+
+  .evaluation-rating-options label {
+    min-width: 82px;
+  }
+
+  .point-date-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
 .lecturer-table td:nth-child(2) {
   min-width: 155px;
   white-space: normal;

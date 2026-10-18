@@ -9,6 +9,7 @@ let toastTimeout;
 let notificationTrigger;
 let lpkpMeetingIndex = 0;
 let lpkpAttendanceFilter = "ALL";
+const evaluationResponses = new Map();
 
 const pointsEntries = [
   {
@@ -29,63 +30,129 @@ const pointsEntries = [
   },
 ];
 
-const pointCategories = {
-  fch4_officer: {
-    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus BEM/DPM Fakultas/Jurusan/Prodi",
-    points: 30,
-    field: "Organisasi & Kepemimpinan",
-    role: "Anggota pengurus BEM/DPM Fakultas/Jurusan/Program Studi",
-    softskills: "Keterampilan manajerial, kepemimpinan, integritas",
+const pointCategories = [
+  {
+    label: "Inisiasi Universitas (Inisiasi Sanata Dharma - INSADHA)",
+    types: [{ label: "Pendampingan dan kegiatan INSADHA", roles: [
+      { label: "Peserta INSADHA", points: 10, softskills: "Adaptasi, komunikasi, kerja sama" },
+      { label: "Pendamping/panitia INSADHA", points: 15, softskills: "Kepemimpinan, kepedulian, komunikasi" },
+    ] }],
   },
-  fch4_committee: {
-    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat universitas",
-    points: 20,
-    field: "Organisasi & Kepemimpinan",
-    role: "Anggota panitia kegiatan tingkat universitas",
-    softskills: "Keterampilan bekerja sama, tanggung jawab, komunikasi",
+  {
+    label: "Formasi Cerdas Humanis 1 (FCH 1): Integral Personality Development (IPD)",
+    types: [{ label: "Pelatihan dan pengembangan diri", roles: [
+      { label: "Peserta aktif pelatihan/sertifikasi", points: 10, softskills: "Kompetensi diri, adaptabilitas" },
+      { label: "Penyelenggara kegiatan pengembangan diri", points: 15, softskills: "Komunikasi, kerja sama, tanggung jawab" },
+    ] }],
   },
-  fch4_faculty_committee: {
-    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat fakultas/prodi",
-    points: 15,
-    field: "Organisasi & Kepemimpinan",
-    role: "Anggota panitia kegiatan tingkat fakultas/program studi",
-    softskills: "Keterampilan bekerja sama, tanggung jawab, komunikasi",
+  {
+    label: "Formasi Cerdas Humanis 2 (FCH 2): Local & Global Citizenship (LGC)",
+    types: [{ label: "Kegiatan kewargaan dan pengabdian", roles: [
+      { label: "Relawan/pengabdian kepada masyarakat", points: 15, softskills: "Empati, kepedulian sosial, kolaborasi" },
+      { label: "Delegasi kegiatan tingkat nasional/internasional", points: 20, softskills: "Komunikasi lintas budaya, adaptabilitas" },
+    ] }],
   },
-  fch4_coordinator: {
-    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi koordinator/ketua panitia kegiatan fakultas",
-    points: 30,
-    field: "Organisasi & Kepemimpinan",
-    role: "Koordinator/ketua panitia kegiatan fakultas",
-    softskills: "Kepemimpinan, keterampilan manajerial, komunikasi",
+  {
+    label: "Formasi Cerdas Humanis 3 (FCH 3): Self-Actualization (SA)",
+    types: [
+      { label: "Gelar Gagasan Kritis (GiSi - Get it Share it!)", roles: [
+        { label: "Peserta/pemakalah", points: 10, softskills: "Berpikir kritis, komunikasi" },
+        { label: "Juara/penerima penghargaan", points: 20, softskills: "Kreativitas, ketekunan, berpikir kritis" },
+      ] },
+      { label: "Unit Kegiatan Mahasiswa", roles: [
+        { label: "Menjadi Ketua UKM", points: 30, softskills: "Kepemimpinan, manajerial, komunikasi" },
+        { label: "Menjadi Pengurus UKM (selain ketua)", points: 25, softskills: "Kerja sama, tanggung jawab, kepemimpinan" },
+        { label: "Menjadi Anggota UKM", points: 20, softskills: "Kolaborasi, komunikasi, disiplin" },
+      ] },
+      { label: "Ajang Talenta Mahasiswa (perlombaan)", roles: [
+        { label: "Peserta perlombaan", points: 10, softskills: "Disiplin, kreativitas, daya juang" },
+        { label: "Juara/finalis perlombaan", points: 25, softskills: "Berpikir kritis, kreativitas, ketekunan" },
+      ] },
+      { label: "Penghargaan dan representasi mahasiswa", roles: [
+        { label: "Menerima penghargaan dari luar USD", points: 20, softskills: "Prestasi, profesionalisme, komunikasi" },
+        { label: "Mengikuti program internasional sebagai perwakilan USD", points: 25, softskills: "Komunikasi lintas budaya, adaptabilitas" },
+        { label: "Menjadi duta/delegasi kegiatan di luar kampus", points: 20, softskills: "Komunikasi, tanggung jawab, representasi diri" },
+      ] },
+    ],
   },
-  fch3_organization: {
-    label: "Formasi Cerdas Humanis 3 (FCH 3) — Pengurus inti UKM/HMPS/komunitas minat bakat",
-    points: 25,
-    field: "Organisasi & Kepemimpinan",
-    role: "Pengurus inti UKM/HMPS/komunitas minat bakat",
-    softskills: "Kepemimpinan, kerja sama tim, tanggung jawab",
+  {
+    label: "Formasi Cerdas Humanis 4 (FCH 4): Global Competence (GC)",
+    types: [
+      { label: "Organisasi kemahasiswaan", roles: [
+        { label: "Menjadi anggota pengurus BEM/DPM Fakultas/Jurusan/Prodi", points: 30, softskills: "Manajerial, kepemimpinan, integritas" },
+        { label: "Menjadi anggota pengurus organisasi di tingkat universitas", points: 35, softskills: "Kepemimpinan, komunikasi, kolaborasi" },
+      ] },
+      { label: "Kepanitiaan kegiatan", roles: [
+        { label: "Anggota panitia tingkat Fakultas/Jurusan/Prodi kurang dari tiga bulan", points: 10, softskills: "Kerja sama, tanggung jawab, komunikasi" },
+        { label: "Anggota panitia tingkat Fakultas/Jurusan/Prodi tiga bulan atau lebih", points: 15, softskills: "Kerja sama, manajemen waktu, tanggung jawab" },
+        { label: "Koordinator/ketua panitia kegiatan", points: 30, softskills: "Kepemimpinan, manajerial, komunikasi" },
+      ] },
+      { label: "Menjadi Co-fasilitator FCH", roles: [
+        { label: "Co-fasilitator kegiatan FCH", points: 20, softskills: "Fasilitasi, komunikasi, kepedulian" },
+      ] },
+      { label: "Satgas PPKS USD", roles: [
+        { label: "Menjadi anggota Satgas PPKS USD", points: 25, softskills: "Empati, integritas, komunikasi" },
+      ] },
+    ],
   },
-  fch3_competition: {
-    label: "Formasi Cerdas Humanis 3 (FCH 3) — Juara/finalis kompetisi ilmiah, hackathon/lomba",
-    points: 20,
-    field: "Kompetisi & Prestasi",
-    role: "Juara/finalis kompetisi ilmiah, hackathon, atau lomba",
-    softskills: "Berpikir kritis, kreativitas, ketekunan",
+  {
+    label: "Formasi Cerdas Humanis 5 (FCH 5): Future Orientation (FO)",
+    types: [{ label: "Pengembangan karier dan kesiapan masa depan", roles: [
+      { label: "Peserta aktif seminar, pelatihan, atau lokakarya", points: 10, softskills: "Adaptabilitas, komunikasi, pembelajaran mandiri" },
+      { label: "Asisten kuliah/penelitian/praktikum", points: 20, softskills: "Kolaborasi, ketelitian, pemecahan masalah" },
+      { label: "Menghasilkan karya atau produk", points: 20, softskills: "Kreativitas, inovasi, pemecahan masalah" },
+    ] }],
   },
-  fch1_workshop: {
-    label: "Formasi Cerdas Humanis 1 (FCH 1) — Peserta aktif workshop/sertifikasi keahlian komputasi",
-    points: 10,
-    field: "Pelatihan & Seminar",
-    role: "Peserta aktif workshop/sertifikasi keahlian komputasi",
-    softskills: "Kompetensi teknis, adaptabilitas, teknologi",
+  {
+    label: "Kegiatan kemahasiswaan lainnya",
+    types: [{ label: "Organisasi dan kegiatan di luar kampus", roles: [
+      { label: "Pengurus organisasi di luar kampus", points: 15, softskills: "Kepemimpinan, tanggung jawab, kolaborasi" },
+      { label: "Berpartisipasi dalam pemilihan ketua organisasi kampus", points: 5, softskills: "Partisipasi, tanggung jawab, kewargaan" },
+    ] }],
   },
-  insa_committee: {
-    label: "Inisiasi Sanata Dharma (INSADHA) — Pendamping/panitia inisiasi mahasiswa baru",
-    points: 15,
-    field: "Pengabdian & Kemahasiswaan",
-    role: "Pendamping/panitia Inisiasi Mahasiswa Baru USD",
-    softskills: "Kepedulian, komunikasi, kerja sama",
-  },
+];
+
+const courseEvaluations = {
+  workload: [
+    ["1", "Berapa menit rata-rata waktu yang dipakai dosen untuk setiap pertemuan dalam kelas?", ["Kurang dari 100 menit", "100 menit", "Lebih dari 100 menit"]],
+    ["2a", "Apakah ada tugas terstruktur dari dosen di luar jam perkuliahan?", ["Ya", "Tidak"]],
+    ["2b", "Berapa menit rata-rata yang Anda habiskan untuk menyelesaikan tugas terstruktur di luar jam perkuliahan?", ["Kurang dari 120 menit", "120 menit", "Lebih dari 120 menit", "Tidak ada tugas terstruktur"]],
+    ["3a", "Apakah Anda melakukan kegiatan belajar mandiri di luar tugas terstruktur?", ["Ya", "Tidak"]],
+    ["3b", "Berapa menit rata-rata per minggu yang Anda habiskan untuk belajar mandiri?", ["Kurang dari 120 menit", "120 menit", "Lebih dari 120 menit", "Tidak ada kegiatan belajar mandiri"]],
+  ],
+  sections: [
+    ["Reliability", [
+      "Tujuan pembelajaran mata kuliah ini disampaikan dengan jelas.",
+      "Hasil ujian atau tugas dikembalikan dalam waktu yang wajar.",
+      "Umpan balik dari dosen bermanfaat bagi pembelajaran.",
+    ]],
+    ["Assurance", [
+      "Saya dapat memahami penjelasan dosen.",
+      "Saya termotivasi untuk mempelajari materi mata kuliah ini.",
+    ]],
+    ["Tangibles", [
+      "Interaksi dengan dosen selama perkuliahan berjalan dengan baik.",
+      "Saya mudah berkonsultasi dengan dosen.",
+    ]],
+    ["Empathy", [
+      "Dosen peduli dengan kesulitan pembelajaran yang saya hadapi.",
+      "Dosen memberi apresiasi atas keberhasilan mahasiswa.",
+      "Dosen membantu mahasiswa mengatasi kendala pembelajaran.",
+    ]],
+    ["Kualitas Suasana Belajar", [
+      "Pembelajaran berlangsung dalam suasana yang berpusat pada mahasiswa.",
+      "Pembelajaran memberi ruang yang cukup untuk kreativitas mahasiswa.",
+      "Kegiatan pembelajaran mendorong kerja sama dan proyek bersama.",
+      "Pembelajaran memfasilitasi penyelesaian kasus dan masalah.",
+    ]],
+    ["Penggunaan LMS", [
+      "Materi pada LMS sesuai dengan kompetensi yang hendak dicapai.",
+      "LMS memfasilitasi interaksi untuk mendukung eksplorasi mandiri.",
+    ]],
+    ["Penilaian/asesmen", [
+      "Kriteria penilaian disampaikan dengan jelas dan hasil penilaian diberikan tepat waktu.",
+    ]],
+  ],
 };
 
 const lpkpMeetings = [
@@ -324,7 +391,42 @@ const services = {
       <section class="grade-panel" id="grade-panel" role="tabpanel" aria-labelledby="grade-tab-1">
         <header class="grade-panel-heading"><div><strong id="grade-semester-label">Semester : 1</strong><span id="grade-year-label">Tahun Akademik : 2024 / 2025 / Gasal</span></div><div class="grade-ips"><small>I P S</small><strong id="semester-gpa">3.01</strong></div></header>
         <div class="grade-table-scroll"><table class="grade-table"><thead><tr><th>Kode</th><th>Nama Mata Kuliah</th><th>SKS</th><th>Nilai</th><th>SWTS</th><th>Evaluasi</th><th>REPA</th><th>REPK</th></tr></thead><tbody id="grade-rows"></tbody><tfoot><tr><th colspan="2">Total SKS</th><td id="semester-credits">20</td><td colspan="5"></td></tr></tfoot></table></div>
-      </section>`,
+      </section>
+      <dialog class="submission-dialog evaluation-dialog" id="course-evaluation-dialog" aria-labelledby="course-evaluation-title">
+        <form class="submission-form" id="course-evaluation-form">
+          <header class="submission-header"><h2 id="course-evaluation-title">Penilaian Evaluasi Pembelajaran</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup kuesioner">×</button></header>
+          <div class="evaluation-body">
+            <section class="evaluation-course-info" aria-label="Informasi mata kuliah">
+              <div><span>TA / Semester</span><strong id="evaluation-semester">2026 / Gasal</strong></div>
+              <div><span>Jadwal Pengisian Evaluasi</span><strong>05-10-2026 s.d. 05-02-2027</strong></div>
+              <div><span>Status Jadwal</span><strong>Dibuka</strong></div>
+              <div><span>Status Pengisian</span><strong class="evaluation-status" id="evaluation-status">Belum Diisi</strong></div>
+              <div><span>Kode / Nama Mata Kuliah</span><strong id="evaluation-course">INFO118 / Proyek Informatika</strong></div>
+              <div><span>SKS / Menit Pertemuan</span><strong id="evaluation-credits">2 / 100 menit</strong></div>
+              <div><span>Dosen Pengampu</span><strong id="evaluation-lecturer">Agnes Maria Polina, S.Kom., M.Sc.</strong></div>
+            </section>
+            <p class="evaluation-intro">Setiap 1 SKS setara dengan 50 menit pertemuan di kelas, 60 menit penyelesaian tugas terstruktur, dan 60 menit belajar mandiri per minggu. Berikan penilaian Anda untuk membantu meningkatkan kualitas pembelajaran.</p>
+            <fieldset class="evaluation-workload">
+              <legend>Pertanyaan Kuesioner Student Workload Akhir Semester</legend>
+              ${courseEvaluations.workload.map(([number, question, choices], index) => `
+                <div class="evaluation-workload-item"><strong>${number}. ${question}</strong><div class="evaluation-choice-list">${choices.map((choice, choiceIndex) => `<label><input type="radio" name="workload-${index}" value="${choiceIndex}" required><span>${choice}</span></label>`).join("")}</div></div>`).join("")}
+            </fieldset>
+            <section class="evaluation-ratings" aria-labelledby="evaluation-ratings-title">
+              <h3 id="evaluation-ratings-title">Penilaian Evaluasi Pembelajaran</h3>
+              <p>1: Buruk · 2: Kurang · 3: Baik · 4: Sangat Baik</p>
+              ${courseEvaluations.sections.map(([section, questions], sectionIndex) => `
+                <fieldset class="evaluation-rating-section"><legend>${escapeHTML(section)}</legend>
+                  ${questions.map((question, questionIndex) => {
+                    const number = courseEvaluations.sections.slice(0, sectionIndex).reduce((total, item) => total + item[1].length, 0) + questionIndex + 1;
+                    return `<div class="evaluation-rating-row"><strong><span>${number}.</span>${escapeHTML(question)}</strong><div class="evaluation-rating-options">${[1, 2, 3, 4].map((rating) => `<label><input type="radio" name="rating-${number}" value="${rating}" required><span>${rating}</span><small>${["Buruk", "Kurang", "Baik", "Sangat Baik"][rating - 1]}</small></label>`).join("")}</div></div>`;
+                  }).join("")}
+                </fieldset>`).join("")}
+            </section>
+            <label class="evaluation-comment"><strong>Saran untuk pembelajaran agar menjadi lebih baik</strong><textarea name="suggestion" rows="3" maxlength="1000" placeholder="Tulis saran Anda"></textarea></label>
+            <div class="evaluation-actions"><button class="secondary-button" type="button" data-close-dialog>Tutup</button><button class="primary-button" type="submit">Simpan Penilaian</button></div>
+          </div>
+        </form>
+      </dialog>`,
   },
   lpkp: {
     title: "LPKP",
@@ -471,37 +573,39 @@ const services = {
         <form class="submission-form" id="point-submission-form">
           <header class="submission-header"><h2 id="point-form-title"><span aria-hidden="true">♙</span> Input Pengajuan Poin Kegiatan</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup formulir">×</button></header>
           <div class="submission-body">
-            <label class="form-field">1. Kategori &amp; Peran Kegiatan (Poin Ditentukan Otomatis):
-              <select id="point-category" required>
-                <option value="fch4_officer">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus BEM/DPM Fakultas/Jurusan/Prodi</option>
-                <option value="fch4_committee">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat universitas</option>
-                <option value="fch4_faculty_committee">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat fakultas/prodi</option>
-                <option value="fch4_coordinator">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi koordinator/ketua panitia kegiatan fakultas</option>
-                <option value="fch3_organization">Formasi Cerdas Humanis 3 (FCH 3) — Pengurus inti UKM/HMPS/komunitas minat bakat</option>
-                <option value="fch3_competition">Formasi Cerdas Humanis 3 (FCH 3) — Juara/finalis kompetisi ilmiah/hackathon/lomba</option>
-                <option value="fch1_workshop">Formasi Cerdas Humanis 1 (FCH 1) — Peserta aktif workshop/sertifikasi keahlian komputasi</option>
-                <option value="insa_committee">Inisiasi Sanata Dharma (INSADHA) — Pendamping/panitia inisiasi mahasiswa baru USD</option>
-              </select>
+            <section class="points-student-info" aria-label="Data mahasiswa">
+              <div><strong>NIM</strong><b>245314034</b></div><div><strong>Nama</strong><b>${escapeHTML(profileData.name.toLocaleUpperCase("id"))}</b></div>
+            </section>
+            <button class="points-template-link" type="button" data-message="Template surat tugas mahasiswa">Template Surat Tugas Mahasiswa</button>
+            <label class="form-field">Kategori
+              <select id="point-category" name="pointCategory" required>${pointCategories.map((item, index) => `<option value="${index}">${escapeHTML(item.label)}</option>`).join("")}</select>
+            </label>
+            <label class="form-field">Jenis
+              <select id="point-type" name="pointType" required></select>
+            </label>
+            <label class="form-field">Peran
+              <select id="point-role" name="pointRole" required></select>
             </label>
             <section class="points-auto-info" aria-live="polite">
-              <div><span>♙</span> Jumlah Poin Ditentukan Sistem: <strong id="calculated-point-value">+30 Poin</strong></div>
-              <p>ⓘ Jumlah poin otomatis terkunci dan tidak dapat diubah oleh mahasiswa. Besaran poin dihitung resmi berdasarkan pedoman kategori kegiatan Universitas Sanata Dharma.</p>
+              <div><span>Poin</span><strong id="calculated-point-value">+10 Poin</strong></div>
+              <p><strong>Satuan: </strong><span id="point-unit">Kegiatan</span></p>
             </section>
-            <div class="category-detail"><p><span>Bidang:</span> <strong id="point-category-field">Organisasi &amp; Kepemimpinan</strong></p><p><span>Peran:</span> <strong id="point-category-role">Anggota pengurus BEM/DPM Fakultas/Jurusan/Program Studi</strong></p><p><span>Softskills yang Dikembangkan:</span> <strong id="point-category-softskills">Keterampilan manajerial, kepemimpinan, integritas</strong></p></div>
-            <label class="form-field">2. Nama Spesifik Kegiatan / Acara:
+            <label class="form-field">Softskills
+              <textarea id="point-softskills" rows="3" readonly></textarea>
+            </label>
+            <label class="form-field">Nama Kegiatan / Nama UKM
               <input name="activity" type="text" maxlength="120" placeholder="Nama kegiatan" required>
             </label>
-            <label class="form-field">3. Unit / Badan Penyelenggara:
-              <input name="organizer" type="text" maxlength="100" value="Informatika FST USD" required>
+            <label class="form-field">Unit / Badan Penyelenggara
+              <input name="organizer" type="text" maxlength="100" placeholder="Nama penyelenggara" required>
             </label>
-            <label class="form-field">4. Waktu / Periode Kegiatan:
-              <input name="period" type="text" maxlength="60" placeholder="Tahun 2026" required>
-            </label>
-            <label class="form-field">5. Unggah Bukti Sertifikat / SK Tugas (PDF / JPG)
+            <div class="point-date-fields"><label class="form-field">Tanggal mulai<input name="startDate" type="date" required></label><label class="form-field">Tanggal selesai<input name="endDate" type="date" required></label></div>
+            <label class="form-field">Surat Keterangan Aktif / Bukti Kegiatan
               <span class="file-picker"><span aria-hidden="true">⇧</span><strong>Pilih Berkas Bukti Kegiatan</strong><small>PDF, JPG, PNG maksimal 5MB</small><input name="evidence" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" required></span>
             </label>
+            <p class="point-input-date">Tanggal Input: <span id="point-input-date"></span></p>
             <p class="form-error" id="point-form-error" role="alert"></p>
-            <button class="primary-button form-submit-button" type="submit">▣ &nbsp; Kirim Pengajuan (+30 Poin)</button>
+            <div class="evaluation-actions"><button class="secondary-button" type="reset">Batal</button><button class="primary-button form-submit-button" type="submit">Simpan Pengajuan</button></div>
           </div>
         </form>
       </dialog>`,
@@ -624,21 +728,21 @@ function renderPointEntries() {
   const pendingPoints = pointsEntries
     .filter((entry) => !entry.status.startsWith("Divalidasi"))
     .reduce((total, entry) => total + entry.points, 0);
-  document.querySelector("#points-total").textContent = String(verifiedPoints);
+  const total = verifiedPoints + pendingPoints;
+  document.querySelector("#points-total").textContent = String(total);
   document.querySelector("#points-verified").textContent = String(verifiedPoints);
   document.querySelector("#points-pending").textContent = String(pendingPoints);
   document.querySelector("#points-entry-count").textContent = `${pointsEntries.length} Kegiatan Tercatat`;
-  list.innerHTML = pointsEntries.map((entry) => `
-    <article class="point-entry-card">
-      <span class="point-entry-icon" aria-hidden="true">♧</span>
-      <div class="point-entry-content">
-        <span class="point-entry-category">${escapeHTML(entry.category)}</span>
-        <h3>${escapeHTML(entry.title)}</h3>
-        <p>${escapeHTML(entry.organization)}</p>
-        <div class="point-entry-meta"><span>▦ ${escapeHTML(entry.date)}</span><span>◷ ${escapeHTML(entry.status)}</span></div>
-      </div>
-      <strong class="point-entry-value">+${entry.points} <small>Poin</small></strong>
-    </article>`).join("");
+  list.innerHTML = `
+    <div class="points-table-scroll"><table class="points-table">
+      <thead><tr><th>No.</th><th>Kategori</th><th>Jenis</th><th>Peran</th><th>Poin</th><th>Verifikasi</th></tr></thead>
+      <tbody>${pointsEntries.map((entry, index) => `
+        <tr><td>${index + 1}</td><td>${escapeHTML(entry.category)}</td><td>${escapeHTML(entry.type || entry.category)}</td><td>${escapeHTML(entry.role || entry.title)}</td><td>${entry.points}</td><td>${escapeHTML(entry.status.startsWith("Divalidasi") ? "Y" : "N")}</td></tr>`).join("")}</tbody>
+    </table></div>`;
+
+  const inputDate = document.querySelector("#point-input-date");
+  if (inputDate) inputDate.textContent = new Intl.DateTimeFormat("id-ID", { dateStyle: "long" }).format(new Date());
+  updatePointCategory("category");
 }
 
 function renderLpkp() {
@@ -690,16 +794,57 @@ function renderLpkpMeeting() {
   document.querySelector("#lpkp-material").textContent = meeting.material;
 }
 
-function updatePointCategory() {
+function updatePointCategory(level = "category") {
   const category = document.querySelector("#point-category");
-  if (!category) return;
-  const selection = pointCategories[category.value];
-  const value = `+${selection.points} Poin`;
-  document.querySelector("#calculated-point-value").textContent = value;
-  document.querySelector("#point-category-field").textContent = selection.field;
-  document.querySelector("#point-category-role").textContent = selection.role;
-  document.querySelector("#point-category-softskills").textContent = selection.softskills;
-  document.querySelector(".form-submit-button").textContent = `▣  Kirim Pengajuan (${value})`;
+  const type = document.querySelector("#point-type");
+  const role = document.querySelector("#point-role");
+  if (!category || !type || !role) return;
+  const categoryOptions = pointCategories[Number(category.value)];
+  if (level === "category") {
+    type.innerHTML = categoryOptions.types.map((item, index) => `<option value="${index}">${escapeHTML(item.label)}</option>`).join("");
+  }
+  const typeOptions = categoryOptions.types[Number(type.value)];
+  if (level !== "role") {
+    role.innerHTML = typeOptions.roles.map((item, index) => `<option value="${index}">${escapeHTML(item.label)}</option>`).join("");
+  }
+  const selection = typeOptions.roles[Number(role.value)];
+  document.querySelector("#calculated-point-value").textContent = `+${selection.points} Poin`;
+  document.querySelector("#point-softskills").value = selection.softskills;
+  document.querySelector("#point-unit").textContent =
+    /organisasi|ukm/i.test(`${categoryOptions.label} ${typeOptions.label}`) ? "Periode" : "Kegiatan";
+}
+
+function openCourseEvaluation(button) {
+  const code = button.dataset.courseCode;
+  const courseTitle = button.dataset.courseTitle;
+  const course = drsCourses.find((item) => item.code === code);
+  const semester = document.querySelector("#grade-year-label").textContent.replace("Tahun Akademik : ", "");
+  const dialog = document.querySelector("#course-evaluation-dialog");
+  const form = document.querySelector("#course-evaluation-form");
+  const key = `${code}:${button.dataset.gradeAction}`;
+  const savedResponse = evaluationResponses.get(key);
+  form.reset();
+  form.dataset.key = key;
+  document.querySelector("#course-evaluation-title").textContent = button.dataset.gradeAction === "SWTS"
+    ? "Kuesioner Student Workload Akhir Semester"
+    : "Penilaian Evaluasi Pembelajaran";
+  document.querySelector("#evaluation-semester").textContent = semester;
+  document.querySelector("#evaluation-course").textContent = `${code} / ${courseTitle}`;
+  document.querySelector("#evaluation-credits").textContent = `${button.dataset.courseCredits} / 100 menit`;
+  document.querySelector("#evaluation-lecturer").textContent = course?.lecturer || "Dosen Pengampu";
+  document.querySelector("#evaluation-status").textContent = savedResponse ? "Sudah Diisi" : "Belum Diisi";
+  if (savedResponse) {
+    for (const [name, value] of Object.entries(savedResponse)) {
+      const input = form.elements.namedItem(name);
+      if (input instanceof RadioNodeList) {
+        const selected = [...input].find((item) => item.value === value);
+        if (selected) selected.checked = true;
+      } else if (input instanceof HTMLTextAreaElement) {
+        input.value = value;
+      }
+    }
+  }
+  dialog.showModal();
 }
 
 function updateProfileDetails() {
@@ -912,7 +1057,7 @@ function updateGrades(semester) {
   document.querySelector("#semester-gpa").textContent = result.gpa;
   document.querySelector("#semester-credits").textContent = result.credits;
   document.querySelector("#grade-rows").innerHTML = result.courses.map(([code, title, credits, grade, repa, repk]) =>
-    `<tr><td>${escapeHTML(code)}</td><td>${escapeHTML(title)}</td><td>${credits}</td><td>${grade ? `<span class="grade-letter">${escapeHTML(grade)}</span>` : ""}</td><td><button type="button" class="grade-action-link" data-grade-action="SWTS">klik disini</button></td><td><button type="button" class="grade-action-link grade-evaluation-link" data-grade-action="Evaluasi">klik disini</button></td><td>${repa}</td><td>${repk}</td></tr>`
+    `<tr><td>${escapeHTML(code)}</td><td>${escapeHTML(title)}</td><td>${credits}</td><td>${grade ? `<span class="grade-letter">${escapeHTML(grade)}</span>` : ""}</td><td><button type="button" class="grade-action-link" data-grade-action="SWTS" data-course-code="${escapeHTML(code)}" data-course-title="${escapeHTML(title)}" data-course-credits="${credits}">klik disini</button></td><td><button type="button" class="grade-action-link grade-evaluation-link" data-grade-action="Evaluasi" data-course-code="${escapeHTML(code)}" data-course-title="${escapeHTML(title)}" data-course-credits="${credits}">klik disini</button></td><td>${repa}</td><td>${repk}</td></tr>`
   ).join("");
 }
 
@@ -984,7 +1129,7 @@ document.addEventListener("click", (event) => {
 
   const gradeAction = event.target.closest("[data-grade-action]");
   if (gradeAction) {
-    showMessage(`${gradeAction.dataset.gradeAction} dipilih.`);
+    openCourseEvaluation(gradeAction);
     return;
   }
 
@@ -1092,7 +1237,15 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("change", (event) => {
   if (event.target.id === "point-category") {
-    updatePointCategory();
+    updatePointCategory("category");
+  }
+
+  if (event.target.id === "point-type") {
+    updatePointCategory("type");
+  }
+
+  if (event.target.id === "point-role") {
+    updatePointCategory("role");
   }
 
   if (event.target.matches('input[name="evidence"]')) {
@@ -1136,6 +1289,16 @@ document.addEventListener("input", (event) => {
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target.id === "course-evaluation-form") {
+    event.preventDefault();
+    const form = event.target;
+    evaluationResponses.set(form.dataset.key, Object.fromEntries(new FormData(form).entries()));
+    document.querySelector("#evaluation-status").textContent = "Sudah Diisi";
+    form.closest("dialog").close();
+    showMessage("Disimpan");
+    return;
+  }
+
   if (event.target.id === "lpkp-verification-form") {
     event.preventDefault();
     showMessage("Disimpan");
@@ -1148,7 +1311,9 @@ document.addEventListener("submit", (event) => {
     const data = new FormData(form);
     const file = data.get("evidence");
     const error = document.querySelector("#point-form-error");
-    const category = pointCategories[document.querySelector("#point-category").value];
+    const category = pointCategories[Number(data.get("pointCategory"))];
+    const type = category.types[Number(data.get("pointType"))];
+    const role = type.roles[Number(data.get("pointRole"))];
     const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
     const allowedExtension = file instanceof File && /\.(pdf|jpe?g|png)$/i.test(file.name);
     if (!(file instanceof File) || (!allowedTypes.includes(file.type) && !allowedExtension)) {
@@ -1159,16 +1324,24 @@ document.addEventListener("submit", (event) => {
       error.textContent = "Ukuran berkas melebihi 5MB. Pilih berkas yang lebih kecil.";
       return;
     }
+    const startDate = data.get("startDate");
+    const endDate = data.get("endDate");
+    if (endDate < startDate) {
+      error.textContent = "Tanggal selesai harus sama atau setelah tanggal mulai.";
+      return;
+    }
     pointsEntries.push({
-      category: category.field,
+      category: category.label,
+      type: type.label,
+      role: role.label,
       title: data.get("activity").trim(),
       organization: data.get("organizer").trim(),
-      date: data.get("period").trim(),
-      points: category.points,
+      date: `${startDate} s.d. ${endDate}`,
+      points: role.points,
       status: "Menunggu verifikasi",
     });
     renderRoute();
-    showMessage("Pengajuan berhasil disimpan.");
+    showMessage("Disimpan");
     return;
   }
 
@@ -1181,6 +1354,15 @@ document.addEventListener("submit", (event) => {
     renderRoute();
     showMessage("Perubahan berhasil disimpan.");
   }
+});
+
+document.addEventListener("reset", (event) => {
+  if (event.target.id !== "point-submission-form") return;
+  window.setTimeout(() => {
+    const error = document.querySelector("#point-form-error");
+    if (error) error.textContent = "";
+    updatePointCategory("category");
+  });
 });
 
 document.addEventListener("click", (event) => {

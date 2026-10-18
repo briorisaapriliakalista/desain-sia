@@ -7,6 +7,8 @@ const notificationCloseButton = document.querySelector(".notification-close");
 const markReadButton = document.querySelector(".mark-read-button");
 let toastTimeout;
 let notificationTrigger;
+let lpkpMeetingIndex = 0;
+let lpkpAttendanceFilter = "ALL";
 
 const pointsEntries = [
   {
@@ -85,6 +87,78 @@ const pointCategories = {
     softskills: "Kepedulian, komunikasi, kerja sama",
   },
 };
+
+const lpkpMeetings = [
+  {
+    course: "Proyek Informatika / AP",
+    time: "14:00–16:50 WIB",
+    room: "Lab Basis Data",
+    lecturer: "Agnes Maria Polina, S.Kom., M.Sc.",
+    material: "Pert-1: Pendahuluan Proyek Informatika (31 Agustus 2026)",
+  },
+  {
+    course: "Kriptografi / E",
+    time: "07:00–09:50 WIB",
+    room: "K.205",
+    lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs.",
+    material: "Pert-2: Pengantar Kriptografi dan Keamanan Informasi",
+  },
+];
+
+const lpkpStudents = [
+  ["205314137", "Sabatino Divera Prasetya"],
+  ["235314038", "Cristiano Kevin Pratama"],
+  ["245314001", "Tumba Tl. Sihombing"],
+  ["245314003", "Michael Angelo Praha Jeshua Immanuel"],
+  ["245314004", "Dimas Rizky Andyanto"],
+  ["245314020", "Lucia Yesika Paskalinda"],
+  ["245314053", "Burju Efraim Purba"],
+  ["245314114", "Tio Alan Kurniawan"],
+  ["245314118", "Anastasia Putri Wulandari"],
+  ["245314121", "Benedictus Aditya Nugraha"],
+  ["245314126", "Cecilia Maria Hartono"],
+  ["245314129", "Davin Mahendra Saputra"],
+  ["245314132", "Elisa Natalia Permata"],
+  ["245314135", "Felix Andreas Wijaya"],
+  ["245314139", "Gabriella Putri Lestari"],
+  ["245314142", "Hendrikus Bima Santoso"],
+  ["245314145", "Ivana Citra Maharani"],
+  ["245314148", "Jonathan Kevin Setiawan"],
+  ["245314151", "Kezia Anindya Prameswari"],
+  ["245314154", "Laurensius Dwi Prabowo"],
+  ["245314157", "Maria Theresia Kusuma"],
+  ["245314160", "Nathaniel Bintang Adi"],
+  ["245314163", "Olivia Grace Amelia"],
+  ["245314166", "Prasetya Yudha Ramadhan"],
+  ["245314169", "Regina Felicia Utami"],
+  ["245314172", "Samuel Christian Putra"],
+  ["245314175", "Theresia Angelica Dewi"],
+  ["245314178", "Unggul Adi Prakoso"],
+  ["245314181", "Valentino Rafael Siregar"],
+  ["245314184", "Winda Ayu Puspitasari"],
+  ["245314187", "Xaverius Dimas Kurnia"],
+  ["245314190", "Yohana Sekar Arum"],
+  ["245314193", "Zefanya Kristanto"],
+  ["245314196", "Adrianus Beni Saputra"],
+  ["245314199", "Bianca Aurelia Putri"],
+  ["245314202", "Clara Febriani"],
+  ["245314205", "Dionisius Mario"],
+  ["245314208", "Evelyn Margaretha"],
+].map(([nim, name], index) => ({
+  nim,
+  name,
+  attendance: index < 35 ? "H" : ["I", "S", "A"][index - 35],
+}));
+
+const drsCourses = [
+  { code: "INFO118", credits: 2, title: "Proyek Informatika (Kelas A)", day: "Senin", time: "13:00–13:50", room: "Lab Basis Data", lecturer: "Agnes Maria Polina, S.Kom., M.Sc.", fee: 580000 },
+  { code: "SDEV204", credits: 3, title: "Algoritma Optimisasi (Kelas A)", day: "Senin", time: "07:00–09:50", room: "K.204", lecturer: "Ir. Drs. Haris Sriwindono, M.Kom., Ph.D.", fee: 870000 },
+  { code: "INFO117", credits: 3, title: "Kriptografi (Kelas E)", day: "Kamis", time: "07:00–09:50", room: "K.205", lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs.", fee: 870000 },
+  { code: "NETW201", credits: 3, title: "Protokol TCP/IP Suite (Kelas A)", day: "Rabu", time: "10:00–12:50", room: "Lab Jaringan", lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs.", fee: 870000 },
+  { code: "SNET52W", credits: 3, title: "Virtualisasi dan Teknologi Cloud (Kelas A)", day: "Senin", time: "10:00–12:50", room: "Lab Jaringan", lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs.", fee: 870000 },
+  { code: "NETW203", credits: 3, title: "Jaringan Toleransi Tunda (Kelas A)", day: "Selasa", time: "07:00–09:50", room: "Lab Jaringan", lecturer: "Prof. Bambang Soelistijanto, Ph.D.", fee: 870000 },
+  { code: "SDEV207", credits: 3, title: "Desain UI/UX (Kelas A)", day: "Selasa", time: "13:00–15:50", room: "K.205", lecturer: "Iwan Binanto, S.Si., M.Sc.", fee: 870000 },
+];
 
 const studentSchedule = [
   { day: "Senin", code: "SDEV204", credits: 3, title: "Algoritma Optimisasi (AO) – Kelas A", time: "07:00 – 09:50 WIB", room: "K.204", lecturer: "Ir. Drs. Haris Sriwindono, M.Kom., Ph.D." },
@@ -165,21 +239,39 @@ const services = {
   lpkp: {
     title: "LPKP",
     category: "AKADEMIK",
-    description: "Pantau lembar perkembangan dan pencapaian kompetensi perkuliahan.",
+    description: "Ringkasan pertemuan, presensi kelas, dan verifikasi kegiatan perkuliahan.",
     content: `
-      <div class="summary-grid summary-grid-three">
-        <article class="summary-card"><span>Progres kurikulum</span><strong>64%</strong><small>92 dari 144 SKS terpenuhi</small><div class="mini-progress"><i style="width:64%"></i></div></article>
-        <article class="summary-card"><span>Mata kuliah lulus</span><strong>28</strong><small>Terakumulasi sampai semester 4</small></article>
-        <article class="summary-card"><span>Sisa mata kuliah</span><strong>18</strong><small>Termasuk mata kuliah pilihan</small></article>
-      </div>
-      <div class="content-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">PERKEMBANGAN</p><h3>Ringkasan per semester</h3></div><span class="sample-tag">Data contoh</span></div>
-        <div class="progress-list">
-          <div class="progress-item"><div><strong>Semester 1</strong><span>20 dari 20 SKS</span></div><div class="mini-progress"><i style="width:100%"></i></div><b>100%</b></div>
-          <div class="progress-item"><div><strong>Semester 2</strong><span>20 dari 20 SKS</span></div><div class="mini-progress"><i style="width:100%"></i></div><b>100%</b></div>
-          <div class="progress-item"><div><strong>Semester 3</strong><span>18 dari 20 SKS</span></div><div class="mini-progress"><i style="width:90%"></i></div><b>90%</b></div>
-          <div class="progress-item"><div><strong>Semester 4</strong><span>20 dari 20 SKS</span></div><div class="mini-progress"><i style="width:100%"></i></div><b>100%</b></div>
-          <div class="progress-item"><div><strong>Semester 5</strong><span>14 dari 20 SKS · berjalan</span></div><div class="mini-progress"><i style="width:70%"></i></div><b>70%</b></div>
-        </div>
+      <div class="lpkp-page">
+        <section class="lpkp-meeting-card" aria-label="Pertemuan perkuliahan">
+          <div class="lpkp-meeting-top"><div class="lpkp-meeting-tags"><span class="lpkp-meeting-number" id="lpkp-meeting-number">Pertemuan Ke-1</span><span class="lpkp-student-count">♙ &nbsp;38 Mahasiswa</span></div><div class="lpkp-meeting-controls"><button type="button" data-meeting-step="-1" aria-label="Pertemuan sebelumnya">‹</button><button type="button" data-meeting-step="1" aria-label="Pertemuan berikutnya">›</button></div></div>
+          <h2 id="lpkp-course-title">${lpkpMeetings[0].course}</h2>
+          <p><span>◷</span><span id="lpkp-course-time">${lpkpMeetings[0].time} | ${lpkpMeetings[0].room}</span></p>
+          <p><span>♙</span><span id="lpkp-course-lecturer">${lpkpMeetings[0].lecturer}</span></p>
+        </section>
+        <section class="lpkp-panel lpkp-material-card"><h2><span aria-hidden="true">▤</span> Rangkuman Materi Dosen</h2><p id="lpkp-material">${lpkpMeetings[0].material}</p></section>
+        <section class="lpkp-panel lpkp-attendance-summary">
+          <div class="lpkp-panel-heading"><h2><span aria-hidden="true">♙</span> Rekap Presensi Kelas</h2><span class="lpkp-hours">Total: 38 Mhs</span></div>
+          <div class="lpkp-attendance-cards"><article class="lpkp-attendance-present"><strong id="lpkp-present-count">35</strong><span><b>✓</b> Mahasiswa Hadir</span></article><article class="lpkp-attendance-absent"><strong id="lpkp-absent-count">3</strong><span><b>×</b> Tidak Hadir</span></article></div>
+          <div class="lpkp-attendance-rate"><span>Tingkat Kehadiran: <strong id="lpkp-attendance-rate">92.1%</strong></span><small>Klik status <b>H</b>, <b>I</b>, <b>S</b>, atau <b>A</b> untuk mengubah presensi.</small></div>
+        </section>
+        <section class="lpkp-panel lpkp-roster-panel">
+          <div class="lpkp-panel-heading"><div><h2><span aria-hidden="true">♙</span> Daftar Nama Mahasiswa</h2><p>Total: 38 Mahasiswa (Pilih: H = Hadir, I = Izin, S = Sakit, A = Alfa)</p></div><button class="lpkp-roster-toggle" type="button" data-toggle-roster aria-expanded="true">Tutup<br>Daftar <span aria-hidden="true">⌃</span></button></div>
+          <div class="lpkp-roster-content" id="lpkp-roster-content">
+            <div class="lpkp-roster-tools"><label class="lpkp-search"><span aria-hidden="true">⌕</span><input id="lpkp-search" type="search" placeholder="Cari nama/NIM" aria-label="Cari nama atau NIM"></label><div class="lpkp-filters" role="group" aria-label="Filter status presensi"><button class="is-selected" type="button" data-attendance-filter="ALL">Semua</button><button type="button" data-attendance-filter="H">H (35)</button><button type="button" data-attendance-filter="I">I (1)</button><button type="button" data-attendance-filter="S">S (1)</button><button type="button" data-attendance-filter="A">A (1)</button></div></div>
+            <div class="lpkp-table-scroll"><table class="lpkp-roster-table"><thead><tr><th>No</th><th>NIM</th><th>Nama Mahasiswa</th><th>Pilih Kehadiran</th></tr></thead><tbody id="lpkp-roster-rows"></tbody></table></div>
+            <p class="lpkp-roster-count" id="lpkp-roster-count">Ditampilkan: 38 dari 38 Mahasiswa</p>
+            <div class="lpkp-absence-heading"><div><strong>Mhs Tdk Hadir :</strong><span>Jumlah Mahasiswa Tidak Hadir: <b id="lpkp-absence-count">3 Orang</b></span></div><span class="lpkp-absence-pill" id="lpkp-absence-pill">3 Mahasiswa</span></div>
+            <div class="lpkp-table-scroll"><table class="lpkp-absence-table"><thead><tr><th>No</th><th>NIM</th><th>Nama</th><th>Alasan</th><th></th></tr></thead><tbody id="lpkp-absence-rows"></tbody></table></div>
+          </div>
+        </section>
+        <form class="lpkp-panel lpkp-verification" id="lpkp-verification-form">
+          <div class="lpkp-panel-heading"><h2><span aria-hidden="true">♧</span> Persetujuan &amp; Verifikasi LPKP</h2></div>
+          <div class="lpkp-verification-info"><div><span>Kunci Dosen:</span><strong class="lpkp-locked">♙ Sudah Dikunci</strong></div><div><span>Mahasiswa Pemeriksa:</span><strong>♙ &nbsp; BRIORISA APRILIA KALISTA <small>(245314034)</small></strong></div><div><span>Jumlah Peserta Kelas:</span><strong>38 Mahasiswa (35 Hadir, 3 Tidak Hadir)</strong></div><div><span>Waktu Konfirmasi:</span><strong class="lpkp-confirm-time">17 Oktober 2026, 21:27 WIB</strong></div></div>
+          <fieldset class="lpkp-confirmation"><legend>Apakah kegiatan perkuliahan sesuai dengan materi dosen?</legend><label><input type="radio" name="lpkp-confirmation" value="yes" required><span>Ya</span></label><label><input type="radio" name="lpkp-confirmation" value="no" required><span>✖ &nbsp; Tidak</span></label></fieldset>
+          <label class="lpkp-notes">Catatan Opsional<textarea name="notes" rows="2" placeholder="Tambahkan catatan atau masukan terkait perkuliahan jika ada..."></textarea></label>
+          <button class="lpkp-submit" type="submit">▣ &nbsp; Simpan &amp; Konfirmasi LPKP</button>
+          <p class="lpkp-preview-note">Data presensi dan konfirmasi hanya tersimpan sebagai pratinjau lokal.</p>
+        </form>
       </div>`,
   },
   keuangan: {
@@ -326,21 +418,27 @@ const services = {
       </dialog>`,
   },
   drs: {
-    title: "DRS · Rencana Studi",
+    title: "Daftar Rencana Studi (DRS)",
     category: "AKADEMIK",
-    description: "Pratinjau daftar rencana studi. Pilih mata kuliah untuk simulasi KRS.",
+    description: "Ringkasan rencana studi semester berjalan dan rincian mata kuliah.",
     content: `
-      <div class="notice-card page-notice"><span class="notice-icon" aria-hidden="true">i</span><div><strong>Simulasi rencana studi</strong><p>Pilihan tersimpan sementara di halaman ini saja dan tidak dikirim ke kampus.</p></div></div>
-      <div class="page-toolbar"><div class="week-label"><strong>Semester Genap 2025/2026</strong><span>Batas maksimal: 24 SKS</span></div><span class="status-badge"><i></i> Perencanaan</span></div>
-      <div class="content-card table-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">KATALOG SEMESTER</p><h3>Pilih mata kuliah</h3></div><span class="sample-tag"><span id="selected-credits">0</span> / 24 SKS</span></div>
-        <div class="table-scroll"><table><thead><tr><th>Pilih</th><th>Mata kuliah</th><th>Kode</th><th>SKS</th><th>Prasyarat</th></tr></thead><tbody>
-          <tr><td><input class="course-choice" type="checkbox" data-credits="3" aria-label="Pilih Pemrograman Web"></td><td>Pemrograman Web</td><td>IF301</td><td>3</td><td>Basis Data</td></tr>
-          <tr><td><input class="course-choice" type="checkbox" data-credits="3" aria-label="Pilih Keamanan Informasi"></td><td>Keamanan Informasi</td><td>IF305</td><td>3</td><td>Jaringan Komputer</td></tr>
-          <tr><td><input class="course-choice" type="checkbox" data-credits="3" aria-label="Pilih Kecerdasan Buatan"></td><td>Kecerdasan Buatan</td><td>IF310</td><td>3</td><td>Struktur Data</td></tr>
-          <tr><td><input class="course-choice" type="checkbox" data-credits="2" aria-label="Pilih Etika Profesi"></td><td>Etika Profesi</td><td>MK201</td><td>2</td><td>—</td></tr>
-          <tr><td><input class="course-choice" type="checkbox" data-credits="3" aria-label="Pilih Pemrograman Aplikasi Bergerak"></td><td>Pemrograman Aplikasi Bergerak</td><td>IF315</td><td>3</td><td>Pemrograman Web</td></tr>
-        </tbody></table></div>
-        <div class="table-actions"><span id="course-selection-status">Belum ada mata kuliah dipilih</span><button class="primary-button" type="button" id="save-study-plan">Simpan simulasi</button></div>
+      <div class="drs-page">
+        <section class="drs-summary-card">
+          <div class="drs-status-row"><div class="drs-status"><span aria-hidden="true">♙</span><div><small>STATUS DRS</small><strong>Disetujui Dosen PA</strong></div></div><div class="drs-semester"><small>Semester</small><strong>2026 / 2027</strong><span>Gasal</span></div></div>
+          <div class="drs-advisor"><span>♙ &nbsp; Dosen<br> Pembimbing PA:</span><strong>Prof. Dr. Ir. Anastasia Rita Widiarti</strong><b>Valid</b></div>
+          <div class="drs-metrics"><div><small>Total SKS Diambil</small><strong>20 SKS</strong></div><div><small>Total Biaya Kuliah</small><strong>Rp 5.800.000</strong></div></div>
+        </section>
+        <div class="drs-course-heading"><h2>Rincian Mata Kuliah</h2><span>7 Mata Kuliah • 20 SKS</span></div>
+        <section class="drs-course-list" aria-label="Rincian mata kuliah">${drsCourses.map((course) => `
+          <article class="drs-course-card">
+            <div class="drs-course-top"><span>${course.code}</span><strong>${course.credits} SKS</strong></div>
+            <h3>${course.title}</h3>
+            <div class="drs-course-detail"><span>Jadwal Perkuliahan:</span><strong>${course.day}, ${course.time} (${course.room})</strong></div>
+            <div class="drs-course-detail"><span>Dosen Pengajar:</span><strong>${course.lecturer}</strong></div>
+            <div class="drs-course-detail"><span>Tarif / Biaya:</span><strong>Rp ${course.fee.toLocaleString("id-ID")}</strong></div>
+          </article>`).join("")}</section>
+        <div class="drs-actions"><button type="button" data-print-drs>▧ &nbsp; Cetak DRS</button><button type="button" data-print-drs class="drs-download-button">⇩ &nbsp; Unduh PDF</button></div>
+        <p class="drs-preview-note">Data DRS ini merupakan pratinjau dan tidak terhubung dengan sistem akademik kampus.</p>
       </div>`,
   },
   "jadwal-dosen": {
@@ -454,6 +552,55 @@ function renderPointEntries() {
       </div>
       <strong class="point-entry-value">+${entry.points} <small>Poin</small></strong>
     </article>`).join("");
+}
+
+function renderLpkp() {
+  const roster = document.querySelector("#lpkp-roster-rows");
+  if (!roster) return;
+  const query = document.querySelector("#lpkp-search").value.trim().toLocaleLowerCase("id");
+  const students = lpkpStudents.filter((student) => {
+    const matchesFilter = lpkpAttendanceFilter === "ALL" || student.attendance === lpkpAttendanceFilter;
+    const matchesQuery = `${student.nim} ${student.name}`.toLocaleLowerCase("id").includes(query);
+    return matchesFilter && matchesQuery;
+  });
+  const attendanceCounts = lpkpStudents.reduce((counts, student) => {
+    counts[student.attendance] += 1;
+    return counts;
+  }, { H: 0, I: 0, S: 0, A: 0 });
+  const absentStudents = lpkpStudents.filter((student) => student.attendance !== "H");
+  const attendanceLabels = { H: "Hadir", I: "Izin", S: "Sakit", A: "Alfa" };
+
+  roster.innerHTML = students.length ? students.map((student) => `
+    <tr><td>${lpkpStudents.indexOf(student) + 1}</td><td>${student.nim}</td><td>${escapeHTML(student.name)}</td><td><div class="lpkp-attendance-select" role="group" aria-label="Presensi ${escapeHTML(student.name)}">${["H", "I", "S", "A"].map((status) => `<button type="button" class="${student.attendance === status ? `is-current status-${status.toLowerCase()}` : ""}" aria-pressed="${student.attendance === status}" aria-label="${attendanceLabels[status]}" data-attendance-set="${status}" data-student-nim="${student.nim}">${status}</button>`).join("")}</div></td></tr>`).join("")
+    : '<tr><td colspan="4" class="lpkp-no-absences">Tidak ada mahasiswa yang cocok dengan pencarian.</td></tr>';
+
+  document.querySelector("#lpkp-roster-count").textContent = `Ditampilkan: ${students.length} dari ${lpkpStudents.length} Mahasiswa`;
+  document.querySelector("#lpkp-present-count").textContent = String(attendanceCounts.H);
+  document.querySelector("#lpkp-absent-count").textContent = String(absentStudents.length);
+  document.querySelector("#lpkp-attendance-rate").textContent = `${(attendanceCounts.H / lpkpStudents.length * 100).toFixed(1)}%`;
+  document.querySelector("#lpkp-absence-count").textContent = `${absentStudents.length} Orang`;
+  document.querySelector("#lpkp-absence-pill").textContent = `${absentStudents.length} Mahasiswa`;
+  document.querySelector(".lpkp-verification-info > div:nth-child(3) strong").textContent =
+    `${lpkpStudents.length} Mahasiswa (${attendanceCounts.H} Hadir, ${absentStudents.length} Tidak Hadir)`;
+  document.querySelectorAll("[data-attendance-filter]").forEach((button) => {
+    const selected = button.dataset.attendanceFilter === lpkpAttendanceFilter;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+    const filter = button.dataset.attendanceFilter;
+    button.textContent = filter === "ALL" ? "Semua" : `${filter} (${filter === "H" ? attendanceCounts.H : attendanceCounts[filter]})`;
+  });
+  document.querySelector("#lpkp-absence-rows").innerHTML = absentStudents.length
+    ? absentStudents.map((student, index) => `<tr><td>${index + 1}</td><td>${student.nim}</td><td>${escapeHTML(student.name)}</td><td><span class="lpkp-reason reason-${student.attendance.toLowerCase()}">${attendanceLabels[student.attendance]}</span></td><td><button type="button" class="lpkp-remove-absence" data-attendance-set="H" data-student-nim="${student.nim}">Hapus</button></td></tr>`).join("")
+    : '<tr><td colspan="5" class="lpkp-no-absences">Semua mahasiswa hadir.</td></tr>';
+}
+
+function renderLpkpMeeting() {
+  const meeting = lpkpMeetings[lpkpMeetingIndex];
+  document.querySelector("#lpkp-meeting-number").textContent = `Pertemuan Ke-${lpkpMeetingIndex + 1}`;
+  document.querySelector("#lpkp-course-title").textContent = meeting.course;
+  document.querySelector("#lpkp-course-time").textContent = `${meeting.time} | ${meeting.room}`;
+  document.querySelector("#lpkp-course-lecturer").textContent = meeting.lecturer;
+  document.querySelector("#lpkp-material").textContent = meeting.material;
 }
 
 function updatePointCategory() {
@@ -601,6 +748,12 @@ function renderRoute() {
   if (selectedRoute === "poin-kemahasiswaan") {
     renderPointEntries();
   }
+  if (selectedRoute === "lpkp") {
+    lpkpMeetingIndex = 0;
+    lpkpAttendanceFilter = "ALL";
+    renderLpkpMeeting();
+    renderLpkp();
+  }
   if (selectedRoute === "profil") {
     updateProfileDetails();
   }
@@ -714,6 +867,45 @@ function closeNotifications() {
 }
 
 document.addEventListener("click", (event) => {
+  const meetingStep = event.target.closest("[data-meeting-step]");
+  if (meetingStep) {
+    lpkpMeetingIndex = (lpkpMeetingIndex + Number(meetingStep.dataset.meetingStep) + lpkpMeetings.length) % lpkpMeetings.length;
+    renderLpkpMeeting();
+    return;
+  }
+
+  const attendanceFilter = event.target.closest("[data-attendance-filter]");
+  if (attendanceFilter) {
+    lpkpAttendanceFilter = attendanceFilter.dataset.attendanceFilter;
+    renderLpkp();
+    return;
+  }
+
+  const attendanceChange = event.target.closest("[data-attendance-set]");
+  if (attendanceChange) {
+    const student = lpkpStudents.find((entry) => entry.nim === attendanceChange.dataset.studentNim);
+    if (student) {
+      student.attendance = attendanceChange.dataset.attendanceSet;
+      renderLpkp();
+    }
+    return;
+  }
+
+  const rosterToggle = event.target.closest("[data-toggle-roster]");
+  if (rosterToggle) {
+    const roster = document.querySelector("#lpkp-roster-content");
+    const expanded = rosterToggle.getAttribute("aria-expanded") === "true";
+    roster.hidden = expanded;
+    rosterToggle.setAttribute("aria-expanded", String(!expanded));
+    rosterToggle.innerHTML = expanded ? 'Buka<br>Daftar <span aria-hidden="true">⌄</span>' : 'Tutup<br>Daftar <span aria-hidden="true">⌃</span>';
+    return;
+  }
+
+  if (event.target.closest("[data-print-drs]")) {
+    window.print();
+    return;
+  }
+
   const financeTab = event.target.closest("[data-finance-tab]");
   if (financeTab) {
     const selectedTab = financeTab.dataset.financeTab;
@@ -845,9 +1037,22 @@ document.addEventListener("input", (event) => {
   if (event.target.id === "lecturer-search") {
     renderLecturerSchedules(event.target.value);
   }
+  if (event.target.id === "lpkp-search") {
+    renderLpkp();
+  }
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target.id === "lpkp-verification-form") {
+    event.preventDefault();
+    const confirmation = new FormData(event.target).get("lpkp-confirmation");
+    const message = confirmation === "yes"
+      ? "Konfirmasi LPKP tersimpan pada pratinjau lokal."
+      : "Catatan ketidaksesuaian tersimpan pada pratinjau lokal.";
+    showMessage(`${message} Data tidak dikirim ke sistem kampus.`);
+    return;
+  }
+
   if (event.target.id === "point-submission-form") {
     event.preventDefault();
     const form = event.target;

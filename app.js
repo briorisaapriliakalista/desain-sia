@@ -2,14 +2,11 @@ const main = document.querySelector("#main-content");
 const homeContent = main.innerHTML;
 const toast = document.querySelector(".toast");
 const notificationButton = document.querySelector(".notification-button");
+const notificationDialog = document.querySelector("#notification-dialog");
+const notificationCloseButton = document.querySelector(".notification-close");
+const markReadButton = document.querySelector(".mark-read-button");
 let toastTimeout;
-
-const currentDate = new Intl.DateTimeFormat("id-ID", {
-  weekday: "long",
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-}).format(new Date()).toLocaleUpperCase("id-ID");
+let notificationTrigger;
 
 const services = {
   nilai: {
@@ -215,8 +212,7 @@ function renderRoute() {
     main.innerHTML = renderService(selectedRoute);
   }
 
-  const dateLabel = main.querySelector("#current-date");
-  if (dateLabel) dateLabel.textContent = currentDate;
+  main.dataset.route = selectedRoute;
   if (selectedRoute === "nilai") {
     updateGrades(document.querySelector("#grade-semester").value);
   }
@@ -303,9 +299,34 @@ function updateGrades(semester) {
   ).join("");
 }
 
+function updateUnreadCount() {
+  const unreadCount = notificationDialog.querySelectorAll(".notification-card.is-unread").length;
+  const notificationDot = notificationButton.querySelector(".notification-dot");
+  notificationDot.hidden = unreadCount === 0;
+  notificationButton.setAttribute(
+    "aria-label",
+    unreadCount ? `Lihat notifikasi, ${unreadCount} belum dibaca` : "Lihat notifikasi",
+  );
+  markReadButton.disabled = unreadCount === 0;
+  markReadButton.innerHTML = unreadCount
+    ? '<span aria-hidden="true">✓</span> Tandai Semua Sudah Dibaca'
+    : '<span aria-hidden="true">✓</span> Semua Notifikasi Sudah Dibaca';
+}
+
+function closeNotifications() {
+  if (notificationDialog.hidden) return;
+  notificationDialog.hidden = true;
+  notificationTrigger?.focus();
+}
+
 document.addEventListener("click", (event) => {
   const routeLink = event.target.closest("[data-route]");
   if (routeLink) {
+    if (routeLink.closest(".notification-card")) {
+      routeLink.closest(".notification-card").classList.remove("is-unread");
+      updateUnreadCount();
+    }
+    closeNotifications();
     if (routeLink instanceof HTMLAnchorElement) {
       event.preventDefault();
     }
@@ -369,7 +390,45 @@ document.addEventListener("click", (event) => {
 });
 
 notificationButton.addEventListener("click", () => {
-  showMessage("Belum ada notifikasi baru.");
+  notificationTrigger = document.activeElement;
+  notificationDialog.hidden = false;
+  notificationCloseButton.focus();
+  updateUnreadCount();
+});
+
+notificationCloseButton.addEventListener("click", closeNotifications);
+
+notificationDialog.addEventListener("click", (event) => {
+  if (event.target === notificationDialog) closeNotifications();
+});
+
+markReadButton.addEventListener("click", () => {
+  notificationDialog.querySelectorAll(".notification-card").forEach((card) => {
+    card.classList.remove("is-unread");
+  });
+  updateUnreadCount();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (notificationDialog.hidden) return;
+  if (event.key === "Escape") {
+    closeNotifications();
+    return;
+  }
+  if (event.key !== "Tab") return;
+
+  const focusableElements = notificationDialog.querySelectorAll(
+    'button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])',
+  );
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
 });
 
 window.addEventListener("hashchange", renderRoute);
@@ -378,4 +437,5 @@ window.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#/beranda`);
   }
   renderRoute();
+  updateUnreadCount();
 });

@@ -41,7 +41,7 @@
         </nav>
         <div class="topbar-actions">
           <span class="semester-label">TA 2025/2026</span>
-          <button class="icon-button notification-button" type="button" aria-label="Lihat notifikasi">
+          <button class="icon-button notification-button" type="button" aria-label="Lihat notifikasi, 3 belum dibaca" aria-haspopup="dialog" aria-controls="notification-dialog">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -60,9 +60,9 @@
       <main id="main-content" tabindex="-1" aria-live="polite">
         <section class="welcome-row" aria-labelledby="welcome-title">
           <div>
-            <p class="eyebrow"><span id="current-date">HARI INI</span><span class="eyebrow-line"></span> DATA CONTOH</p>
-            <h1 id="welcome-title">Selamat datang, Mahasiswa <span aria-hidden="true">👋</span></h1>
-            <p class="welcome-subtitle">Satu langkah kecil hari ini, satu progres besar untuk masa depan.</p>
+            <p class="eyebrow greeting-label">Halo!</p>
+            <h1 id="welcome-title">Briorisa <span aria-hidden="true">👋</span></h1>
+            <p class="student-meta">NIM: 245314034 <span aria-hidden="true">•</span> Informatika (S-1)</p>
           </div>
           <div class="welcome-avatar" aria-hidden="true">M</div>
         </section>
@@ -79,102 +79,95 @@
                   </svg>
                 </span>
                 <div>
-                  <p class="card-kicker">RINGKASAN AKADEMIK</p>
-                  <h2 id="academic-title">Progres studimu</h2>
+                  <p class="card-kicker">SIA Santa Dharma</p>
+                  <h2 id="academic-title">Indeks Prestasi Kumulatif (IPK)</h2>
                 </div>
               </div>
-              <span class="semester-pill"><span></span> Aktif</span>
+              <span class="semester-pill"><span></span> Semester 5 · Aktif</span>
             </div>
 
-            <div class="metrics" aria-label="Statistik akademik contoh">
+            <div class="metrics" aria-label="Ringkasan nilai akademik contoh">
               <div class="metric">
-                <span class="metric-label">IPK Kumulatif</span>
-                <strong>3.82</strong>
-                <span class="metric-note"><span class="trend-arrow">↗</span> dari semester lalu</span>
+                <span class="metric-label">IPK</span>
+                <strong>3.26</strong>
               </div>
               <div class="metric">
                 <span class="metric-label">IPS Terakhir</span>
-                <strong class="metric-cyan">3.91</strong>
-                <span class="metric-note"><span class="trend-arrow">↗</span> semester 4</span>
+                <strong class="metric-cyan">3.55</strong>
               </div>
               <div class="metric">
-                <span class="metric-label">SKS Ditempuh</span>
-                <strong>92<span class="metric-unit">/144</span></strong>
-                <span class="metric-note">64% dari total SKS</span>
+                <span class="metric-label">Total SKS</span>
+                <strong>84 <span class="metric-unit">SKS</span></strong>
               </div>
             </div>
 
-            <div class="progress-row">
-              <div class="progress-track" role="progressbar" aria-label="Progres SKS" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">
-                <span></span>
-              </div>
-              <span>64%</span>
+            <div class="academic-card-bottom">
+              <span>Predikat: <strong>Sangat Memuaskan</strong></span>
+              <a href="#/nilai" data-route="nilai">Lihat Nilai <span aria-hidden="true">›</span></a>
             </div>
           </div>
-          <span class="card-caption">Data contoh · diperbarui hari ini</span>
         </section>
 
         <section class="shortcuts-section" aria-labelledby="shortcuts-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow section-eyebrow">AKSES CEPAT</p>
-              <h2 id="shortcuts-title">Layanan akademik</h2>
+              <h2 id="shortcuts-title">Pintasan Cepat</h2>
             </div>
-            <a class="text-link" href="#/akademik" data-route="akademik">Lihat semua <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="#/akademik" data-route="akademik">Semua Menu</a>
           </div>
           <div class="shortcut-grid">
             <button class="shortcut-card" type="button" data-route="nilai">
               <span class="shortcut-icon icon-blue">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19V9m7 10V5m7 14v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m4 6 4-2 4 3 7-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
               </span>
               <span class="shortcut-name">Nilai per<br>Semester</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="lpkp">
-              <span class="shortcut-icon icon-violet">
+              <span class="shortcut-icon icon-green">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.75h8l4 4v12.5H6a2 2 0 0 1-2-2v-12a2.5 2.5 0 0 1 2-2.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v4h4M8 13h8M8 16.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="shortcut-name">LPKP</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="keuangan">
-              <span class="shortcut-icon icon-amber">
+              <span class="shortcut-icon icon-teal">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 10h17M7.5 14.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               </span>
               <span class="shortcut-name">Kartu Keuangan<br>Mahasiswa</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="jadwal-mahasiswa">
-              <span class="shortcut-icon icon-teal">
+              <span class="shortcut-icon icon-indigo">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5v4M16 3.5v4M4 10h16m-11 4h.01M12 14h.01M15 14h.01M9 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               </span>
               <span class="shortcut-name">Jadwal<br>Mahasiswa</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="poin-kemahasiswaan">
-              <span class="shortcut-icon icon-rose">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              <span class="shortcut-icon icon-cyan">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h6m-5 0v5.5l-4 8.2A2.2 2.2 0 0 0 8 20h8a2.2 2.2 0 0 0 2-3.3l-4-8.2V3m-5 9h6m-8 3h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m10 16 1.3 1.3L14 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="shortcut-name">Poin<br>Kemahasiswaan</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="drs">
-              <span class="shortcut-icon icon-indigo">
+              <span class="shortcut-icon icon-amber">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.75h8l4 4v12.5H6a2 2 0 0 1-2-2v-12a2.5 2.5 0 0 1 2-2.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v4h4M8 13h8M8 16.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="shortcut-name">DRS</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="jadwal-dosen">
-              <span class="shortcut-icon icon-orange">
+              <span class="shortcut-icon icon-magenta">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5v4M16 3.5v4M4 10h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="15.5" cy="15.5" r="3" fill="var(--icon-fill, #fff)" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 14v1.7l1.1.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
               </span>
               <span class="shortcut-name">Jadwal<br>Dosen</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
             </button>
             <button class="shortcut-card" type="button" data-route="profil">
-              <span class="shortcut-icon icon-slate">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span class="shortcut-icon icon-green">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19a6.5 6.5 0 0 1 13 0H3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m16 11 1.5 1.5 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="shortcut-name">Profil</span>
               <span class="shortcut-arrow" aria-hidden="true">↗</span>
@@ -205,18 +198,52 @@
           <span>Beranda</span>
         </button>
         <button class="nav-item" type="button" data-route="akademik">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3.5 9 8.5-5 8.5 5-8.5 5-8.5-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 11.1v4.4c2.8 2.3 7.2 2.3 10 0v-4.4M20.5 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span>Akademik</span>
         </button>
         <button class="nav-item" type="button" data-route="kegiatan">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          <span>Kegiatan</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5v4M16 3.5v4M4 10h16m-11 4h.01M12 14h.01M15 14h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Kegiatan Mahasiswa</span>
         </button>
         <button class="nav-item" type="button" data-route="profil">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <span>Profil</span>
         </button>
       </nav>
+      <div class="notification-overlay" id="notification-dialog" hidden>
+        <section class="notification-panel" role="dialog" aria-modal="true" aria-labelledby="notification-title" aria-describedby="notification-subtitle">
+          <header class="notification-header">
+            <span class="notification-heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="notification-heading-copy">
+              <strong id="notification-title">Notifikasi Akademik</strong>
+              <span id="notification-subtitle">Pemberitahuan terkini perkuliahan</span>
+            </span>
+            <button class="notification-close" type="button" aria-label="Tutup notifikasi">×</button>
+          </header>
+          <div class="notification-list">
+            <article class="notification-card is-unread">
+              <h3>Persetujuan LPKP Menunggu Verifikasi</h3>
+              <p>Dosen Agnes Maria Polina telah mengunggah LPKP Pertemuan 1 Proyek Informatika. Mohon lakukan konfirmasi.</p>
+              <footer><span><span aria-hidden="true">◷</span> 10 menit yang lalu</span><button type="button" data-route="lpkp">Buka Menu <span aria-hidden="true">→</span></button></footer>
+            </article>
+            <article class="notification-card is-unread">
+              <h3>Daftar Rencana Studi (DRS) Disetujui</h3>
+              <p>DRS Anda telah diverifikasi dan disetujui oleh Dosen Pembimbing Akademik Prof. Hendra, Ph.D.</p>
+              <footer><span><span aria-hidden="true">◷</span> Kemarin, 14:10</span><button type="button" data-route="drs">Buka Menu <span aria-hidden="true">→</span></button></footer>
+            </article>
+            <article class="notification-card is-unread">
+              <h3>Pembayaran UKT Semester 4 LUNAS</h3>
+              <p>Pembayaran UKT sebesar Rp 5.000.000 telah berhasil diverifikasi oleh Biro Keuangan.</p>
+              <footer><span><span aria-hidden="true">◷</span> 12 Feb 2026</span><button type="button" data-route="keuangan">Buka Menu <span aria-hidden="true">→</span></button></footer>
+            </article>
+          </div>
+          <footer class="notification-actions">
+            <button class="mark-read-button" type="button"><span aria-hidden="true">✓</span> Tandai Semua Sudah Dibaca</button>
+          </footer>
+        </section>
+      </div>
       <div class="toast" role="status" aria-live="polite"></div>
     </div>
   </body>

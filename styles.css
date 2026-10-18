@@ -229,6 +229,27 @@ main {
   margin-bottom: 23px;
 }
 
+.welcome-row .greeting-label {
+  margin: 0 0 2px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.welcome-row .student-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.student-meta-divider {
+  color: #c1ccd8;
+}
+
 .eyebrow {
   display: flex;
   align-items: center;
@@ -1726,7 +1747,7 @@ h1 {
     line-height: 1.4;
   }
 
-  .student-meta span {
+  .student-meta .student-meta-divider {
     color: #c1ccd8;
   }
 

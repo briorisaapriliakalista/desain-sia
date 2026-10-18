@@ -275,6 +275,7 @@ const lecturerSchedules = [
 
 const profileData = {
   name: "Briorisa Aprilia Kalista",
+  program: "Informatika",
   email: "245314034@student.usd.ac.id",
   phone: "+62 812–3456–7890",
 };
@@ -772,15 +773,30 @@ function updateProfileDetails() {
   document.querySelector('#profile-edit-form [name="phone"]').value = profileData.phone;
 }
 
+function getGreetingByJakartaTime(date = new Date()) {
+  const hour = Number(new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    hourCycle: "h23",
+    timeZone: "Asia/Jakarta",
+  }).format(date));
+
+  if (hour >= 4 && hour < 11) return "Selamat pagi,";
+  if (hour >= 11 && hour < 15) return "Selamat siang,";
+  if (hour >= 15 && hour < 18) return "Selamat sore,";
+  return "Selamat malam,";
+}
+
 function updateIdentity() {
   const initial = profileData.name.trim().charAt(0).toLocaleUpperCase("id");
   document.querySelectorAll(".avatar-small, .welcome-avatar").forEach((avatar) => {
     avatar.textContent = initial;
   });
   const greeting = document.querySelector("#welcome-title");
-  if (greeting) greeting.textContent = `Halo, ${profileData.name}`;
-  const studentMeta = document.querySelector(".student-meta");
-  if (studentMeta) studentMeta.textContent = "NIM: 245314034";
+  if (greeting) greeting.textContent = profileData.name;
+  const greetingLabel = document.querySelector("#welcome-greeting");
+  if (greetingLabel) greetingLabel.textContent = getGreetingByJakartaTime();
+  const studentProgram = document.querySelector(".student-program");
+  if (studentProgram) studentProgram.textContent = `Prodi: ${profileData.program}`;
   const profileMeta = document.querySelector(".student-profile-meta");
   if (profileMeta) profileMeta.textContent = "NIM: 245314034";
 }

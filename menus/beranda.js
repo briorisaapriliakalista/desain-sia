@@ -2,7 +2,7 @@ window.SIA_MENU_VIEWS = window.SIA_MENU_VIEWS || {};
 
 window.SIA_MENU_VIEWS.beranda = () => `
   <section class="welcome-row" aria-labelledby="welcome-title">
-    <div><h1 id="welcome-title">Halo, Briorisa Aprilia Kalista</h1><p class="student-meta">NIM: 245314034</p></div>
+    <div><p class="greeting-label" id="welcome-greeting"></p><h1 id="welcome-title">Briorisa Aprilia Kalista</h1><p class="student-meta"><span>NIM: 245314034</span><span class="student-meta-divider" aria-hidden="true">·</span><span class="student-program">Prodi: Informatika</span></p></div>
     <div class="welcome-avatar" aria-hidden="true">B</div>
   </section>
   <section class="academic-card" aria-labelledby="academic-title">

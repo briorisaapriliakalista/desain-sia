@@ -3198,3 +3198,505 @@ h1 {
     transition-duration: 0.01ms !important;
   }
 }
+
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+.academic-term {
+  min-height: 40px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 11px;
+  color: #334155;
+  background: #edf2f7;
+  font-size: 11px;
+}
+
+.schedule-view-toggle {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 11px;
+  border: 1px solid #e1e9f1;
+  border-radius: 10px;
+  color: #28588c;
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.schedule-view-toggle > span:first-child {
+  font-size: 15px;
+}
+
+.student-day-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 0 -2px 19px;
+  padding: 1px 2px 5px;
+  scrollbar-width: thin;
+  scrollbar-color: #c6d2df transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-day-tab {
+  min-width: 82px;
+  min-height: 56px;
+  display: grid;
+  flex: 0 0 auto;
+  place-content: center;
+  gap: 4px;
+  padding: 7px 11px;
+  border: 1px solid #e4eaf1;
+  border-radius: 14px;
+  color: #45566e;
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.student-day-tab strong {
+  font-size: 11px;
+}
+
+.student-day-tab span {
+  color: #8997a9;
+  font-size: 8px;
+}
+
+.student-day-tab.is-selected {
+  border-color: #102d46;
+  color: #fff;
+  background: #102d46;
+  box-shadow: 0 5px 12px rgba(16, 45, 70, 0.12);
+}
+
+.student-day-tab.is-selected span {
+  color: #cbd8e6;
+}
+
+.schedule-day-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 3px 11px;
+}
+
+.schedule-day-heading h2 {
+  margin: 0;
+  color: #4b5e76;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.schedule-day-heading > span {
+  color: #8a98aa;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.student-schedule-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.student-class-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e5ebf2;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 3px 9px rgba(26, 50, 77, 0.035);
+}
+
+.student-class-code {
+  color: #3979db;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.student-class-card h3 {
+  margin: 8px 0 11px;
+  color: #202e42;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.student-class-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 15px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #edf1f5;
+  color: #76869b;
+  font-size: 10px;
+}
+
+.student-class-details b {
+  margin-right: 3px;
+  color: #4c83e7;
+  font-size: 13px;
+}
+
+.student-class-details span:last-child b {
+  color: #22a879;
+}
+
+.student-class-lecturer {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 10px 0 0;
+  color: #8391a4;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.student-class-lecturer > span {
+  flex: 0 0 auto;
+}
+
+.schedule-empty-day {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 22px 14px;
+  border: 1px dashed #d9e2ec;
+  border-radius: 13px;
+  color: #8290a2;
+  background: #fff;
+  font-size: 11px;
+  text-align: center;
+}
+
+.schedule-matrix-view[hidden],
+.student-schedule-view[hidden] {
+  display: none;
+}
+
+.schedule-matrix-scroll table {
+  min-width: 560px;
+}
+
+.schedule-matrix-scroll th,
+.schedule-matrix-scroll td {
+  border: 1px solid #dce5ee;
+}
+
+.schedule-matrix-scroll th {
+  color: #fff;
+  background: #4d83b8;
+}
+
+.schedule-matrix-scroll tbody th {
+  color: #3f536a;
+  background: #f4f7fa;
+}
+
+.schedule-matrix-scroll td:nth-child(2) {
+  white-space: normal;
+}
+
+.schedule-matrix-scroll td strong,
+.schedule-matrix-scroll td span {
+  display: block;
+}
+
+.schedule-matrix-scroll td span {
+  margin-top: 3px;
+  color: #8390a0;
+  font-size: 9px;
+}
+
+.schedule-empty-cell {
+  color: #9aa5b3 !important;
+  font-style: italic;
+}
+
+.lecturer-search {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  padding: 0 13px;
+  border: 1px solid #e2e9f0;
+  border-radius: 13px;
+  color: #8ea1b7;
+  background: #fff;
+  box-shadow: 0 2px 7px rgba(21, 44, 70, 0.035);
+}
+
+.lecturer-search > span {
+  font-size: 20px;
+}
+
+.lecturer-search input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  color: #334155;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+}
+
+.lecturer-search input::placeholder {
+  color: #94a3b8;
+}
+
+.lecturer-search kbd {
+  padding: 2px 6px;
+  border: 1px solid #e3e9ef;
+  border-radius: 5px;
+  color: #94a3b8;
+  font: inherit;
+  font-size: 10px;
+}
+
+.lecturer-search-hint {
+  margin: 6px 2px 13px;
+  color: #8190a2;
+  font-size: 9px;
+}
+
+.lecturer-schedule-list {
+  display: grid;
+  gap: 10px;
+}
+
+.lecturer-schedule-card {
+  overflow: hidden;
+  border: 1px solid #e2eaf2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 7px rgba(21, 44, 70, 0.03);
+}
+
+.lecturer-schedule-card summary {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 13px;
+  color: #35485f;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.lecturer-schedule-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.lecturer-schedule-card summary::after {
+  content: "⌄";
+  color: #8292a5;
+  font-size: 15px;
+}
+
+.lecturer-schedule-card[open] summary {
+  color: #fff;
+  background: #4d86bd;
+}
+
+.lecturer-schedule-card[open] summary::after {
+  color: #e8f2fb;
+  content: "⌃";
+}
+
+.lecturer-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lecturer-table {
+  width: 100%;
+  min-width: 610px;
+  border-collapse: collapse;
+  table-layout: auto;
+  text-align: left;
+}
+
+.lecturer-table th,
+.lecturer-table td {
+  padding: 9px 8px;
+  border: 1px solid #e4eaf0;
+  color: #46566c;
+  font-size: 9px;
+  vertical-align: middle;
+}
+
+.lecturer-table thead th {
+  color: #3c4c62;
+  background: #f2f5f8;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.lecturer-table tbody th {
+  min-width: 66px;
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.lecturer-table td:nth-child(2) {
+  min-width: 155px;
+  white-space: normal;
+}
+
+.lecturer-table td strong,
+.lecturer-course-code {
+  display: block;
+}
+
+.lecturer-table td strong {
+  margin-top: 3px;
+  color: #1e293b;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.lecturer-course-code {
+  color: #2870c8;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.lecturer-no-results {
+  margin: 0;
+  padding: 22px 14px;
+  border: 1px dashed #d7e0ea;
+  border-radius: 12px;
+  color: #718096;
+  background: #fff;
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .schedule-toolbar {
+    align-items: stretch;
+    gap: 7px;
+    margin-bottom: 11px;
+  }
+
+  .academic-term {
+    min-height: 39px;
+    padding: 0 11px;
+    font-size: 10px;
+  }
+
+  .schedule-view-toggle {
+    width: 39px;
+    min-width: 39px;
+    min-height: 39px;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .schedule-view-toggle > span:first-child {
+    font-size: 17px;
+  }
+
+  .student-day-tabs {
+    gap: 7px;
+    margin: 0 -20px 15px;
+    padding: 1px 20px 6px;
+  }
+
+  .student-day-tab {
+    min-width: 67px;
+    min-height: 53px;
+    border-radius: 13px;
+  }
+
+  .student-day-tab strong {
+    font-size: 10px;
+  }
+
+  .student-day-tab span {
+    font-size: 7px;
+  }
+
+  .schedule-day-heading h2 {
+    font-size: 9px;
+  }
+
+  .schedule-day-heading > span {
+    font-size: 8px;
+  }
+
+  .student-schedule-cards {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .student-class-card {
+    padding: 13px;
+    border-radius: 14px;
+  }
+
+  .student-class-code {
+    font-size: 9px;
+  }
+
+  .student-class-card h3 {
+    margin: 6px 0 9px;
+    font-size: 12px;
+  }
+
+  .student-class-details {
+    gap: 7px 12px;
+    padding-bottom: 9px;
+    font-size: 9px;
+  }
+
+  .student-class-lecturer {
+    margin-top: 8px;
+    font-size: 8px;
+  }
+
+  .lecturer-search {
+    min-height: 44px;
+    border-radius: 11px;
+  }
+
+  .lecturer-schedule-card summary {
+    min-height: 39px;
+    padding: 0 11px;
+    font-size: 10px;
+  }
+
+  .lecturer-table {
+    min-width: 565px;
+  }
+
+  .lecturer-table th,
+  .lecturer-table td {
+    padding: 7px 6px;
+    font-size: 8px;
+  }
+
+  .lecturer-table td:nth-child(2) {
+    min-width: 140px;
+  }
+}

@@ -28,43 +28,107 @@ const pointsEntries = [
 ];
 
 const pointCategories = {
-  fch1: {
-    label: "Formasi Cerdas Humanis 1 (FCH 1) — Menjadi peserta kegiatan",
-    points: 10,
-    field: "Formasi Cerdas Humanis",
-    role: "Peserta kegiatan pengembangan diri",
-  },
-  fch2: {
-    label: "Formasi Cerdas Humanis 2 (FCH 2) — Menjadi peserta pelatihan",
-    points: 15,
-    field: "Formasi Cerdas Humanis",
-    role: "Peserta pelatihan dan pengembangan karakter",
-  },
-  fch3: {
-    label: "Formasi Cerdas Humanis 3 (FCH 3) — Menjadi panitia kegiatan",
-    points: 20,
-    field: "Formasi Cerdas Humanis",
-    role: "Panitia pelaksana kegiatan mahasiswa",
-  },
-  fch4: {
-    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus",
+  fch4_officer: {
+    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus BEM/DPM Fakultas/Jurusan/Prodi",
     points: 30,
-    field: "Formasi Cerdas Humanis",
-    role: "Menjadi anggota pengurus organisasi",
+    field: "Organisasi & Kepemimpinan",
+    role: "Anggota pengurus BEM/DPM Fakultas/Jurusan/Program Studi",
+    softskills: "Keterampilan manajerial, kepemimpinan, integritas",
   },
-  organization: {
-    label: "Organisasi Kemahasiswaan — Menjadi ketua organisasi",
-    points: 50,
-    field: "Organisasi kemahasiswaan (ormawa)",
-    role: "Menjabat sebagai pengurus BEM/DPM Fakultas/Jurusan/Prodi",
+  fch4_committee: {
+    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat universitas",
+    points: 20,
+    field: "Organisasi & Kepemimpinan",
+    role: "Anggota panitia kegiatan tingkat universitas",
+    softskills: "Keterampilan bekerja sama, tanggung jawab, komunikasi",
   },
-  committee: {
-    label: "Sertifikasi Kepanitiaan — Menjadi anggota panitia",
+  fch4_faculty_committee: {
+    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat fakultas/prodi",
+    points: 15,
+    field: "Organisasi & Kepemimpinan",
+    role: "Anggota panitia kegiatan tingkat fakultas/program studi",
+    softskills: "Keterampilan bekerja sama, tanggung jawab, komunikasi",
+  },
+  fch4_coordinator: {
+    label: "Formasi Cerdas Humanis 4 (FCH 4) — Menjadi koordinator/ketua panitia kegiatan fakultas",
+    points: 30,
+    field: "Organisasi & Kepemimpinan",
+    role: "Koordinator/ketua panitia kegiatan fakultas",
+    softskills: "Kepemimpinan, keterampilan manajerial, komunikasi",
+  },
+  fch3_organization: {
+    label: "Formasi Cerdas Humanis 3 (FCH 3) — Pengurus inti UKM/HMPS/komunitas minat bakat",
+    points: 25,
+    field: "Organisasi & Kepemimpinan",
+    role: "Pengurus inti UKM/HMPS/komunitas minat bakat",
+    softskills: "Kepemimpinan, kerja sama tim, tanggung jawab",
+  },
+  fch3_competition: {
+    label: "Formasi Cerdas Humanis 3 (FCH 3) — Juara/finalis kompetisi ilmiah, hackathon/lomba",
+    points: 20,
+    field: "Kompetisi & Prestasi",
+    role: "Juara/finalis kompetisi ilmiah, hackathon, atau lomba",
+    softskills: "Berpikir kritis, kreativitas, ketekunan",
+  },
+  fch1_workshop: {
+    label: "Formasi Cerdas Humanis 1 (FCH 1) — Peserta aktif workshop/sertifikasi keahlian komputasi",
     points: 10,
-    field: "Sertifikasi Kepanitiaan",
-    role: "Anggota kepanitiaan kegiatan resmi kampus",
+    field: "Pelatihan & Seminar",
+    role: "Peserta aktif workshop/sertifikasi keahlian komputasi",
+    softskills: "Kompetensi teknis, adaptabilitas, teknologi",
+  },
+  insa_committee: {
+    label: "Inisiasi Sanata Dharma (INSADHA) — Pendamping/panitia inisiasi mahasiswa baru",
+    points: 15,
+    field: "Pengabdian & Kemahasiswaan",
+    role: "Pendamping/panitia Inisiasi Mahasiswa Baru USD",
+    softskills: "Kepedulian, komunikasi, kerja sama",
   },
 };
+
+const studentSchedule = [
+  { day: "Senin", code: "SDEV204", credits: 3, title: "Algoritma Optimisasi (AO) – Kelas A", time: "07:00 – 09:50 WIB", room: "K.204", lecturer: "Ir. Drs. Haris Sriwindono, M.Kom., Ph.D." },
+  { day: "Senin", code: "SNET52W", credits: 3, title: "Virtualisasi dan Teknologi Cloud (VIRTEC) – Kelas A", time: "10:00 – 12:50 WIB", room: "Lab Jaringan", lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs." },
+  { day: "Senin", code: "INFO118", credits: 2, title: "Proyek Informatika – Kelas A / AP", time: "13:00 – 16:50 WIB", room: "Lab Basis Data", lecturer: "Agnes Maria Polina, S.Kom., M.Sc." },
+  { day: "Selasa", code: "NETW203", credits: 3, title: "Jaringan Komputer (JARKOM) – Kelas A", time: "07:00 – 09:50 WIB", room: "Lab Jaringan", lecturer: "Dr. Alb. Agung Hadiatma, M.T." },
+  { day: "Selasa", code: "SDEV207", credits: 3, title: "User Interface / User Experience (UI/UX) – Kelas A", time: "13:00 – 15:50 WIB", room: "K.205", lecturer: "Prof. Dr. Ir. Anastasia Rita Widiarti" },
+  { day: "Rabu", code: "NETW201", credits: 3, title: "TCP/IP – Kelas A", time: "10:00 – 12:50 WIB", room: "Lab Jaringan", lecturer: "Dr. Alb. Agung Hadiatma, M.T." },
+  { day: "Kamis", code: "INFO117", credits: 2, title: "Kriptografi – Kelas E", time: "07:00 – 09:50 WIB", room: "K.205", lecturer: "Henricus Agung Hermawan, S.Kom., M.Cs." },
+];
+
+const lecturerSchedules = [
+  {
+    name: "Agnes Maria Polina, S.Kom., M.Sc.",
+    schedule: [
+      { day: "Senin", time: "13:00 – 16:50", code: "INFO118", course: "Proyek Informatika", className: "AP", room: "Lab Basis Data" },
+      { day: "Selasa", time: "10:00 – 12:00", code: "INFO103", course: "Analisis Proses Bisnis", className: "B", room: "K.204" },
+      { day: "Rabu", time: "08:00 – 09:50", code: "INFO105", course: "Pemrograman Berorientasi Objek", className: "C", room: "Lab Pemrograman" },
+      { day: "Jumat", time: "13:00 – 14:50", code: "INFO118", course: "Bimbingan Proyek Informatika", className: "AP", room: "Lab Basis Data" },
+    ],
+  },
+  {
+    name: "Dr. Alb. Agung Hadiatma, M.T.",
+    schedule: [
+      { day: "Senin", time: "08:00 – 09:50", code: "NETW203", course: "Jaringan Komputer", className: "A", room: "Lab Jaringan" },
+      { day: "Selasa", time: "13:00 – 14:50", code: "NETW201", course: "TCP/IP", className: "A", room: "Lab Jaringan" },
+      { day: "Rabu", time: "10:00 – 12:50", code: "NETW203", course: "Praktikum Jaringan", className: "B", room: "Lab Jaringan" },
+    ],
+  },
+  {
+    name: "Prof. Dr. Ir. Anastasia Rita Widiarti",
+    schedule: [
+      { day: "Selasa", time: "13:00 – 15:50", code: "SDEV207", course: "User Interface / User Experience", className: "A", room: "K.205" },
+      { day: "Kamis", time: "10:00 – 12:00", code: "INFO205", course: "Interaksi Manusia dan Komputer", className: "B", room: "K.301" },
+    ],
+  },
+  {
+    name: "Ir. Drs. Haris Sriwindono, M.Kom., Ph.D.",
+    schedule: [
+      { day: "Senin", time: "07:00 – 09:50", code: "SDEV204", course: "Algoritma Optimisasi", className: "A", room: "K.204" },
+      { day: "Kamis", time: "13:00 – 15:50", code: "SDEV204", course: "Algoritma Optimisasi", className: "B", room: "K.204" },
+    ],
+  },
+];
 
 const profileData = {
   name: "Briorisa Aprilia Kalista",
@@ -135,24 +199,26 @@ const services = {
       <p class="inline-note">Informasi pembayaran ini hanya simulasi. Pembayaran nyata tidak tersedia di pratinjau ini.</p>`,
   },
   "jadwal-mahasiswa": {
-    title: "Jadwal Mahasiswa",
+    title: "Jadwal Kuliah Mahasiswa",
     category: "AKADEMIK",
     description: "Jadwal perkuliahan mingguan untuk semester yang sedang berjalan.",
     content: `
-      <div class="page-toolbar"><div class="week-label"><strong>Minggu perkuliahan</strong><span>16–20 Februari 2026</span></div><span class="status-badge"><i></i> Semester genap</span></div>
-      <div class="day-tabs" role="group" aria-label="Filter hari jadwal">
-        <button class="day-tab is-selected" type="button" data-day="Semua">Semua</button><button class="day-tab" type="button" data-day="Senin">Senin</button><button class="day-tab" type="button" data-day="Selasa">Selasa</button><button class="day-tab" type="button" data-day="Rabu">Rabu</button><button class="day-tab" type="button" data-day="Kamis">Kamis</button><button class="day-tab" type="button" data-day="Jumat">Jumat</button>
+      <div class="schedule-toolbar"><div class="academic-term"><strong>Tahun Akademik: 2026 / Gasal</strong></div><button class="schedule-view-toggle" type="button" data-schedule-view="table" aria-pressed="false"><span aria-hidden="true">▦</span><span class="schedule-view-label">Lihat matriks mingguan</span></button></div>
+      <div class="student-day-tabs" role="group" aria-label="Pilih hari perkuliahan">
+        <button class="student-day-tab is-selected" type="button" data-schedule-day-select="Senin"><strong>Senin</strong><span>3 Mata Kuliah</span></button>
+        <button class="student-day-tab" type="button" data-schedule-day-select="Selasa"><strong>Selasa</strong><span>2 Mata Kuliah</span></button>
+        <button class="student-day-tab" type="button" data-schedule-day-select="Rabu"><strong>Rabu</strong><span>1 Mata Kuliah</span></button>
+        <button class="student-day-tab" type="button" data-schedule-day-select="Kamis"><strong>Kamis</strong><span>1 Mata Kuliah</span></button>
+        <button class="student-day-tab" type="button" data-schedule-day-select="Jumat"><strong>Jumat</strong><span>Libur</span></button>
       </div>
-      <div class="content-card table-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">KELAS MINGGU INI</p><h3>Jadwal perkuliahan</h3></div><span class="sample-tag">Jadwal contoh</span></div>
-        <div class="table-scroll"><table><thead><tr><th>Hari</th><th>Waktu</th><th>Mata kuliah</th><th>Dosen</th><th>Ruang</th></tr></thead><tbody>
-          <tr data-schedule-day="Senin"><td>Senin</td><td>08.00–09.40</td><td>Basis Data</td><td>Dr. Siti Rahma, M.Kom.</td><td>Lab 2</td></tr>
-          <tr data-schedule-day="Senin"><td>Senin</td><td>10.00–11.40</td><td>Interaksi Manusia Komputer</td><td>R. Pratama, M.T.</td><td>R. 301</td></tr>
-          <tr data-schedule-day="Selasa"><td>Selasa</td><td>09.00–10.40</td><td>Rekayasa Perangkat Lunak</td><td>Dr. A. Nugraha, M.Kom.</td><td>R. 204</td></tr>
-          <tr data-schedule-day="Rabu"><td>Rabu</td><td>13.00–14.40</td><td>Analisis dan Desain Sistem</td><td>F. Lestari, M.Kom.</td><td>R. 105</td></tr>
-          <tr data-schedule-day="Kamis"><td>Kamis</td><td>08.00–09.40</td><td>Jaringan Komputer</td><td>H. Saputra, M.T.</td><td>Lab 1</td></tr>
-          <tr data-schedule-day="Jumat"><td>Jumat</td><td>10.00–11.40</td><td>Metodologi Penelitian</td><td>Dr. N. Wibowo, M.Si.</td><td>R. 202</td></tr>
-        </tbody></table></div>
-      </div>`,
+      <section class="student-schedule-view" id="student-day-view">
+        <div class="schedule-day-heading"><h2 id="selected-schedule-day-title">Perkuliahan Hari Senin</h2><span id="selected-schedule-day-count">3 Sesi Perkuliahan</span></div>
+        <div class="student-schedule-cards" id="student-schedule-cards"></div>
+      </section>
+      <section class="content-card table-card schedule-matrix-view" id="student-matrix-view" hidden>
+        <div class="content-card-heading"><div><p class="eyebrow section-eyebrow">RINGKASAN MINGGUAN</p><h3>Matriks Jadwal Kuliah Mingguan</h3></div><span class="sample-tag">Jadwal contoh</span></div>
+        <div class="table-scroll schedule-matrix-scroll"><table><thead><tr><th>Hari</th><th>Mata Kuliah &amp; Ruang</th><th>Jam</th></tr></thead><tbody id="student-schedule-matrix"></tbody></table></div>
+      </section>`,
   },
   "poin-kemahasiswaan": {
     title: "Poin Kemahasiswaan",
@@ -184,19 +250,21 @@ const services = {
           <div class="submission-body">
             <label class="form-field">1. Kategori &amp; Peran Kegiatan (Poin Ditentukan Otomatis):
               <select id="point-category" required>
-                <option value="fch4">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus</option>
-                <option value="fch1">Formasi Cerdas Humanis 1 (FCH 1) — Menjadi peserta kegiatan</option>
-                <option value="fch2">Formasi Cerdas Humanis 2 (FCH 2) — Menjadi peserta pelatihan</option>
-                <option value="fch3">Formasi Cerdas Humanis 3 (FCH 3) — Menjadi panitia kegiatan</option>
-                <option value="organization">Organisasi Kemahasiswaan — Menjadi ketua organisasi</option>
-                <option value="committee">Sertifikasi Kepanitiaan — Menjadi anggota panitia</option>
+                <option value="fch4_officer">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota pengurus BEM/DPM Fakultas/Jurusan/Prodi</option>
+                <option value="fch4_committee">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat universitas</option>
+                <option value="fch4_faculty_committee">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi anggota panitia tingkat fakultas/prodi</option>
+                <option value="fch4_coordinator">Formasi Cerdas Humanis 4 (FCH 4) — Menjadi koordinator/ketua panitia kegiatan fakultas</option>
+                <option value="fch3_organization">Formasi Cerdas Humanis 3 (FCH 3) — Pengurus inti UKM/HMPS/komunitas minat bakat</option>
+                <option value="fch3_competition">Formasi Cerdas Humanis 3 (FCH 3) — Juara/finalis kompetisi ilmiah/hackathon/lomba</option>
+                <option value="fch1_workshop">Formasi Cerdas Humanis 1 (FCH 1) — Peserta aktif workshop/sertifikasi keahlian komputasi</option>
+                <option value="insa_committee">Inisiasi Sanata Dharma (INSADHA) — Pendamping/panitia inisiasi mahasiswa baru USD</option>
               </select>
             </label>
             <section class="points-auto-info" aria-live="polite">
               <div><span>♙</span> Jumlah Poin Ditentukan Sistem: <strong id="calculated-point-value">+30 Poin</strong></div>
               <p>ⓘ Jumlah poin otomatis terkunci dan tidak dapat diubah oleh mahasiswa. Besaran poin dihitung resmi berdasarkan pedoman kategori kegiatan Universitas Sanata Dharma.</p>
             </section>
-            <div class="category-detail"><p><span>Bidang:</span> <strong id="point-category-field">Formasi Cerdas Humanis</strong></p><p><span>Peran:</span> <strong id="point-category-role">Menjadi anggota pengurus organisasi</strong></p><p>Softskills yang Dikembangkan: Keterampilan bekerja sama (teamwork), Keterampilan manajerial, Integritas</p></div>
+            <div class="category-detail"><p><span>Bidang:</span> <strong id="point-category-field">Organisasi &amp; Kepemimpinan</strong></p><p><span>Peran:</span> <strong id="point-category-role">Anggota pengurus BEM/DPM Fakultas/Jurusan/Program Studi</strong></p><p><span>Softskills yang Dikembangkan:</span> <strong id="point-category-softskills">Keterampilan manajerial, kepemimpinan, integritas</strong></p></div>
             <label class="form-field">2. Nama Spesifik Kegiatan / Acara:
               <input name="activity" type="text" maxlength="120" placeholder="Contoh: Panitia Malam Keakraban Informatika 2025" required>
             </label>
@@ -236,19 +304,12 @@ const services = {
   "jadwal-dosen": {
     title: "Jadwal Dosen",
     category: "AKADEMIK",
-    description: "Informasi jadwal mengajar dosen untuk membantu konsultasi akademik.",
+    description: "Cari nama dosen untuk melihat jadwal mengajar dan ruang kelasnya.",
     content: `
-      <div class="page-toolbar"><label class="select-field">Pilih dosen
-        <select id="lecturer-filter" aria-label="Pilih dosen"><option value="Semua">Semua dosen</option><option value="Dr. Siti Rahma">Dr. Siti Rahma, M.Kom.</option><option value="R. Pratama">R. Pratama, M.T.</option><option value="Dr. A. Nugraha">Dr. A. Nugraha, M.Kom.</option><option value="F. Lestari">F. Lestari, M.Kom.</option></select>
-      </label><span class="sample-tag">Jadwal contoh</span></div>
-      <div class="content-card table-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">SEMESTER GENAP 2025/2026</p><h3>Jadwal mengajar</h3></div></div>
-        <div class="table-scroll"><table><thead><tr><th>Dosen</th><th>Hari</th><th>Waktu</th><th>Mata kuliah</th><th>Ruang</th></tr></thead><tbody id="lecturer-rows">
-          <tr data-lecturer="Dr. Siti Rahma"><td>Dr. Siti Rahma, M.Kom.</td><td>Senin</td><td>08.00–09.40</td><td>Basis Data</td><td>Lab 2</td></tr>
-          <tr data-lecturer="R. Pratama"><td>R. Pratama, M.T.</td><td>Senin</td><td>10.00–11.40</td><td>Interaksi Manusia Komputer</td><td>R. 301</td></tr>
-          <tr data-lecturer="Dr. A. Nugraha"><td>Dr. A. Nugraha, M.Kom.</td><td>Selasa</td><td>09.00–10.40</td><td>Rekayasa Perangkat Lunak</td><td>R. 204</td></tr>
-          <tr data-lecturer="F. Lestari"><td>F. Lestari, M.Kom.</td><td>Rabu</td><td>13.00–14.40</td><td>Analisis dan Desain Sistem</td><td>R. 105</td></tr>
-        </tbody></table></div>
-      </div>`,
+      <label class="lecturer-search"><span aria-hidden="true">⌕</span><input id="lecturer-search" type="search" placeholder="Cari nama dosen..." aria-label="Cari nama dosen"><kbd>⌕</kbd></label>
+      <p class="lecturer-search-hint">Cari nama dosen, lalu buka daftar jadwal mengajarnya.</p>
+      <div class="lecturer-schedule-list" id="lecturer-schedule-list"></div>
+      <p class="lecturer-no-results" id="lecturer-no-results" hidden>Dosen tidak ditemukan. Coba kata kunci lain.</p>`,
   },
   profil: {
     title: "Profil Mahasiswa",
@@ -361,6 +422,7 @@ function updatePointCategory() {
   document.querySelector("#calculated-point-value").textContent = value;
   document.querySelector("#point-category-field").textContent = selection.field;
   document.querySelector("#point-category-role").textContent = selection.role;
+  document.querySelector("#point-category-softskills").textContent = selection.softskills;
   document.querySelector(".form-submit-button").textContent = `▣  Kirim Pengajuan (${value})`;
 }
 
@@ -376,6 +438,74 @@ function updateProfileDetails() {
   document.querySelector('#profile-edit-form [name="fullName"]').value = profileData.name;
   document.querySelector('#profile-edit-form [name="email"]').value = profileData.email;
   document.querySelector('#profile-edit-form [name="phone"]').value = profileData.phone;
+}
+
+function renderStudentSchedule(day = "Senin") {
+  const cards = document.querySelector("#student-schedule-cards");
+  if (!cards) return;
+  const dayCourses = studentSchedule.filter((course) => course.day === day);
+  document.querySelectorAll("[data-schedule-day-select]").forEach((tab) => {
+    const selected = tab.dataset.scheduleDaySelect === day;
+    tab.classList.toggle("is-selected", selected);
+    tab.setAttribute("aria-pressed", String(selected));
+  });
+  document.querySelector("#selected-schedule-day-title").textContent = `Perkuliahan Hari ${day}`;
+  document.querySelector("#selected-schedule-day-count").textContent = `${dayCourses.length} Sesi Perkuliahan`;
+  cards.innerHTML = dayCourses.length
+    ? dayCourses.map((course) => `
+      <article class="student-class-card">
+        <span class="student-class-code">${escapeHTML(course.code)} • ${course.credits} SKS</span>
+        <h3>${escapeHTML(course.title)}</h3>
+        <div class="student-class-details"><span><b aria-hidden="true">◷</b> ${escapeHTML(course.time)}</span><span><b aria-hidden="true">⌖</b> ${escapeHTML(course.room)}</span></div>
+        <p class="student-class-lecturer"><span aria-hidden="true">♙</span> ${escapeHTML(course.lecturer)}</p>
+      </article>`).join("")
+    : '<p class="schedule-empty-day">Tidak ada jadwal kuliah pada hari ini.</p>';
+
+  const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+  document.querySelector("#student-schedule-matrix").innerHTML = weekDays.map((weekDay) => {
+    const courses = studentSchedule.filter((course) => course.day === weekDay);
+    if (!courses.length) {
+      return `<tr><th scope="row">${weekDay}</th><td colspan="2" class="schedule-empty-cell">Tidak ada jadwal kuliah</td></tr>`;
+    }
+    return courses.map((course, index) => `
+      <tr>${index === 0 ? `<th scope="row" rowspan="${courses.length}">${weekDay}</th>` : ""}
+        <td><strong>${escapeHTML(course.code)} ${escapeHTML(course.title)}</strong><span>– ${escapeHTML(course.room)}</span></td>
+        <td>${escapeHTML(course.time.replace(" WIB", ""))}</td>
+      </tr>`).join("");
+  }).join("");
+}
+
+function renderLecturerSchedules(query = "") {
+  const list = document.querySelector("#lecturer-schedule-list");
+  if (!list) return;
+  const normalizedQuery = query.trim().toLocaleLowerCase("id");
+  const matchingLecturers = lecturerSchedules.filter((lecturer) =>
+    lecturer.name.toLocaleLowerCase("id").includes(normalizedQuery)
+  );
+  list.innerHTML = matchingLecturers.map((lecturer, lecturerIndex) => {
+    const rows = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"].map((day) => {
+      const dayClasses = lecturer.schedule.filter((item) => item.day === day);
+      if (!dayClasses.length) {
+        return `<tr><th scope="row">${day}</th><td>–</td><td>–</td><td>–</td><td>–</td></tr>`;
+      }
+      return dayClasses.map((course, index) => `
+        <tr>${index === 0 ? `<th scope="row" rowspan="${dayClasses.length}">${day}</th>` : ""}
+          <td>${escapeHTML(course.time)}</td>
+          <td><span class="lecturer-course-code">${escapeHTML(course.code)}</span><strong>${escapeHTML(course.course)}</strong></td>
+          <td>${escapeHTML(course.className)}</td>
+          <td>${escapeHTML(course.room)}</td>
+        </tr>`).join("");
+    }).join("");
+    return `
+      <details class="lecturer-schedule-card"${lecturerIndex === 0 ? " open" : ""}>
+        <summary>${escapeHTML(lecturer.name)}<span aria-hidden="true"></span></summary>
+        <div class="lecturer-table-scroll"><table class="lecturer-table">
+          <thead><tr><th>Hari</th><th>Jam</th><th>Mata Kuliah</th><th>Kelas</th><th>Ruang</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+      </details>`;
+  }).join("");
+  document.querySelector("#lecturer-no-results").hidden = matchingLecturers.length > 0;
 }
 
 function showMessage(message) {
@@ -431,6 +561,12 @@ function renderRoute() {
   }
   if (selectedRoute === "profil") {
     updateProfileDetails();
+  }
+  if (selectedRoute === "jadwal-mahasiswa") {
+    renderStudentSchedule();
+  }
+  if (selectedRoute === "jadwal-dosen") {
+    renderLecturerSchedules();
   }
 
   const activeTab = selectedRoute === "beranda"
@@ -548,7 +684,7 @@ document.addEventListener("click", (event) => {
   }
 
   const routeLink = event.target.closest("[data-route]");
-  if (routeLink) {
+  if (routeLink && routeLink !== main) {
     if (routeLink.closest(".notification-card")) {
       routeLink.closest(".notification-card").classList.remove("is-unread");
       updateUnreadCount();
@@ -602,12 +738,6 @@ document.addEventListener("change", (event) => {
     updateGrades(event.target.value);
   }
 
-  if (event.target.id === "lecturer-filter") {
-    document.querySelectorAll("[data-lecturer]").forEach((row) => {
-      row.hidden = event.target.value !== "Semua" && row.dataset.lecturer !== event.target.value;
-    });
-  }
-
   if (event.target.matches(".course-choice")) {
     const choices = [...document.querySelectorAll(".course-choice:checked")];
     const credits = choices.reduce((total, choice) => total + Number(choice.dataset.credits), 0);
@@ -621,6 +751,12 @@ document.addEventListener("change", (event) => {
       showMessage("Batas simulasi rencana studi adalah 24 SKS.");
       event.target.dispatchEvent(new Event("change", { bubbles: true }));
     }
+  }
+});
+
+document.addEventListener("input", (event) => {
+  if (event.target.id === "lecturer-search") {
+    renderLecturerSchedules(event.target.value);
   }
 });
 
@@ -667,14 +803,22 @@ document.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-  const dayTab = event.target.closest("[data-day]");
-  if (!dayTab) return;
-  document.querySelectorAll(".day-tab").forEach((tab) => {
-    tab.classList.toggle("is-selected", tab === dayTab);
-  });
-  document.querySelectorAll("[data-schedule-day]").forEach((row) => {
-    row.hidden = dayTab.dataset.day !== "Semua" && row.dataset.scheduleDay !== dayTab.dataset.day;
-  });
+  const dayTab = event.target.closest("[data-schedule-day-select]");
+  if (dayTab) {
+    renderStudentSchedule(dayTab.dataset.scheduleDaySelect);
+    return;
+  }
+  const viewToggle = event.target.closest("[data-schedule-view]");
+  if (viewToggle) {
+    const showMatrix = viewToggle.dataset.scheduleView === "table";
+    document.querySelector("#student-day-view").hidden = showMatrix;
+    document.querySelector("#student-matrix-view").hidden = !showMatrix;
+    viewToggle.dataset.scheduleView = showMatrix ? "days" : "table";
+    viewToggle.setAttribute("aria-pressed", String(showMatrix));
+    viewToggle.querySelector(".schedule-view-label").textContent = showMatrix
+      ? "Lihat jadwal per hari"
+      : "Lihat matriks mingguan";
+  }
 });
 
 notificationButton.addEventListener("click", () => {

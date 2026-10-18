@@ -210,31 +210,121 @@ const profileData = {
   phone: "+62 812–3456–7890",
 };
 
+const gradeHistory = {
+  "1": {
+    year: "2024 / 2025",
+    term: "Gasal",
+    gpa: "3.01",
+    credits: 20,
+    cumulativeCredits: 20,
+    courses: [
+      ["MATE101", "Logika Matematika", 2, "C", "2.88", "2.86"],
+      ["INFO103", "Informatika dan Dampak Sosialnya", 2, "B", "2.94", "3.48"],
+      ["INFO102", "Sistem Digital", 2, "C", "2.76", "3.11"],
+      ["PPKMB 001", "Pendampingan Mahasiswa Baru 1", 0, "–", "3", "3.6"],
+      ["INFO101", "Algoritma dan Pemrograman", 3, "B-", "3.47", "3.62"],
+      ["MATE102", "Matematika Diskret", 3, "B-", "3.47", "3.64"],
+      ["BING 101", "Bahasa Inggris", 3, "B", "2.94", "3.21"],
+      ["BIND 101", "Bahasa Indonesia", 3, "A", "3", "3.61"],
+      ["TEOL 101", "Pendidikan Agama", 2, "A", "2.88", "3.6"],
+    ],
+  },
+  "2": {
+    year: "2024 / 2025",
+    term: "Genap",
+    gpa: "3.08",
+    credits: 23,
+    cumulativeCredits: 43,
+    courses: [
+      ["FITE 107", "Teologi Moral", 2, "B", "3.41", "3.43"],
+      ["INFO107", "Dasar Komputer dan Sistem Operasi", 3, "A-", "2.65", "3.25"],
+      ["MATE104", "Statistika dan Probabilitas", 3, "B", "2.59", "3.34"],
+      ["MATE103", "Kalkulus", 3, "B", "2.76", "3.34"],
+      ["PPKMB002", "Pendampingan Mahasiswa Baru 2", 0, "–", "3", "3.61"],
+      ["INFO108", "Dasar Komunikasi Komputer dan Jaringan", 2, "C+", "2.29", "3.21"],
+      ["INFO106", "Pemrograman Analisis Data", 2, "B+", "2.41", "3.44"],
+      ["INFO105", "Pemrograman Berorientasi Objek", 3, "B", "2.88", "3.7"],
+      ["INFO104", "Struktur Data Linier", 3, "B-", "3", "3.56"],
+      ["KEBN 101", "Pendidikan Pancasila", 2, "A-", "2.53", "3.36"],
+    ],
+  },
+  "3": {
+    year: "2025 / 2026",
+    term: "Gasal",
+    gpa: "3.42",
+    credits: 19,
+    cumulativeCredits: 62,
+    courses: [
+      ["INFO109", "Struktur Data Non Linier", 3, "A", "3.53", "3.7"],
+      ["INFO110", "Pemrograman Berorientasi Objek Lanjut", 3, "B", "3", "3.61"],
+      ["MATE105", "Aljabar Linier", 3, "B", "2.65", "3.14"],
+      ["INFO111", "Sistem Cerdas", 3, "B+", "2.94", "3.59"],
+      ["INFO112", "Internet dan Aplikasinya", 3, "A", "3", "3.52"],
+      ["RPLN101", "Konsep dan Desain Basis Data", 3, "B", "3", "3.54"],
+      ["RPLN102", "Bahasa Query", 1, "A", "3.06", "3.67"],
+    ],
+  },
+  "4": {
+    year: "2025 / 2026",
+    term: "Genap",
+    gpa: "3.55",
+    credits: 22,
+    cumulativeCredits: 84,
+    courses: [
+      ["INFO113", "Analisis dan Strategi Algoritma", 3, "A-", "3", "3.53"],
+      ["INFO114", "Komputasi Paralel dan Terdistribusi", 2, "B", "3", "3.25"],
+      ["RPLN103", "Pemrograman Berbasis Platform", 3, "B+", "2.82", "3.15"],
+      ["INFO115", "Pembelajaran Mesin", 3, "A", "3", "3.52"],
+      ["RPLN105", "Interaksi Manusia dan Komputer", 2, "A", "3", "3.49"],
+      ["RPLN104", "Rekayasa Perangkat Lunak", 3, "B", "2.94", "3.65"],
+      ["KEBN 102", "Pendidikan Kewarganegaraan", 2, "A-", "2.88", "3.39"],
+      ["HEEA 045", "Healing Earth", 2, "B+", "2.71", "3.24"],
+      ["INFO116", "Manajemen Informasi", 2, "A", "2.94", "3.44"],
+    ],
+  },
+  "5": {
+    year: "2026 / 2027",
+    term: "Gasal",
+    gpa: "0.00",
+    credits: 0,
+    cumulativeCredits: 84,
+    courses: [
+      ["INFO118", "Proyek Informatika", 2, "", "", ""],
+      ["SDEV204", "Algoritma Optimisasi", 3, "", "", ""],
+      ["NETW201", "Protokol TCP/IP Suite", 3, "", "", ""],
+      ["INFO117", "Kriptografi", 3, "", "", ""],
+      ["SNET52W", "Virtualisasi dan Teknologi Cloud", 3, "", "", ""],
+      ["NETW203", "Jaringan Toleransi Tunda", 3, "", "", ""],
+      ["SDEV207", "Desain UI/UX", 3, "", "", ""],
+    ],
+  },
+};
+
 const services = {
   nilai: {
     title: "Nilai per Semester",
     category: "AKADEMIK",
-    description: "Lihat hasil studi dan perkembangan nilaimu di setiap semester.",
+    description: "Rekap hasil studi dan evaluasi perkuliahan.",
     content: `
-      <div class="page-toolbar">
-        <label class="select-field">Pilih semester
-          <select id="grade-semester" aria-label="Pilih semester nilai">
-            <option value="5">Semester 5 · Berjalan</option>
-            <option value="4">Semester 4 · Genap 2024/2025</option>
-            <option value="3">Semester 3 · Ganjil 2024/2025</option>
-          </select>
-        </label>
-        <span class="status-badge"><i></i> Nilai contoh</span>
-      </div>
-      <div class="summary-grid summary-grid-three">
-        <article class="summary-card"><span>IPS semester ini</span><strong id="semester-gpa">3.91</strong><small>Indeks Prestasi Semester</small></article>
-        <article class="summary-card"><span>Total SKS</span><strong id="semester-credits">20</strong><small>SKS yang diambil</small></article>
-        <article class="summary-card"><span>Mata kuliah</span><strong id="semester-count">6</strong><small>Termasuk mata kuliah pilihan</small></article>
-      </div>
-      <div class="content-card table-card">
-        <div class="content-card-heading"><div><p class="eyebrow section-eyebrow">HASIL STUDI</p><h3>Rincian nilai</h3></div><span class="sample-tag">Data pratinjau</span></div>
-        <div class="table-scroll"><table><thead><tr><th>Mata kuliah</th><th>Kode</th><th>SKS</th><th>Nilai</th><th>Mutu</th></tr></thead><tbody id="grade-rows"></tbody></table></div>
-      </div>`,
+      <section class="grade-student-card" aria-label="Data mahasiswa">
+        <h2>Data Nilai Mahasiswa <span>SIA USD</span></h2>
+        <div class="grade-student-details">
+          <div><span class="grade-detail-icon">♙</span><span><small>NAMA MAHASISWA</small><strong>${escapeHTML(profileData.name)}</strong></span></div>
+          <div><span class="grade-detail-icon">#</span><span><small>NIM</small><strong>245314034</strong></span></div>
+          <div><span class="grade-detail-icon">▤</span><span><small>JUMLAH KREDIT KUMULATIF</small><strong>84 SKS</strong></span></div>
+          <div><span class="grade-detail-icon grade-complete-icon">✓</span><span><small>JUMLAH SKS LULUS</small><strong>84 SKS</strong></span></div>
+        </div>
+      </section>
+      <section class="grade-semesters" aria-label="Pilih semester">
+        <h2>PILIH SEMESTER</h2>
+        <div class="grade-semester-tabs" role="tablist" aria-label="Semester nilai">
+          ${Object.keys(gradeHistory).map((semester) => `<button type="button" role="tab" id="grade-tab-${semester}" aria-controls="grade-panel" aria-selected="${semester === "1"}" data-grade-semester="${semester}">Semester ${semester}${semester === "1" ? '<span>IPS 3.01</span>' : semester === "2" ? '<span>IPS 3.08</span>' : semester === "3" ? '<span>IPS 3.42</span>' : semester === "4" ? '<span>IPS 3.55</span>' : ""}</button>`).join("")}
+        </div>
+      </section>
+      <section class="grade-panel" id="grade-panel" role="tabpanel" aria-labelledby="grade-tab-1">
+        <header class="grade-panel-heading"><div><strong id="grade-semester-label">Semester : 1</strong><span id="grade-year-label">Tahun Akademik : 2024 / 2025 / Gasal</span></div><div class="grade-ips"><small>I P S</small><strong id="semester-gpa">3.01</strong></div></header>
+        <div class="grade-table-scroll"><table class="grade-table"><thead><tr><th>Kode</th><th>Nama Mata Kuliah</th><th>SKS</th><th>Nilai</th><th>SWTS</th><th>Evaluasi</th><th>REPA</th><th>REPK</th></tr></thead><tbody id="grade-rows"></tbody><tfoot><tr><th colspan="2">Total SKS</th><td id="semester-credits">20</td><td colspan="5"></td></tr></tfoot></table></div>
+      </section>`,
   },
   lpkp: {
     title: "LPKP",
@@ -270,7 +360,6 @@ const services = {
           <fieldset class="lpkp-confirmation"><legend>Apakah kegiatan perkuliahan sesuai dengan materi dosen?</legend><label><input type="radio" name="lpkp-confirmation" value="yes" required><span>Ya</span></label><label><input type="radio" name="lpkp-confirmation" value="no" required><span>✖ &nbsp; Tidak</span></label></fieldset>
           <label class="lpkp-notes">Catatan Opsional<textarea name="notes" rows="2" placeholder="Tambahkan catatan atau masukan terkait perkuliahan jika ada..."></textarea></label>
           <button class="lpkp-submit" type="submit">▣ &nbsp; Simpan &amp; Konfirmasi LPKP</button>
-          <p class="lpkp-preview-note">Data presensi dan konfirmasi hanya tersimpan sebagai pratinjau lokal.</p>
         </form>
       </div>`,
   },
@@ -322,15 +411,15 @@ const services = {
             <div class="receipt-university"><span class="receipt-seal">USD</span><div><strong>Universitas Sanata Dharma</strong><small>Biro Keuangan &amp; Administrasi Akademik</small></div><span class="finance-paid-badge">LUNAS</span></div>
             <p class="receipt-reference">No: BKT-2026-USD-04-89312</p>
             <div class="receipt-title"><h2>Kuitansi Pembayaran Biaya Pendidikan (UKT)</h2><span>Semester Genap Tahun Akademik 2025/2026</span></div>
-            <dl class="receipt-student"><div><dt>Nama Mahasiswa</dt><dd>Briorisa Aprilia Kalista</dd></div><div><dt>Nomor Induk Mahasiswa (NIM)</dt><dd>245314034</dd></div><div><dt>Program Studi / Jenjang</dt><dd>Informatika (S-1)</dd></div><div><dt>Fakultas</dt><dd>Sains dan Teknologi</dd></div><div><dt>Waktu Pembayaran</dt><dd>29 Januari 2026, 11:20 WIB</dd></div></dl>
+            <dl class="receipt-student"><div><dt>Nama Mahasiswa</dt><dd>Briorisa Aprilia Kalista</dd></div><div><dt>Nomor Induk Mahasiswa (NIM)</dt><dd>245314034</dd></div><div><dt>Program Studi</dt><dd>Informatika</dd></div><div><dt>Fakultas</dt><dd>Sains dan Teknologi</dd></div><div><dt>Waktu Pembayaran</dt><dd>29 Januari 2026, 11:20 WIB</dd></div></dl>
             <table class="receipt-cost-table"><thead><tr><th>Komponen Biaya</th><th>Jumlah</th></tr></thead><tbody><tr><td>Uang Kuliah Tunggal (UKT) Tahap I</td><td>Rp 2.750.000</td></tr><tr><td>Uang Kuliah Tunggal (UKT) Tahap II</td><td>Rp 2.750.000</td></tr><tr><td>Iuran Kemahasiswaan (Kmhs)</td><td>Rp 225.000</td></tr><tr><td>Sosial Mahasiswa (Sos Mhs)</td><td>Rp 40.000</td></tr><tr><td>Total Terbayar Semester Ini</td><td>Rp 5.765.000</td></tr><tr class="receipt-total-row"><th>TOTAL PEMBAYARAN</th><th>Rp 5.765.000</th></tr></tbody></table>
             <p class="receipt-amount-words"><strong>Terbilang:</strong> “Lima Juta Tujuh Ratus Enam Puluh Lima Ribu Rupiah”</p>
             <div class="receipt-signature"><div class="receipt-qr" aria-label="Kode verifikasi kuitansi">▦</div><p><strong>Digital Signature Valid</strong><span>Bank Partner: PT Bank Central Asia Tbk</span><span>ID Transaksi: USD-TRX-2026-04-89312</span></p><div><span>Disahkan oleh,</span><strong>Biro Administrasi Keuangan</strong><small>Universitas Sanata Dharma</small></div></div>
           </article>
         </div>
-        <footer class="receipt-dialog-footer"><span>✓ Kuitansi ini merupakan contoh pratinjau dan bukan bukti pembayaran resmi.</span><button type="button" data-close-dialog>Tutup</button></footer>
+        <footer class="receipt-dialog-footer"><button type="button" data-close-dialog>Tutup</button></footer>
       </dialog>
-      <p class="finance-preview-note">Informasi pembayaran di atas adalah contoh pratinjau. Pembayaran dan kuitansi resmi tidak terhubung ke sistem kampus.</p>`,
+      `,
   },
   "jadwal-mahasiswa": {
     title: "Jadwal Kuliah Mahasiswa",
@@ -350,7 +439,7 @@ const services = {
         <div class="student-schedule-cards" id="student-schedule-cards"></div>
       </section>
       <section class="content-card table-card schedule-matrix-view" id="student-matrix-view" hidden>
-        <div class="content-card-heading"><div><p class="eyebrow section-eyebrow">RINGKASAN MINGGUAN</p><h3>Matriks Jadwal Kuliah Mingguan</h3></div><span class="sample-tag">Jadwal contoh</span></div>
+        <div class="content-card-heading"><div><p class="eyebrow section-eyebrow">RINGKASAN MINGGUAN</p><h3>Matriks Jadwal Kuliah Mingguan</h3></div></div>
         <div class="table-scroll schedule-matrix-scroll"><table><thead><tr><th>Hari</th><th>Mata Kuliah &amp; Ruang</th><th>Jam</th></tr></thead><tbody id="student-schedule-matrix"></tbody></table></div>
       </section>`,
   },
@@ -400,7 +489,7 @@ const services = {
             </section>
             <div class="category-detail"><p><span>Bidang:</span> <strong id="point-category-field">Organisasi &amp; Kepemimpinan</strong></p><p><span>Peran:</span> <strong id="point-category-role">Anggota pengurus BEM/DPM Fakultas/Jurusan/Program Studi</strong></p><p><span>Softskills yang Dikembangkan:</span> <strong id="point-category-softskills">Keterampilan manajerial, kepemimpinan, integritas</strong></p></div>
             <label class="form-field">2. Nama Spesifik Kegiatan / Acara:
-              <input name="activity" type="text" maxlength="120" placeholder="Contoh: Panitia Malam Keakraban Informatika 2025" required>
+              <input name="activity" type="text" maxlength="120" placeholder="Nama kegiatan" required>
             </label>
             <label class="form-field">3. Unit / Badan Penyelenggara:
               <input name="organizer" type="text" maxlength="100" value="Informatika FST USD" required>
@@ -438,7 +527,6 @@ const services = {
             <div class="drs-course-detail"><span>Tarif / Biaya:</span><strong>Rp ${course.fee.toLocaleString("id-ID")}</strong></div>
           </article>`).join("")}</section>
         <div class="drs-actions"><button type="button" data-print-drs>▧ &nbsp; Cetak DRS</button><button type="button" data-print-drs class="drs-download-button">⇩ &nbsp; Unduh PDF</button></div>
-        <p class="drs-preview-note">Data DRS ini merupakan pratinjau dan tidak terhubung dengan sistem akademik kampus.</p>
       </div>`,
   },
   "jadwal-dosen": {
@@ -460,7 +548,7 @@ const services = {
         <div class="student-profile-top">
           <div class="profile-portrait"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="10" r="5" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 27v-2a8.5 8.5 0 0 1 17 0v2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span aria-hidden="true">✿</span></div>
           <strong class="student-profile-name">${escapeHTML(profileData.name)}</strong>
-          <span class="student-profile-meta">245314034 • Informatika (S-1)</span>
+          <span class="student-profile-meta">NIM: 245314034</span>
           <div class="student-profile-badges"><span class="profile-status">◉ Aktif</span><span class="profile-semester">Semester 4</span></div>
           <div class="student-profile-stats"><div><strong>3.26</strong><span>IPK</span></div><div><strong>84</strong><span>SKS Lulus</span></div><div><strong>A / B+</strong><span>Predikat</span></div></div>
         </div>
@@ -476,12 +564,11 @@ const services = {
           </dl>
         </section>
       </section>
-      <div class="profile-actions"><button class="primary-button" type="button" data-open-dialog="profile-edit-dialog"><span aria-hidden="true">✎</span> Perbarui Data Diri</button><button class="logout-button" type="button" data-message="Logout tidak tersedia pada pratinjau tanpa sistem akun.">⇥ &nbsp; Keluar Akun (Logout)</button></div>
+      <div class="profile-actions"><button class="primary-button" type="button" data-open-dialog="profile-edit-dialog"><span aria-hidden="true">✎</span> Perbarui Data Diri</button><button class="logout-button" type="button" data-message="Anda telah keluar.">⇥ &nbsp; Keluar Akun (Logout)</button></div>
       <dialog class="submission-dialog profile-edit-dialog" id="profile-edit-dialog" aria-labelledby="profile-edit-title">
         <form class="submission-form" id="profile-edit-form">
           <header class="submission-header"><h2 id="profile-edit-title">Perbarui Data Diri</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Tutup formulir">×</button></header>
           <div class="submission-body">
-            <p class="inline-note">Perubahan hanya berlaku selama halaman pratinjau ini terbuka.</p>
             <label class="form-field">Nama lengkap<input name="fullName" value="${escapeHTML(profileData.name)}" required></label>
             <label class="form-field">Email student<input name="email" type="email" value="${escapeHTML(profileData.email)}" required></label>
             <label class="form-field">Nomor telepon<input name="phone" type="tel" value="${escapeHTML(profileData.phone)}" required></label>
@@ -496,12 +583,12 @@ const services = {
     description: "Temukan kegiatan, organisasi, dan kesempatan berpartisipasi di kampus.",
     content: `
       <div class="summary-grid summary-grid-three">
-        <article class="summary-card"><span>Poin partisipasi</span><strong>245</strong><small>Poin contoh terkumpul</small></article>
+        <article class="summary-card"><span>Poin partisipasi</span><strong>60</strong><small>Total poin terkumpul</small></article>
         <article class="summary-card"><span>Kegiatan diikuti</span><strong>8</strong><small>Selama tahun akademik ini</small></article>
         <article class="summary-card"><span>Organisasi</span><strong>2</strong><small>Keanggotaan aktif</small></article>
       </div>
-      <div class="content-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">AGENDA KAMPUS</p><h3>Kegiatan mendatang</h3></div><span class="sample-tag">Agenda contoh</span></div>
-        <div class="event-list"><article class="event-row"><div class="event-date"><strong>22</strong><span>FEB</span></div><div class="event-description"><strong>Workshop Karier Digital</strong><p>Seminar · Auditorium kampus · 09.00</p></div><button class="secondary-button" type="button" data-message="Pendaftaran kegiatan contoh belum terhubung.">Detail</button></article><article class="event-row"><div class="event-date"><strong>28</strong><span>FEB</span></div><div class="event-description"><strong>Aksi Peduli Lingkungan</strong><p>Pengabdian · Taman kampus · 07.30</p></div><button class="secondary-button" type="button" data-message="Pendaftaran kegiatan contoh belum terhubung.">Detail</button></article><article class="event-row"><div class="event-date"><strong>05</strong><span>MAR</span></div><div class="event-description"><strong>Kompetisi Inovasi Mahasiswa</strong><p>Kompetisi · Gedung F · 13.00</p></div><button class="secondary-button" type="button" data-message="Pendaftaran kegiatan contoh belum terhubung.">Detail</button></article></div>
+      <div class="content-card"><div class="content-card-heading"><div><p class="eyebrow section-eyebrow">AGENDA KAMPUS</p><h3>Kegiatan mendatang</h3></div></div>
+        <div class="event-list"><article class="event-row"><div class="event-date"><strong>22</strong><span>FEB</span></div><div class="event-description"><strong>Workshop Karier Digital</strong><p>Seminar · Auditorium kampus · 09.00</p></div><button class="secondary-button" type="button" data-message="Workshop Karier Digital">Detail</button></article><article class="event-row"><div class="event-date"><strong>28</strong><span>FEB</span></div><div class="event-description"><strong>Aksi Peduli Lingkungan</strong><p>Pengabdian · Taman kampus · 07.30</p></div><button class="secondary-button" type="button" data-message="Aksi Peduli Lingkungan">Detail</button></article><article class="event-row"><div class="event-date"><strong>05</strong><span>MAR</span></div><div class="event-description"><strong>Kompetisi Inovasi Mahasiswa</strong><p>Kompetisi · Gedung F · 13.00</p></div><button class="secondary-button" type="button" data-message="Kompetisi Inovasi Mahasiswa">Detail</button></article></div>
       </div>
       <button class="text-link points-link" type="button" data-route="poin-kemahasiswaan">Lihat riwayat poin kemahasiswaan <span aria-hidden="true">→</span></button>`,
   },
@@ -629,6 +716,19 @@ function updateProfileDetails() {
   document.querySelector('#profile-edit-form [name="phone"]').value = profileData.phone;
 }
 
+function updateIdentity() {
+  const initial = profileData.name.trim().charAt(0).toLocaleUpperCase("id");
+  document.querySelectorAll(".avatar-small, .welcome-avatar").forEach((avatar) => {
+    avatar.textContent = initial;
+  });
+  const greeting = document.querySelector("#welcome-title");
+  if (greeting) greeting.textContent = `Halo, ${profileData.name}`;
+  const studentMeta = document.querySelector(".student-meta");
+  if (studentMeta) studentMeta.textContent = "NIM: 245314034";
+  const profileMeta = document.querySelector(".student-profile-meta");
+  if (profileMeta) profileMeta.textContent = "NIM: 245314034";
+}
+
 function renderStudentSchedule(day = "Senin") {
   const cards = document.querySelector("#student-schedule-cards");
   if (!cards) return;
@@ -712,8 +812,7 @@ function renderAcademicHub() {
 
   return `
     <div class="academic-list-heading"><button class="academic-home-link" type="button" data-route="beranda">← Beranda</button><h1>Akademik</h1></div>
-    <div class="academic-service-list">${cards}</div>
-    <div class="notice-card page-notice"><span class="notice-icon" aria-hidden="true">i</span><div><strong>Pratinjau antarmuka</strong><p>Login, data pribadi, dan layanan kampus belum terhubung ke sistem akademik.</p></div></div>`;
+    <div class="academic-service-list">${cards}</div>`;
 }
 
 function renderService(route) {
@@ -742,8 +841,9 @@ function renderRoute() {
   }
 
   main.dataset.route = selectedRoute;
+  updateIdentity();
   if (selectedRoute === "nilai") {
-    updateGrades(document.querySelector("#grade-semester").value);
+    updateGrades("1");
   }
   if (selectedRoute === "poin-kemahasiswaan") {
     renderPointEntries();
@@ -799,50 +899,20 @@ function renderRoute() {
 }
 
 function updateGrades(semester) {
-  const gradeData = {
-    "5": {
-      gpa: "3.91",
-      credits: "20",
-      courses: [
-        ["Basis Data", "IF202", "4", "A", "16.00"],
-        ["Interaksi Manusia Komputer", "IF204", "3", "A", "12.00"],
-        ["Rekayasa Perangkat Lunak", "IF206", "3", "A-", "11.25"],
-        ["Analisis dan Desain Sistem", "IF208", "3", "A", "12.00"],
-        ["Jaringan Komputer", "IF210", "4", "A-", "15.00"],
-        ["Metodologi Penelitian", "IF212", "3", "A", "12.00"],
-      ],
-    },
-    "4": {
-      gpa: "3.91",
-      credits: "20",
-      courses: [
-        ["Struktur Data", "IF201", "4", "A", "16.00"],
-        ["Pemrograman Berorientasi Objek", "IF203", "3", "A", "12.00"],
-        ["Statistika", "IF205", "3", "A-", "11.25"],
-        ["Sistem Operasi", "IF207", "3", "A", "12.00"],
-        ["Manajemen Proyek TI", "IF209", "4", "A-", "15.00"],
-        ["Bahasa Inggris", "MK104", "3", "A", "12.00"],
-      ],
-    },
-    "3": {
-      gpa: "3.74",
-      credits: "19",
-      courses: [
-        ["Algoritma dan Pemrograman", "IF101", "4", "A-", "15.00"],
-        ["Matematika Diskrit", "IF103", "3", "B+", "9.75"],
-        ["Pengantar Sistem Informasi", "IF105", "3", "A", "12.00"],
-        ["Arsitektur Komputer", "IF107", "3", "A-", "11.25"],
-        ["Komunikasi Bisnis", "MK102", "3", "A", "12.00"],
-        ["Kewarganegaraan", "MK106", "3", "A", "12.00"],
-      ],
-    },
-  };
-  const result = gradeData[semester];
+  const result = gradeHistory[semester];
+  if (!result) return;
+  document.querySelectorAll("[data-grade-semester]").forEach((tab) => {
+    const selected = tab.dataset.gradeSemester === semester;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  document.querySelector("#grade-panel").setAttribute("aria-labelledby", `grade-tab-${semester}`);
+  document.querySelector("#grade-semester-label").textContent = `Semester : ${semester}`;
+  document.querySelector("#grade-year-label").textContent = `Tahun Akademik : ${result.year} / ${result.term}`;
   document.querySelector("#semester-gpa").textContent = result.gpa;
   document.querySelector("#semester-credits").textContent = result.credits;
-  document.querySelector("#semester-count").textContent = String(result.courses.length);
-  document.querySelector("#grade-rows").innerHTML = result.courses.map((course) =>
-    `<tr><td>${course[0]}</td><td>${course[1]}</td><td>${course[2]}</td><td><span class="grade-badge">${course[3]}</span></td><td>${course[4]}</td></tr>`
+  document.querySelector("#grade-rows").innerHTML = result.courses.map(([code, title, credits, grade, repa, repk]) =>
+    `<tr><td>${escapeHTML(code)}</td><td>${escapeHTML(title)}</td><td>${credits}</td><td>${grade ? `<span class="grade-letter">${escapeHTML(grade)}</span>` : ""}</td><td><button type="button" class="grade-action-link" data-grade-action="SWTS">klik disini</button></td><td><button type="button" class="grade-action-link grade-evaluation-link" data-grade-action="Evaluasi">klik disini</button></td><td>${repa}</td><td>${repk}</td></tr>`
   ).join("");
 }
 
@@ -903,6 +973,18 @@ document.addEventListener("click", (event) => {
 
   if (event.target.closest("[data-print-drs]")) {
     window.print();
+    return;
+  }
+
+  const semesterTab = event.target.closest("[data-grade-semester]");
+  if (semesterTab) {
+    updateGrades(semesterTab.dataset.gradeSemester);
+    return;
+  }
+
+  const gradeAction = event.target.closest("[data-grade-action]");
+  if (gradeAction) {
+    showMessage(`${gradeAction.dataset.gradeAction} dipilih.`);
     return;
   }
 
@@ -974,11 +1056,26 @@ document.addEventListener("click", (event) => {
 
   if (event.target.closest("#save-study-plan")) {
     const count = [...document.querySelectorAll(".course-choice:checked")].length;
-    showMessage(count ? "Simulasi rencana studi berhasil disimpan di halaman ini." : "Pilih minimal satu mata kuliah terlebih dahulu.");
+    showMessage(count ? "Rencana studi berhasil disimpan." : "Pilih minimal satu mata kuliah terlebih dahulu.");
   }
 });
 
 document.addEventListener("keydown", (event) => {
+  const gradeTab = event.target.closest("[data-grade-semester]");
+  if (gradeTab && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+    const tabs = [...document.querySelectorAll("[data-grade-semester]")];
+    const currentIndex = tabs.indexOf(gradeTab);
+    const nextIndex = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? tabs.length - 1
+        : (currentIndex + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
+    event.preventDefault();
+    tabs[nextIndex].focus();
+    tabs[nextIndex].click();
+    return;
+  }
+
   const tab = event.target.closest(".finance-tab");
   if (!tab || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
   const tabs = [...document.querySelectorAll(".finance-tab")];
@@ -1013,10 +1110,6 @@ document.addEventListener("change", (event) => {
     }
   }
 
-  if (event.target.id === "grade-semester") {
-    updateGrades(event.target.value);
-  }
-
   if (event.target.matches(".course-choice")) {
     const choices = [...document.querySelectorAll(".course-choice:checked")];
     const credits = choices.reduce((total, choice) => total + Number(choice.dataset.credits), 0);
@@ -1027,7 +1120,7 @@ document.addEventListener("change", (event) => {
       : "Belum ada mata kuliah dipilih";
     if (credits > 24) {
       event.target.checked = false;
-      showMessage("Batas simulasi rencana studi adalah 24 SKS.");
+      showMessage("Batas rencana studi adalah 24 SKS.");
       event.target.dispatchEvent(new Event("change", { bubbles: true }));
     }
   }
@@ -1045,11 +1138,7 @@ document.addEventListener("input", (event) => {
 document.addEventListener("submit", (event) => {
   if (event.target.id === "lpkp-verification-form") {
     event.preventDefault();
-    const confirmation = new FormData(event.target).get("lpkp-confirmation");
-    const message = confirmation === "yes"
-      ? "Konfirmasi LPKP tersimpan pada pratinjau lokal."
-      : "Catatan ketidaksesuaian tersimpan pada pratinjau lokal.";
-    showMessage(`${message} Data tidak dikirim ke sistem kampus.`);
+    showMessage("Disimpan");
     return;
   }
 
@@ -1079,7 +1168,7 @@ document.addEventListener("submit", (event) => {
       status: "Menunggu verifikasi",
     });
     renderRoute();
-    showMessage("Pengajuan ditambahkan ke pratinjau lokal dan menunggu verifikasi. Data tidak dikirim ke sistem kampus.");
+    showMessage("Pengajuan berhasil disimpan.");
     return;
   }
 
@@ -1090,7 +1179,7 @@ document.addEventListener("submit", (event) => {
     profileData.email = data.get("email").trim();
     profileData.phone = data.get("phone").trim();
     renderRoute();
-    showMessage("Biodata diperbarui untuk pratinjau ini saja.");
+    showMessage("Perubahan berhasil disimpan.");
   }
 });
 
